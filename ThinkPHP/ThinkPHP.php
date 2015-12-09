@@ -20,7 +20,7 @@ define('MEMORY_LIMIT_ON',function_exists('memory_get_usage'));
 if(MEMORY_LIMIT_ON) $GLOBALS['_startUseMems'] = memory_get_usage();
 
 // 版本信息
-const THINK_VERSION     =   '3.2.3';
+const THINK_VERSION     =   '3.2.3beta';
 
 // URL 模式定义
 const URL_COMMON        =   0;  //普通模式
@@ -29,7 +29,7 @@ const URL_REWRITE       =   2;  //REWRITE模式
 const URL_COMPAT        =   3;  // 兼容模式
 
 // 类文件后缀
-const EXT               =   '.class.php';
+const EXT               =   '.class.php'; 
 
 // 系统常量定义
 defined('THINK_PATH')   or define('THINK_PATH',     __DIR__.'/');
@@ -41,8 +41,8 @@ if(function_exists('saeAutoLoader')){// 自动识别SAE环境
     defined('APP_MODE')     or define('APP_MODE',      'sae');
     defined('STORAGE_TYPE') or define('STORAGE_TYPE',  'Sae');
 }else{
-    defined('APP_MODE')     or define('APP_MODE',       'common'); // 应用模式 默认为普通模式
-    defined('STORAGE_TYPE') or define('STORAGE_TYPE',   'File'); // 存储类型 默认为File
+    defined('APP_MODE')     or define('APP_MODE',       'common'); // 应用模式 默认为普通模式    
+    defined('STORAGE_TYPE') or define('STORAGE_TYPE',   'File'); // 存储类型 默认为File    
 }
 
 defined('RUNTIME_PATH') or define('RUNTIME_PATH',   APP_PATH.'Runtime/');   // 系统运行时目录
@@ -66,7 +66,7 @@ defined('ADDON_PATH')   or define('ADDON_PATH',     APP_PATH.'Addon');
 // 系统信息
 if(version_compare(PHP_VERSION,'5.4.0','<')) {
     ini_set('magic_quotes_runtime',0);
-    define('MAGIC_QUOTES_GPC',get_magic_quotes_gpc()? true : false);
+    define('MAGIC_QUOTES_GPC',get_magic_quotes_gpc()?True:False);
 }else{
     define('MAGIC_QUOTES_GPC',false);
 }
@@ -93,5 +93,5 @@ if(!IS_CLI) {
 
 // 加载核心Think类
 require CORE_PATH.'Think'.EXT;
-// 应用初始化
+// 应用初始化 
 Think\Think::start();
