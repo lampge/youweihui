@@ -50,12 +50,16 @@
 					<tbody>
 						<volist name="line_tc" id="val">
 							<tr>
-								<td>{$val['tc_name']} </td>
-								<td>{$val['retail_price']}</td>
-								<td>{$val['retail_price']}</td>
+								<td>{$val['typename']} </td>
+								<td>{$val['price']}</td>
+								<td>{$val['best_price']}</td>
 								<td><span>{$val['status']?'正常':'关闭'}</span></td>
 								<td>
-									<a href="{:U('tcChangeIsDefault', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']))}" class="confirm ajax-get">设置默认</a>
+									<eq name="val['is_default']" value="1">
+										<a href="javascript:void(0);" class="disabled">已经默认</a>
+									<else />
+										<a href="{:U('tcChangeIsDefault', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']))}" class="confirm ajax-get">设置默认</a>
+									</eq>
 									<a href="{:U('tcEdit', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']))}" class="">修改</a>
 									<a href="{:U('tcDel', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']))}" class="confirm ajax-get">删除</a>
 								</td>
@@ -63,7 +67,7 @@
 						</volist>
 						<tr>
 							<td colspan="5" align="center">
-								<a href="{:U('tcAdd', array('line_id'=>$val['line_id']))}" class="btn">添加</a>
+								<a href="{:U('tcEdit', array('line_id'=>$val['line_id']))}" class="btn">添加</a>
 							</td>
 						</tr>
 					</tbody>

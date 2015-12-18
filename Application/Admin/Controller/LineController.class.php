@@ -260,7 +260,16 @@ class LineController extends AdminController {
         }
         $Line = M('Line');
         if (IS_POST) {
-
+            $data = $Line->create();
+            $data['xingcheng'] = serialize($data['xingcheng']);
+            $data['remark'] = serialize($data['remark']);
+            $data['update_time'] = NOW_TIME;
+            $result = $Line->save($data);
+            if ($result) {
+                $this->success('成功');
+            } else {
+                $this->error('失败');
+            }
         } else  {
             $this->getMenu();
             // 操作步骤
@@ -271,6 +280,10 @@ class LineController extends AdminController {
             );
             $this->assign('setp', $setp);
 
+            $data = $Line->where(array('line_id'=>$line_id))->find();
+            $data['xingcheng'] = unserialize($data['xingcheng']);
+            $data['remark'] = unserialize($data['remark']);
+            $this->assign('data', $data);
             $this->meta_title   =   '编辑线路3';
             $this->display();
         }
@@ -285,20 +298,61 @@ class LineController extends AdminController {
         if(empty($line_id)){
             $this->error('参数不能为空！');
         }
-        $Line = M('Line');
-        $LineTc = M('LineTc');
+        $Line = D('Line');
+        $LineTc = D('LineTc');
         if (IS_POST) {
-
-
-        } else  {
-
+            $result = $LineTc->update();
+            if ($result) {
+                $Line->where(array('line_id'=>$line_id))->setField('status', NOW_TIME);
+                $this->success('成功', U('Line/edit2', array('line_id'=>$line_id)));
+            } else {
+                $this->error($Line->getError());
+            }
+        } else {
             // 线路套餐
             $data = $LineTc->where(array('tc_id'=>$tc_id))->find();
+            if (empty($data)) {
+                $data['line_id'] = $line_id;
+            }
+            $data['earlier_date'] = $Line->where(array('line_id'=>$line_id))->getField('earlier_date');
             $this->assign('data', $data);
             $this->meta_title   =   '价格方案';
             $this->display();
         }
     }
+    // 删除套餐操作
+    public function tcDel($tc_id = 0){
+        if (empty($tc_id)) {
+            $this->error('参数错误');
+        }
+        $LineTc = D('LineTc');
+        $map = array('tc_id' => $tc_id);
+        $line_tc = $LineTc->where($map)->field('is_default,line_id')->find();
+        $result = $LineTc->where($map)->delete();
+        if ($result) {
+            if ($line_tc['is_default']) {
+                $LineTc->where(array('line_id'=>$line_tc['line_id']))->limit(1)->save(array('is_default'=>1));
+            }
+            $this->success('成功');
+        } else {
+            $this->error('失败');
+        }
 
+    }
+    // 设置默认套餐
+    public function tcChangeIsDefault($line_id, $tc_id){
+        if (empty($line_id) || empty($tc_id)) {
+            $this->error('参数错误');
+        }
+        $LineTc = D('LineTc');
+        $map = array('line_id'=>$line_id);
+        $LineTc->where(array('line_id'=>$line_id))->save(array('update_time'=>NOW_TIME,'is_default'=>0));
+        $result = $LineTc->where(array('tc_id'=>$tc_id))->save(array('update_time'=>NOW_TIME,'is_default'=>1));
+        if ($result) {
+            $this->success('成功');
+        } else {
+            $this->error('失败');
+        }
+    }
 
 }

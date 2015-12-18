@@ -120,31 +120,37 @@
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">线路特色<span class="check-tips">（必填）</span></label>
-			        <textarea name="features" class="textarea textarea470 J_editor"  cols="" rows=""></textarea>
+			        <textarea name="features" class="textarea textarea470 J_editor"  cols="" rows=""><?php echo ($data['features']); ?></textarea>
 		    	</div>
 		    </div>
 			<div class="form-item cf">
 				<label class="item-label">行程安排<span class="check-tips"></span></label>
-			<?php $__FOR_START_27024__=0;$__FOR_END_27024__=7;for($i=$__FOR_START_27024__;$i < $__FOR_END_27024__;$i+=1){ ?><dl class="checkmod">
+			<?php $__FOR_START_5465__=0;$__FOR_END_5465__=$data['daynum'];for($i=$__FOR_START_5465__;$i < $__FOR_END_5465__;$i+=1){ ?><dl class="checkmod">
 					<dt class="hd">
-						<label class="item-label">第<?php echo $i+1;?>天：<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][0]" value="" /></label>
+						<label class="item-label">第<?php echo $i+1;?>天：<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][0]" value="<?php echo $data['xingcheng'][$i][0];?>" /></label>
 					</dt>
 					<dd class="bd">
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
-							<textarea name="xingcheng[<?php echo ($i); ?>][1]" class="textarea textarea470 J_editor"  cols="" rows=""></textarea>
+							<textarea name="xingcheng[<?php echo ($i); ?>][1]" class="textarea textarea470 J_editor"  cols="" rows=""><?php echo $data['xingcheng'][$i][1];?></textarea>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
-							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2]" value="1">早餐</label>
-							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2]" value="2">中餐</label>
-							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2]" value="3">晚餐</label>
+							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2][]" <?php if(in_array(1, $data['xingcheng'][$i][2])): ?>checked="checked"<?php endif; ?> value="1">早餐</label>
+							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2][]" <?php if(in_array(2, $data['xingcheng'][$i][2])): ?>checked="checked"<?php endif; ?> value="2">中餐</label>
+							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2][]" <?php if(in_array(3, $data['xingcheng'][$i][2])): ?>checked="checked"<?php endif; ?> value="3">晚餐</label>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
-							<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][3]" value="" placeholder="住宿"/>
+							<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][3]" value="<?php echo $data['xingcheng'][$i][3];?>" placeholder="住宿"/>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
 							<div class="controls uploads">
 								<input type="file" name="xingcheng[<?php echo ($i); ?>][4]">
-								<div class="upload-img-box"></div>
+								<div class="upload-img-box">
+									<?php if(is_array($data['xingcheng'][$i][4])): $n = 0; $__LIST__ = $data['xingcheng'][$i][4];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$value): $mod = ($n % 2 );++$n;?><div class="upload-pre-item">
+											<i onclick="removeImage(this)">X</i>
+											<input type="hidden" name="xingcheng[<?php echo ($i); ?>][4][]" value="<?php echo ($value); ?>">
+											<img src="<?php echo get_cover($value, 'path');?>"/>
+										</div><?php endforeach; endif; else: echo "" ;endif; ?>
+								</div>
 							</div>
 						</div>
 					</dd>
@@ -157,22 +163,21 @@
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">预订须知<span class="check-tips">（必填）</span></label>
-					<input type="text" class="text input-large" style="margin-bottom:10px;" name="remark[0]" value="" />
-					<textarea name="remark[1]" class="textarea textarea470 J_editor"  style="display: none;"></textarea>
+					<input type="text" class="text input-large" style="margin-bottom:10px;" name="remark[0]" value="<?php echo ($data['remark'][0]); ?>" />
+					<textarea name="remark[1]" class="textarea textarea470 J_editor"  style="display: none;"><?php echo ($data['remark'][1]); ?></textarea>
 		    	</div>
 		    </div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">温馨提示<span class="check-tips">（必填）</span></label>
-					<input type="text" class="text input-large" style="margin-bottom:10px;" name="remark[2]" value="" />
-					<textarea name="remark[3]" class="textarea textarea470 J_editor" style="display: none;"></textarea>
+					<input type="text" class="text input-large" style="margin-bottom:10px;" name="remark[2]" value="<?php echo ($data['remark'][2]); ?>" />
+					<textarea name="remark[3]" class="textarea textarea470 J_editor" style="display: none;"><?php echo ($data['remark'][3]); ?></textarea>
 		    	</div>
 		    </div>
 		</div>
 		<div class="form-item cf">
-			<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" name="1" target-form="form-horizontal">确定发布</button>
-			<button class="btn btn-return ajax-post hidden" id="submit" type="submit" name="0" target-form="form-horizontal">确定保存</button>
-			<input type="hidden" name="site_id" value="<?php echo ($site_id); ?>"/>
+			<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" name="is_display" value="1" target-form="form-horizontal">确定发布</button>
+			<button class="btn btn-return ajax-post hidden" id="submit" type="submit" name="is_display" value="0" target-form="form-horizontal">确定保存</button>
 			<input type="hidden" name="line_id" value="<?php echo ($data['line_id']); ?>"/>
 		</div>
 	</form>

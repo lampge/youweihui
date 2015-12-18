@@ -131,19 +131,21 @@
 					</thead>
 					<tbody>
 						<?php if(is_array($line_tc)): $i = 0; $__LIST__ = $line_tc;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><tr>
-								<td><?php echo ($val['tc_name']); ?> </td>
-								<td><?php echo ($val['retail_price']); ?></td>
-								<td><?php echo ($val['retail_price']); ?></td>
+								<td><?php echo ($val['typename']); ?> </td>
+								<td><?php echo ($val['price']); ?></td>
+								<td><?php echo ($val['best_price']); ?></td>
 								<td><span><?php echo ($val['status']?'正常':'关闭'); ?></span></td>
 								<td>
-									<a href="<?php echo U('tcChangeIsDefault', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']));?>" class="confirm ajax-get">设置默认</a>
+									<?php if(($val['is_default']) == "1"): ?><a href="javascript:void(0);" class="disabled">已经默认</a>
+									<?php else: ?>
+										<a href="<?php echo U('tcChangeIsDefault', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']));?>" class="confirm ajax-get">设置默认</a><?php endif; ?>
 									<a href="<?php echo U('tcEdit', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']));?>" class="">修改</a>
 									<a href="<?php echo U('tcDel', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']));?>" class="confirm ajax-get">删除</a>
 								</td>
 							</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 						<tr>
 							<td colspan="5" align="center">
-								<a href="<?php echo U('tcAdd', array('line_id'=>$val['line_id']));?>" class="btn">添加</a>
+								<a href="<?php echo U('tcEdit', array('line_id'=>$val['line_id']));?>" class="btn">添加</a>
 							</td>
 						</tr>
 					</tbody>

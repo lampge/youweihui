@@ -120,7 +120,7 @@
 					<label class="item-label">线路报价<span class="check-tips">（必填）</span></label>
 
 					<div class="pro_input date_price">
-			            <input type="hidden" value="3" id="earlier_date">
+			            <input type="hidden" value="<?php echo ($data['earlier_date']); ?>" id="earlier_date">
 			            <input type="hidden" value="<?php echo date('Y-m-d');?>" id="today">
 			            <input type="hidden" value="<?php echo date('Y-m-d',strtotime('+ 6month'));?>" id="expire_day">
 			            <input type="hidden" value="<?php echo ($data['date_price_data']); ?>" id="date_price_data" name="date_price_data">
