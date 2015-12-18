@@ -20,6 +20,8 @@ define('APP_DEBUG', true );
  * 安全期间，建议安装调试完成后移动到非WEB目录
  */
 define ( 'APP_PATH', './Application/' );
+// 开启调试模式 建议开发阶段开启 部署阶段注释或者设为false
+define('APP_DEBUG',fase);
 
 if(!is_file(APP_PATH . 'User/Conf/config.php')){
 	header('Location: ./install.php');
