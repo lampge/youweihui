@@ -86,7 +86,7 @@
 
 <section>
 	<div class="span12">
-        <form class="login-form" action="/index.php?s=/Home/User/register.html" method="post">
+        <form class="login-form" action="/index.php?m=Home&c=User&a=register" method="post">
           <div class="control-group">
             <label class="control-label" for="inputEmail">用户名</label>
             <div class="controls">
@@ -160,7 +160,7 @@
 (function(){
 	var ThinkPHP = window.Think = {
 		"ROOT"   : "", //当前网站地址
-		"APP"    : "/index.php?s=", //当前项目地址
+		"APP"    : "/index.php", //当前项目地址
 		"PUBLIC" : "/Public", //项目公共目录地址
 		"DEEP"   : "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINFO分割符
 		"MODEL"  : ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],

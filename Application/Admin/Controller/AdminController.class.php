@@ -60,7 +60,7 @@ class AdminController extends Controller {
                     }
                 }
             }
-        }        
+        }
 
         $this->assign('__MENU__', $this->getMenus());
     }

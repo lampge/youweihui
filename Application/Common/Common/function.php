@@ -11,6 +11,37 @@
 const ONETHINK_VERSION    = '1.1.141101';
 const ONETHINK_ADDON_PATH = './Addons/';
 
+// 吴文豹 start
+
+/**
+ * 参团类型
+ *
+ */
+function get_can_tuan($id = 0){
+    $list = C('CAN_TUAN');
+    return isset($list[$id]) ? $list[$id] : '其他';
+}
+/**
+ * 线路类型
+ *
+ */
+function get_line_type($id = 0){
+    $list = C('LINE_TYPE');
+    return isset($list[$id]) ? $list[$id] : '其他';
+}
+/**
+ * 站点
+ *
+ */
+function get_site_list($id = 0){
+    $list = C('SITE_LIST');
+    return isset($list[$id]) ? $list[$id] : '其他';
+}
+
+
+// end
+
+
 /**
  * 系统公共库文件
  * 主要定义系统公共函数库

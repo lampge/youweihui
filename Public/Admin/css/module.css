@@ -107,6 +107,13 @@ label.textarea ~ .check-tips {
 	height: 28px;
 	line-height: 28px;
 }
+.search-form .txt {
+	display: inline-block;
+	margin: 0 2px 0 4px;
+	padding-left: 6px;
+	/*width: 100%;*/
+	cursor: pointer;
+}
 .search-form .sort-txt {
 	display: inline-block;
 	margin: 0 2px 0 4px;

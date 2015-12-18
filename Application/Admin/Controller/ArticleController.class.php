@@ -178,7 +178,7 @@ class ArticleController extends AdminController {
                 $model = M('Model')->getById($model_id);
                 if (empty($model['list_grid'])) {
                     $model['list_grid'] = M('Model')->getFieldByName('document','list_grid');
-                }                
+                }
             }
             $this->assign('model', explode(',', $models));
         }else{
@@ -224,7 +224,7 @@ class ArticleController extends AdminController {
         $list   =   $this->getDocumentList($cate_id,$model_id,$position,$fields,$group_id);
         // 列表显示处理
         $list   =   $this->parseDocumentList($list,$model_id);
-        
+
         $this->assign('model_id',$model_id);
 		$this->assign('group_id',$group_id);
         $this->assign('position',$position);
@@ -289,7 +289,7 @@ class ArticleController extends AdminController {
                     unset($field[$key]);
                     $field[] = 'DOCUMENT.id';
                 }
-            }            
+            }
         }
         if(!is_null($position)){
             $map[] = "position & {$position} = {$position}";
@@ -380,7 +380,7 @@ class ArticleController extends AdminController {
             $this->error('参数不能为空！');
         }
 
-        // 获取详细数据 
+        // 获取详细数据
         $Document = D('Document');
         $data = $Document->detail($id);
         if(!$data){

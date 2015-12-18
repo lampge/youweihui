@@ -1,0 +1,70 @@
+<!-- 分类授权编辑页面 -->
+<extend name="Public/base" />
+<block name="body">
+<div class="tab-wrap">
+    <ul class="tab-nav nav">
+        <li><a href="{:U('AuthManager/access',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">访问授权</a></li>
+        <li class="current"><a href="javascript:;">站点授权</a></li>
+        <li><a href="{:U('AuthManager/category',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">分类授权</a></li>
+		<li><a href="{:U('AuthManager/user',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')))}">成员授权</a></li>
+	    <li class="fr">
+		    <select name="group">
+			    <volist name="auth_group" id="vo">
+				    <option value="{:U('AuthManager/site',array('group_id'=>$vo['id'],'group_name'=>$vo['title']))}" <eq name="vo['id']" value="$this_group['id']">selected</eq> >{$vo.title}</option>
+			    </volist>
+		    </select>
+	    </li>
+    </ul>
+    <!-- 表格列表 -->
+    <div class="tb-unit posr">
+        <form class="save-category" action="{:U('AuthManager/addToSite')}" method="post" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="group_id" value="{:I('group_id')}">
+            <div class="category auth-category">
+                <div class="hd cf">
+                    <div class="fold">站点ID</div>
+                    <div class="order">选择</div>
+                    <div class="name">站点名称</div>
+                </div>
+                <volist name=":C('SITE_LIST')" id="list">
+                <dl class="cate-item">
+                    <dt class="cf">
+                    <div class="fold"><i></i>{$key}</div>
+                    <label>
+                        <div class="order"> <input class="cate_id" type="checkbox" name="sid[]" value="{$key}"></div>
+                        <div class="name">
+                            <span class="tab-sign"></span>
+                            {$list}
+                            <span class="help-inline msg"></span>
+                        </div>
+                    </label>
+                    </dt>
+                </dl>
+                </volist>
+            </div>
+
+            <div class="tb-unit-bar">
+                <button class="btn submit-btn ajax-post" type="submit" target-form="save-category">确 定</button>
+                <button class="btn btn-return" onclick="javascript:history.back(-1);return false;">返 回</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- /表格列表 -->
+</block>
+<block name="script">
+<script type="text/javascript">
+    +function($){
+        var auth_groups = [{$authed_group}];
+        $('.cate_id').each(function(){
+            if( $.inArray( parseInt(this.value,10),auth_groups )>-1 ){
+                $(this).prop('checked',true);
+            }
+        });
+        $('select[name=group]').change(function(){
+            location.href = this.value;
+        });
+    }(jQuery);
+    //导航高亮
+    highlight_subnav('{:U('AuthManager/index')}');
+</script>
+</block>

@@ -224,6 +224,21 @@ class AuthManagerController extends AdminController{
     }
 
     /**
+     * 将站点添加到用户组的编辑页面
+     * @author 朱亚杰 <zhuyajie@topthink.net>
+     */
+    public function site(){
+        $auth_group     =   M('AuthGroup')->where( array('status'=>array('egt','0'),'module'=>'admin','type'=>AuthGroupModel::TYPE_ADMIN) )
+            ->getfield('id,id,title,rules');
+        $authed_group   =   AuthGroupModel::getSiteOfGroup(I('group_id'));
+        $this->assign('authed_group',   implode(',',(array)$authed_group));
+        $this->assign('auth_group',     $auth_group);
+        $this->assign('this_group',     $auth_group[(int)$_GET['group_id']]);
+        $this->meta_title = '站点授权';
+        $this->display();
+    }
+
+    /**
      * 将分类添加到用户组的编辑页面
      * @author 朱亚杰 <zhuyajie@topthink.net>
      */
@@ -318,7 +333,29 @@ class AuthManagerController extends AdminController{
             $this->error('操作失败');
         }
     }
-
+    /**
+     * 将站点添加到用户组  入参:site_id,group_id
+     * @author 朱亚杰 <zhuyajie@topthink.net>
+     */
+    public function addToSite(){
+        $sid = I('sid');
+        $gid = I('group_id');
+        if( empty($gid) ){
+            $this->error('参数有误');
+        }
+        $AuthGroup = D('AuthGroup');
+        if( !$AuthGroup->find($gid)){
+            $this->error('用户组不存在');
+        }
+        if( $sid && !$AuthGroup->checkSiteId($sid)){
+            $this->error($AuthGroup->error);
+        }
+        if ( $AuthGroup->addToSite($gid,$sid) ){
+            $this->success('操作成功');
+        }else{
+            $this->error('操作失败');
+        }
+    }
     /**
      * 将分类添加到用户组  入参:cid,group_id
      * @author 朱亚杰 <zhuyajie@topthink.net>

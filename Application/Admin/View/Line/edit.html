@@ -1,0 +1,286 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<style media="screen">
+		.upload-pre-item{
+			position: relative;
+			widht:120px;
+			height:120px;
+			float:left;
+			margin-right: 5px;
+		}
+		.upload-pre-item i{
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-size: 20px;
+			font-style: normal;
+			line-height: 20px;
+			padding:5px;
+
+		}
+	</style>
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title cf">
+		<h2>{$meta_title}</h2>
+	</div>
+	<!-- 标签页导航 -->
+<div class="tab-wrap">
+	<ul class="tab-nav nav">
+		<volist name="setp" id="val">
+			<li data-tab="tab{$key}" <eq name="val['current']" value="1">class="current"</eq>><a href="{$val['url']}">{$val['title']}</a></li>
+		</volist>
+	</ul>
+	<div class="tab-content">
+	<!-- 表单 -->
+	<form id="form" action="" method="post" class="form-horizontal">
+        <div id="tab1" class="tab-pane tab1 in">
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">所属站点<span class="check-tips">（必填）</span></label>
+					<volist name="nodes" id="val">
+						<label class="radio">
+							<input type="radio" value="{$key}" name="site_id" <eq name="data['site_id']" value="$key">checked="checked"</eq>>{$val['title']}
+						</label>
+					</volist>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路类型<span class="check-tips">（必填）</span></label>
+					<volist name=":C('LINE_TYPE')" id="val">
+						<label class="radio">
+							<input type="radio" value="{$key}" name="l_type" <eq name="data['l_type']" value="$key">checked="checked"</eq>>{$val}
+						</label>
+					</volist>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">参团性质<span class="check-tips">（必填）</span></label>
+					<volist name=":C('CAN_TUAN')" id="val">
+						<label class="radio">
+							<input type="radio" value="{$key}" name="ct_type" <eq name="data['l_type']" value="$key">checked="checked"</eq>>{$val}
+						</label>
+					</volist>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路主标题<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-large" name="title" value="{$data['title']}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路副标题<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-large" name="sub_title" value="{$data['sub_title']}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<label class="item-label">产品分类<span class="check-tips">（必填）</span></label>
+				<volist name="categorys" id="node">
+						<dl class="checkmod">
+							<dt class="hd">
+								<label class="checkbox"><input class="auth_rules rules_all" type="checkbox" name="categorys[]" value="{$node['id']}">{$node.title}管理</label>
+							</dt>
+							<dd class="bd" style="margin-left:20px;">
+								<present name="node['_']">
+								<volist name="node['_']" id="child" >
+                                    <div class="rule_check">
+                                        <div>
+                                            <label class="checkbox">
+                                           <input class="auth_rules rules_row" type="checkbox" name="categorys[]" value="{$child['id']}"/>{$child.title}
+                                            </label>
+                                        </div>
+                                       <notempty name="child['_']">
+                                           <span class="divsion">&nbsp;</span>
+                                           <span class="child_row">
+                                               <volist name="child['_']" id="op">
+                                                   <label class="checkbox">
+                                                       <input class="auth_rules rules_child" type="checkbox" name="categorys[]"
+                                                       value="{$op['id']}"/>{$op.title}
+                                                   </label>
+                                               </volist>
+                                           </span>
+                                       </notempty>
+				                    </div>
+								</volist>
+								</present>
+							</dd>
+						</dl>
+				</volist>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">游客需提前几天报名<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="earlier_date" value="{$data['earlier_date']}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">行程天数<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="daynum" value="{$data['daynum']}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">交通方式<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="traffic" value="{$data['traffic']}">
+				</div>
+			</div>
+
+			<div class="form-item cf">
+				<div class="controls">
+					<div class="item-label">线路图片描述<span class="check-tips">（必填）</span></div>
+					<div class="controls uploads">
+						<input type="file" name="images">
+						<div class="upload-img-box">
+						<volist name="data['images']" id="val">
+							<div class="upload-pre-item">
+								<i onclick="removeImage(this)">X</i>
+								<input type="hidden" name="images[]" value="{$val}">
+								<img src="{:get_cover($val, 'path')}"/>
+							</div>
+						</volist>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">详情页显示数据<span class="check-tips"></span></label>
+					游客关注：<input type="text" class="text input-mid" name="base_hits" value="{$data['base_hits']}">
+					最近订单：<input type="text" class="text input-mid" name="base_order" value="{$data['base_order']}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">排序<span class="check-tips"></span></label>
+					<input type="text" class="text input-mid" name="sort" value="{$data['sort']}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路状态<span class="check-tips"></span></label>
+					<label class="radio">
+						<input type="radio" value="1" name="is_display" <eq name="data['is_display']" value="1">checked="checked"</eq>>显示
+					</label>
+					<label class="radio">
+						<input type="radio" value="0" name="is_display" <eq name="data['is_display']" value="0">checked="checked"</eq>>隐藏
+					</label>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">是否推荐<span class="check-tips"></span></label>
+					<label class="radio">
+						<input type="radio" value="1" name="is_position" <eq name="data['is_position']" value="1">checked="checked"</eq>>推荐
+					</label>
+					<label class="radio">
+						<input type="radio" value="0" name="is_position" <eq name="data['is_position']" value="0">checked="checked"</eq>>不推荐
+					</label>
+				</div>
+			</div>
+		</div>
+		<div class="form-item cf">
+			<button class="btn btn-return ajax-post hidden" id="submit" type="submit" name="0" target-form="form-horizontal">确定保存</button>
+			<input type="hidden" name="line_id" value="{$data['line_id']}"/>
+		</div>
+	</form>
+</div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript">
+
+Think.setValue("type", {$data.type|default='""'});
+Think.setValue("display", {$data.display|default=0});
+
+$('#submit').click(function(){
+	$('#form').submit();
+});
+
+$(function(){
+	//导航高亮
+	highlight_subnav('{:U('index')}');
+
+	var rules = [{$data['line_type']}];
+	$('.auth_rules').each(function(){
+		if( $.inArray( parseInt(this.value,10),rules )>-1 ){
+			$(this).prop('checked',true);
+		}
+		if(this.value==''){
+			$(this).closest('span').remove();
+		}
+	});
+
+	//全选节点
+	$('.rules_all').on('change',function(){
+		$(this).closest('dl').find('dd').find('input').prop('checked',this.checked);
+	});
+	$('.rules_row').on('change',function(){
+		$(this).closest('.checkmod').find('.rules_all').prop('checked', true);
+		$(this).closest('.rule_check').find('.child_row').find('input').prop('checked',this.checked);
+	});
+	$('.rules_child').on('change', function(){
+		$(this).closest('.checkmod').find('.rules_all').prop('checked', true);
+		$(this).closest('.rule_check').find('.rules_row').prop('checked', true);
+	});
+
+    $('.date').datetimepicker({
+        format: 'yyyy-mm-dd',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    $('.time').datetimepicker({
+        format: 'yyyy-mm-dd hh:ii',
+        language:"zh-CN",
+        minView:2,
+        autoclose:true
+    });
+    showTab();
+});
+</script>
+<script type="text/javascript">
+$(".uploads").each(function(i){
+	var Obj = $(this),
+		Upload = $(this).find('[type=file]'),
+		Name = Upload.attr('name') ? Upload.attr('name') : 'img';
+	Upload.attr('id', 'id_' + (new Date()).getTime()+Math.floor(Math.random()*1000));
+	Upload.uploadify({
+		"height"          : 30,
+		"swf"             : "__STATIC__/uploadify/uploadify.swf",
+		"fileObjName"     : "download",
+		"buttonText"      : "选择图片",
+		"uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+		"width"           : 120,
+		'removeTimeout'	  : 1,
+		'multi'			  : true,
+		'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+		"onUploadSuccess" : function(file, data){
+			var data = $.parseJSON(data);
+			var src = '';
+			if(data.status){
+				src = data.url || '__ROOT__' + data.path
+				Obj.find('.upload-img-box').append(
+					'<div class="upload-pre-item"><i onclick="removeImage(this)">X</i><input type="hidden" name="'+Name+'[]" value="' + data.id + '"/><img src="' + src + '"/></div>'
+				);
+			}
+		},
+		'onFallback' : function() {
+			alert('未检测到兼容版本的Flash.');
+		}
+	});
+})
+function removeImage(dom){
+	$(dom).parent().remove();
+}
+</script>
+</block>

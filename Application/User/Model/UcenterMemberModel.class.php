@@ -119,6 +119,38 @@ class UcenterMemberModel extends Model{
 	}
 
 	/**
+	 * 自定义用户注册
+	 * @param  string  $username 用户名
+	 * @param  string  $password 用户密码
+	 * @param  integer $type     用户名类型 （1-用户名，2-邮箱，3-手机）
+	 * @return integer           登录成功-用户ID，登录失败-错误编号
+	 */
+	public function regZdy($username, $password, $type = 1){
+		$data = array('password' => $password);
+		switch ($type) {
+			case 1:
+				$data['username'] = $username;
+				break;
+			case 2:
+				$data['email'] = $username;
+				break;
+			case 3:
+				$data['mobile'] = $username;
+				break;
+			default:
+				return 0; //参数错误
+		}
+
+		/* 添加用户 */
+		if($this->create($data)){
+			$uid = $this->add();
+			return $uid ? $uid : 0; //0-未知错误，大于0-注册成功
+		} else {
+			return $this->getError(); //错误详情见自动验证注释
+		}
+	}
+
+	/**
 	 * 用户登录认证
 	 * @param  string  $username 用户名
 	 * @param  string  $password 用户密码

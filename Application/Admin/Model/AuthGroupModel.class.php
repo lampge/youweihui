@@ -24,6 +24,7 @@ class AuthGroupModel extends Model {
     const AUTH_GROUP                = 'auth_group';        // 用户组表名
     const AUTH_EXTEND_CATEGORY_TYPE = 1;              // 分类权限标识
     const AUTH_EXTEND_MODEL_TYPE    = 2; //分类权限标识
+    const AUTH_EXTEND_SITE_TYPE     = 3; //站点权限标识
 
     protected $_validate = array(
         array('title','require', '必须设置用户组标题', Model::MUST_VALIDATE ,'regex',Model::MODEL_INSERT),
@@ -147,6 +148,20 @@ class AuthGroupModel extends Model {
     }
 
     /**
+     * 返回用户拥有管理权限的站点id列表
+     *
+     * @param int     $uid  用户id
+     * @return array
+     *
+     *  array(2,4,8,13)
+     *
+     * @author 朱亚杰 <zhuyajie@topthink.net>
+     */
+    static public function getAuthSiteies($uid){
+        return self::getAuthExtend($uid,self::AUTH_EXTEND_SITE_TYPE,'AUTH_SITE');
+    }
+
+    /**
      * 返回用户拥有管理权限的分类id列表
      *
      * @param int     $uid  用户id
@@ -177,6 +192,20 @@ class AuthGroupModel extends Model {
             return false;
         }
         return M(self::AUTH_EXTEND)->where( array('group_id'=>$gid,'type'=>$type) )->getfield('extend_id',true);
+    }
+
+    /**
+     * 获取用户组授权的分类id列表
+     *
+     * @param int     $gid  用户组id
+     * @return array
+     *
+     *  array(2,4,8,13)
+     *
+     * @author 朱亚杰 <zhuyajie@topthink.net>
+     */
+    static public function getSiteOfGroup($gid){
+        return self::getExtendOfGroup($gid,self::AUTH_EXTEND_SITE_TYPE);
     }
 
     /**
@@ -240,6 +269,17 @@ class AuthGroupModel extends Model {
         return self::addToExtend($gid,$cid,self::AUTH_EXTEND_CATEGORY_TYPE);
     }
 
+    /**
+     * 批量设置用户组可管理的站点
+     *
+     * @param int|string|array $gid   用户组id
+     * @param int|string|array $sid   站点id
+     *
+     * @author 朱亚杰 <zhuyajie@topthink.net>
+     */
+    static public function addToSite($gid,$sid){
+        return self::addToExtend($gid,$sid,self::AUTH_EXTEND_SITE_TYPE);
+    }
 
     /**
      * 将用户从用户组中移除
@@ -315,6 +355,36 @@ class AuthGroupModel extends Model {
         return $this->checkId('Category',$cid, '以下分类id不存在:');
     }
 
+    /**
+     * 检查站点是否全部存在
+     * @param array|string $sid  站点id列表
+     * @author 朱亚杰 <zhuyajie@topthink.net>
+     */
+    public function checkSiteId($sid){
+        if(is_array($sid)){
+            $count = count($sid);
+        }else{
+            $sid   = explode(',',$sid);
+            $count = count($sid);
+        }
+        if ($count) {
+            $arr = array();
+            $site_list = array_keys(C('SITE_LIST'));
+            foreach ($sid as $val) {
+                if (!in_array($val, $site_list)) {
+                    $arr[] = $val;
+                }
+            }
+            if (count($arr)) {
+                $this->error = '以下站点id不存在:'. implode(',', $arr);
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return true;
+        }
+    }
+
 
 }
-

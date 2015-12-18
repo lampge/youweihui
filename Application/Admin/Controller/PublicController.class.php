@@ -59,7 +59,7 @@ class PublicController extends \Think\Controller {
                     S('DB_CONFIG_DATA',$config);
                 }
                 C($config); //添加配置
-                
+
                 $this->display();
             }
         }
@@ -78,6 +78,8 @@ class PublicController extends \Think\Controller {
 
     public function verify(){
         $verify = new \Think\Verify();
+        $verify->length    = 4;
+        $verify->codeSet = '0123456789'; 
         $verify->entry(1);
     }
 

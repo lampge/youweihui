@@ -88,6 +88,7 @@
 	<div class="tab-wrap">
 		<ul class="tab-nav nav">
 			<li class="current"><a href="javascript:;">访问授权</a></li>
+            <li><a href="<?php echo U('AuthManager/site',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')));?>">站点授权</a></li>
             <li><a href="<?php echo U('AuthManager/category',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')));?>">分类授权</a></li>
 			<li><a href="<?php echo U('AuthManager/user',array('group_name'=>I('group_name') ,'group_id'=> I('group_id')));?>">成员授权</a></li>
 			<li class="fr">
@@ -150,7 +151,7 @@
     (function(){
         var ThinkPHP = window.Think = {
             "ROOT"   : "", //当前网站地址
-            "APP"    : "/admin.php?s=", //当前项目地址
+            "APP"    : "/admin.php", //当前项目地址
             "PUBLIC" : "/Public", //项目公共目录地址
             "DEEP"   : "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINFO分割符
             "MODEL"  : ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],

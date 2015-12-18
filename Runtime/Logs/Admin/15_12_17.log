@@ -1,0 +1,1027 @@
+[ 2015-12-17T17:59:44+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002052s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002521s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000558s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0036s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0008s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0027s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0024s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0019s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000243s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000297s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022926s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022982s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000412s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000477s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000668s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000718s ]
+
+[ 2015-12-17T17:59:56+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001044s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001322s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000309s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000366s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0029s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0032s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+SQL: UPDATE `jfsd_line` SET `l_type`='1',`ct_type`='1',`title`='（新春预订）【土耳其双飞全景9日】南航直飞',`sub_title`='2016年2月10、12日',`earlier_date`='0',`site_id`='0',`daynum`='5',`traffic`='阿萨德法撒旦',`images`='3',`base_hits`='10',`base_order`='0',`sort`='0',`is_display`='0',`is_position`='0',`update_time`='1450346396',`status`='1' WHERE `line_id` = 17 [ RunTime:0.1333s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0027s ]
+NOTIC: [2] Illegal offset type in isset or empty E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 509 行.
+SQL: DELETE FROM `jfsd_line_type` WHERE `line_id` = 17 [ RunTime:0.0299s ]
+SQL: INSERT INTO `jfsd_line_type` (`line_id`,`type_id`) VALUES ('17','1'),('17','2'),('17','28'),('17','29'),('17','7'),('17','8'),('17','9'),('17','10'),('17','11'),('17','12'),('17','13'),('17','6'),('17','16'),('17','18'),('17','19'),('17','20'),('17','17'),('17','15'),('17','21'),('17','5'),('17','22') [ RunTime:0.0325s ]
+
+[ 2015-12-17T17:59:58+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000026s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001718s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002571s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000537s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000609s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0035s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0027s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0029s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0036s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000299s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000359s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0025s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.026534s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.026599s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000338s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000383s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000783s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000868s ]
+
+[ 2015-12-17T18:00:34+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001080s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001371s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000387s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000485s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0027s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0027s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+SQL: UPDATE `jfsd_line` SET `site_id`='0',`l_type`='2',`ct_type`='2',`title`='（新春预订）【土耳其双飞全景9日】南航直飞',`sub_title`='2016年2月10、12日',`earlier_date`='0',`daynum`='5',`traffic`='阿萨德法撒旦',`images`='3',`base_hits`='10',`base_order`='0',`sort`='0',`is_display`='0',`is_position`='0',`update_time`='1450346434',`status`='1' WHERE `line_id` = 17 [ RunTime:0.1330s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0024s ]
+NOTIC: [2] Illegal offset type in isset or empty E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 509 行.
+SQL: DELETE FROM `jfsd_line_type` WHERE `line_id` = 17 [ RunTime:0.0305s ]
+SQL: INSERT INTO `jfsd_line_type` (`line_id`,`type_id`) VALUES ('17','1'),('17','2'),('17','28'),('17','29'),('17','7'),('17','8'),('17','9'),('17','10'),('17','11'),('17','12'),('17','13'),('17','6'),('17','16'),('17','18'),('17','19'),('17','20'),('17','17'),('17','15'),('17','21'),('17','5'),('17','22') [ RunTime:0.0325s ]
+
+[ 2015-12-17T18:00:36+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000019s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001487s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001905s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000436s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000506s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0029s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0031s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0021s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0024s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0020s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000264s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000428s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.024774s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024851s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000712s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000755s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000655s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000710s ]
+
+[ 2015-12-17T18:01:25+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001649s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001969s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000474s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000523s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0037s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0026s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0026s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0029s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0021s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000230s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000286s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023166s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023222s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000425s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000467s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000602s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000683s ]
+
+[ 2015-12-17T18:01:32+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001881s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002420s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000384s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000476s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0025s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0011s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0006s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0007s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0033s ]
+NOTIC: [2] preg_match() expects parameter 2 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1112 行.
+
+[ 2015-12-17T18:01:37+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001637s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001965s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000656s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000732s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0023s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0026s ]
+NOTIC: [2] preg_match() expects parameter 2 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1112 行.
+
+[ 2015-12-17T18:01:40+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001633s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001939s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000400s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000483s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0025s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0028s ]
+NOTIC: [2] preg_match() expects parameter 2 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1112 行.
+
+[ 2015-12-17T18:01:43+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001632s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001925s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000428s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000476s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0024s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0029s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0024s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0020s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000230s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000286s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023157s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023287s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000387s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000446s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000570s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000638s ]
+
+[ 2015-12-17T18:01:45+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001668s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002005s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000468s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000521s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0035s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0025s ]
+NOTIC: [2] preg_match() expects parameter 2 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1112 行.
+
+[ 2015-12-17T18:01:49+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002185s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002827s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000510s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000566s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0031s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0009s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0026s ]
+NOTIC: [2] preg_match() expects parameter 2 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1112 行.
+
+[ 2015-12-17T18:02:11+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001717s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002032s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000497s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000550s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0035s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0027s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0030s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000239s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000295s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021919s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021975s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000358s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000397s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000880s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000929s ]
+
+[ 2015-12-17T18:02:14+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001607s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001903s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000381s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000435s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0026s ]
+NOTIC: [2] preg_match() expects parameter 2 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1112 行.
+
+[ 2015-12-17T18:02:20+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001658s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001946s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000445s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000498s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0035s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0001s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0030s ]
+NOTIC: [2] preg_match() expects parameter 2 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1112 行.
+
+[ 2015-12-17T18:03:11+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001960s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002316s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000671s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000774s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0021s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0019s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0022s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0028s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000248s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000339s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0038s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.024196s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024258s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000388s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000428s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000636s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000683s ]
+
+[ 2015-12-17T18:03:15+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001011s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001287s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000317s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000371s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0024s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0025s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+SQL: UPDATE `jfsd_line` SET `site_id`='0',`l_type`='2',`ct_type`='2',`title`='（新春预订）【土耳其双飞全景9日】南航直飞',`sub_title`='2016年2月10、12日',`earlier_date`='0',`daynum`='5',`traffic`='阿萨德法撒旦',`images`='3',`base_hits`='10',`base_order`='0',`sort`='0',`is_display`='0',`is_position`='0',`update_time`='1450346595',`status`='1' WHERE `line_id` = 17 [ RunTime:0.1299s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0068s ]
+NOTIC: [2] Illegal offset type in isset or empty E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 509 行.
+SQL: DELETE FROM `jfsd_line_type` WHERE `line_id` = 17 [ RunTime:0.0361s ]
+SQL: INSERT INTO `jfsd_line_type` (`line_id`,`type_id`) VALUES ('17','1'),('17','2'),('17','28'),('17','29'),('17','7'),('17','8'),('17','9'),('17','10'),('17','11'),('17','12'),('17','13'),('17','6'),('17','16'),('17','18'),('17','19'),('17','20'),('17','17'),('17','15'),('17','21'),('17','5'),('17','22') [ RunTime:0.0319s ]
+
+[ 2015-12-17T18:03:17+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000025s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001881s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002399s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000537s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000626s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0033s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0030s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0020s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000220s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000271s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0037s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023952s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024008s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000365s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000405s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000721s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000785s ]
+
+[ 2015-12-17T18:04:15+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001431s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001806s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000457s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000534s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0029s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0036s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0026s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0022s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000217s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000287s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.024947s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.025003s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000360s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000416s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000656s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000705s ]
+
+[ 2015-12-17T18:04:18+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001584s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001905s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000384s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000440s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0023s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0025s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+SQL: UPDATE `jfsd_line` SET `site_id`='2',`l_type`='2',`ct_type`='2',`title`='（新春预订）【土耳其双飞全景9日】南航直飞',`sub_title`='2016年2月10、12日',`earlier_date`='0',`daynum`='5',`traffic`='阿萨德法撒旦',`images`='3',`base_hits`='10',`base_order`='0',`sort`='0',`is_display`='0',`is_position`='0',`update_time`='1450346657',`status`='1' WHERE `line_id` = 17 [ RunTime:0.1322s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0032s ]
+NOTIC: [2] Illegal offset type in isset or empty E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 509 行.
+SQL: DELETE FROM `jfsd_line_type` WHERE `line_id` = 17 [ RunTime:0.0295s ]
+SQL: INSERT INTO `jfsd_line_type` (`line_id`,`type_id`) VALUES ('17','1'),('17','2'),('17','28'),('17','29'),('17','7'),('17','8'),('17','9'),('17','10'),('17','11'),('17','12'),('17','13'),('17','6'),('17','16'),('17','18'),('17','19'),('17','20'),('17','17'),('17','15'),('17','21'),('17','5'),('17','22') [ RunTime:0.0315s ]
+
+[ 2015-12-17T18:04:19+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000018s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002193s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002607s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000590s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000667s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0029s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0031s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0025s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0025s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0022s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000216s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000268s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.022793s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.022851s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000468s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000527s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000657s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000726s ]
+
+[ 2015-12-17T18:04:27+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001766s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002128s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000509s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000563s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0033s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0028s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+SQL: UPDATE `jfsd_line` SET `site_id`='2',`l_type`='2',`ct_type`='2',`title`='（新春预订）【土耳其双飞全景9日】南航直飞',`sub_title`='2016年2月10、12日',`earlier_date`='0',`daynum`='5',`traffic`='阿萨德法撒旦',`images`='3',`base_hits`='10',`base_order`='0',`sort`='0',`is_display`='0',`is_position`='0',`update_time`='1450346666',`status`='1' WHERE `line_id` = 17 [ RunTime:0.1285s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0065s ]
+NOTIC: [2] Illegal offset type in isset or empty E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 509 行.
+SQL: DELETE FROM `jfsd_line_type` WHERE `line_id` = 17 [ RunTime:0.0368s ]
+SQL: INSERT INTO `jfsd_line_type` (`line_id`,`type_id`) VALUES ('17','1'),('17','2'),('17','28'),('17','29'),('17','7'),('17','8'),('17','9'),('17','10'),('17','11'),('17','12'),('17','13'),('17','5'),('17','22') [ RunTime:0.0307s ]
+
+[ 2015-12-17T18:04:28+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000016s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001914s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002309s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000502s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000556s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0038s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0023s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0026s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0022s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000304s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000363s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0026s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023194s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023251s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000416s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000458s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000637s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000707s ]
+
+[ 2015-12-17T18:04:35+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.000998s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001288s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000363s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000416s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0041s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0026s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+
+[ 2015-12-17T18:04:43+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000020s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001182s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001691s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000522s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000605s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0025s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+SQL: UPDATE `jfsd_line` SET `site_id`='2',`l_type`='2',`ct_type`='2',`title`='（新春预订）【土耳其双飞全景9日】南航直飞',`sub_title`='2016年2月10、12日',`earlier_date`='0',`daynum`='5',`traffic`='啊三分大赛的分',`images`='3',`base_hits`='10',`base_order`='0',`sort`='0',`is_display`='0',`is_position`='0',`update_time`='1450346683',`status`='1' WHERE `line_id` = 17 [ RunTime:0.1286s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0022s ]
+NOTIC: [2] Illegal offset type in isset or empty E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 509 行.
+SQL: DELETE FROM `jfsd_line_type` WHERE `line_id` = 17 [ RunTime:0.0306s ]
+SQL: INSERT INTO `jfsd_line_type` (`line_id`,`type_id`) VALUES ('17','1'),('17','2'),('17','28'),('17','29'),('17','7'),('17','8'),('17','9'),('17','10'),('17','11'),('17','12'),('17','13'),('17','5'),('17','22') [ RunTime:0.0330s ]
+
+[ 2015-12-17T18:04:44+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000027s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002116s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002759s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000666s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000771s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0024s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0024s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000237s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000306s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0027s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0004s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.024249s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024306s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000367s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000409s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000495s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000542s ]
+
+[ 2015-12-17T18:05:37+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001460s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001762s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000403s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000453s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0027s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0029s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0022s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0021s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000296s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000391s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0007s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.024665s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024769s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000749s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000822s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000863s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000934s ]
+
+[ 2015-12-17T18:05:39+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001753s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002108s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000529s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000584s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0025s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0029s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+SQL: UPDATE `jfsd_line` SET `site_id`='2',`l_type`='2',`ct_type`='2',`title`='（新春预订）【土耳其双飞全景9日】南航直飞',`sub_title`='2016年2月10、12日',`earlier_date`='0',`daynum`='5',`traffic`='啊三分大赛的分',`images`='3',`base_hits`='10',`base_order`='0',`sort`='0',`is_display`='0',`is_position`='0',`update_time`='1450346738',`status`='1' WHERE `line_id` = 17 [ RunTime:0.1286s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0074s ]
+NOTIC: [2] Illegal offset type in isset or empty E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 509 行.
+SQL: DELETE FROM `jfsd_line_type` WHERE `line_id` = 17 [ RunTime:0.0358s ]
+SQL: INSERT INTO `jfsd_line_type` (`line_id`,`type_id`) VALUES ('17','1'),('17','2'),('17','28'),('17','29'),('17','7'),('17','8'),('17','9'),('17','10'),('17','11'),('17','12'),('17','13'),('17','5'),('17','22') [ RunTime:0.0319s ]
+
+[ 2015-12-17T18:05:40+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001798s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002243s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000480s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000530s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0026s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0036s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0032s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0025s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0021s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000449s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000570s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.025035s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.025092s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000576s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000639s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000652s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000705s ]
+
+[ 2015-12-17T18:05:43+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001025s ]
+INFO: [ app_init ] --END-- [ RunTime:0.001292s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000305s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000357s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0036s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0025s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+
+[ 2015-12-17T18:05:47+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001705s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002043s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000312s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000367s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0024s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0033s ]
+NOTIC: [2] trim() expects parameter 1 to be string, array given E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 1204 行.
+SQL: UPDATE `jfsd_line` SET `site_id`='2',`l_type`='2',`ct_type`='2',`title`='（新春预订）【土耳其双飞全景9日】南航直飞',`sub_title`='2016年2月10、12日',`earlier_date`='0',`daynum`='5',`traffic`='阿凡俗的',`images`='3',`base_hits`='10',`base_order`='0',`sort`='0',`is_display`='0',`is_position`='0',`update_time`='1450346746',`status`='1' WHERE `line_id` = 17 [ RunTime:0.0345s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0027s ]
+NOTIC: [2] Illegal offset type in isset or empty E:\phpStudy\WWW\songjian\youweihui\ThinkPHP\Library\Think\Model.class.php 第 509 行.
+SQL: DELETE FROM `jfsd_line_type` WHERE `line_id` = 17 [ RunTime:0.0298s ]
+SQL: INSERT INTO `jfsd_line_type` (`line_id`,`type_id`) VALUES ('17','1'),('17','2'),('17','28'),('17','29'),('17','7'),('17','8'),('17','9'),('17','10'),('17','11'),('17','12'),('17','13'),('17','5'),('17','22') [ RunTime:0.0327s ]
+
+[ 2015-12-17T18:05:48+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000030s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002525s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003184s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000543s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000624s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0026s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0025s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0026s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0005s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0028s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 223 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000221s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000273s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0022s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.020919s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021008s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000348s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000389s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000781s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000830s ]
+
