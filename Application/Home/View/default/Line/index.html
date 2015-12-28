@@ -1,0 +1,138 @@
+<extend name="Base/common"/>
+
+<block name="body">
+    <div class="ytip_02 main auto fs">
+        <a href="#">首页</a> -> <a href="#">全部尾单</a> -> <a href="#">港澳台</a>
+    </div>
+    <section class="ydiv5 fs">
+        <div class="yk_01 fix">
+            <span>出发城市：</span>
+            <div class="yy1">
+                <a href="#" class="ya3">全部</a><a href="#">北京/天津</a><a href="#">东北/沈阳/长春/哈尔滨</a><a href="#">华东/上海/杭州/南京</a><a href="#">西南/成都/重庆/昆明</a>
+            </div>
+        </div>
+        <div class="yk_01 fix">
+           <div class="fix yfff">
+                <span>目的地：</span>
+                <div class="yy1">
+                    <a href="#" class="ya3">全部</a><a href="#">塞舌尔</a><a href="#">港澳台</a><a href="#">埃及</a><a href="#">南非</a><a href="#">肯尼亚</a><a href="#">坦桑尼亚</a><a href="#">毛里求斯</a><a href="#">牙买加</a><a href="#">巴厘岛</a><a href="#">塞班岛</a>
+                </div>
+                <div class="yy2">
+                    <a href="#" class="ya4">更多</a>
+                    <a href="#" class="ya5">收起</a>
+                </div>
+            </div>
+            <div class="ydiv6 fix">
+            	<div class="yydiv">
+                	<a href="#">全部</a><a href="#">泰国</a><a href="#">马来西亚</a><a href="#">新加坡</a><a href="#">菲律宾</a><a href="#">印度尼西亚</a><a href="#">柬埔寨</a><a href="#">越南</a><a href="#">北马里亚纳</a><a href="#">马尔代夫</a><a href="#">韩国</a><a href="#">日本</a><a href="#">中国香港</a><a href="#">尼泊尔</a><a href="#">中国澳门 </a><a href="#">文莱</a><a href="#">斐济 </a><a href="#">印度</a>
+                </div>
+                <div class="yydiv">
+                	<a href="#">全部2</a><a href="#">泰国</a><a href="#">马来西亚</a><a href="#">新加坡</a><a href="#">菲律宾</a><a href="#">印度尼西亚</a><a href="#">柬埔寨</a><a href="#">越南</a><a href="#">北马里亚纳</a><a href="#">马尔代夫</a><a href="#">韩国</a><a href="#">日本</a><a href="#">中国香港</a><a href="#">尼泊尔</a><a href="#">中国澳门 </a><a href="#">文莱</a><a href="#">斐济 </a><a href="#">印度</a>
+                </div>
+                <div class="yydiv">
+                	<a href="#">全部3</a><a href="#">泰国</a><a href="#">马来西亚</a><a href="#">新加坡</a><a href="#">菲律宾</a><a href="#">印度尼西亚</a><a href="#">柬埔寨</a><a href="#">越南</a><a href="#">北马里亚纳</a><a href="#">马尔代夫</a><a href="#">韩国</a><a href="#">日本</a><a href="#">中国香港</a><a href="#">尼泊尔</a><a href="#">中国澳门 </a><a href="#">文莱</a><a href="#">斐济 </a><a href="#">印度</a>
+                </div>
+            </div>
+        </div>
+        <div class="yk_01 fix">
+            <span>参团性质：</span>
+            <div class="yy1">
+                <a href="#" class="ya3">全部</a><a href="#">跟团游</a><a href="#">自由行</a><a href="#">游轮</a><a href="#">自驾游</a><a href="#">主题游</a>
+            </div>
+        </div>
+        <div class="yk_01 fix">
+            <span>旅行时间：</span>
+            <div class="yy1">
+                <a href="#" class="ya3">全部</a><a href="#">10月</a><a href="#">11月</a><a href="#">12月</a><a href="#">1月</a><a href="#">2月</a><a href="#">3月</a><a href="#">4月</a><a href="#">圣诞</a><a href="#">元旦</a><a href="#">春节</a>
+            </div>
+        </div>
+        <div class="yk_01 fix ybbb">
+            <span>价格区间：</span>
+            <div class="yy1">
+                <a href="#" class="ya3">全部</a><a href="#">1000-2000元</a><a href="#">2000-3000元</a><a href="#">3000-5000元</a><a href="#">5000元以上</a>
+            </div>
+        </div>
+    </section>
+    <section class="yydd mian">
+        <div class="ydiv7 fl">
+            <div class="ytip_03 fs">
+                <span>排序条件：</span><a href="#" class="xz">默认</a><a href="#">销量</a><a href="#">价格</a>
+            </div>
+            <div class="y_div3">
+                <volist name="line_lists" id="val">
+                    <div class="y_k02 fix">
+                        <img src="<empty name="val['img']">__IMG__/y_04.jpg<else/>{$val['img']}</empty>" alt="{$val['title']}" width="262" height="194" class="fl">
+                        <div class="y_art02 fl">
+                            <a href="{$val['url']}" class="y_a3 fs">{$val['starting']} - {$val['dest']}</a>
+                            <a href="{$val['url']}" class="y_a4">{$val['title']}</a>
+                            {$val['sub_title']}
+                            <span>出发日期：11月02日 | 11月03日 | 11月04日 | 11月05日</span>
+                        </div>
+                        <span><del>4999元</del><bdo>￥</bdo><font>4199</font>元起</span>
+                        <a href="{$val['url']}">立即预定</a>
+                    </div>
+                </volist>
+
+                <div class="y_k02 fix">
+                    <img src="__IMG__/y_04.jpg" alt="" class="fl">
+                    <div class="y_art02 fl">
+                        <a href="#" class="y_a3 fs">昆明 - 泰国 苏梅岛</a>
+                        <a href="#" class="y_a4">温柔海岛 | 苏梅岛4晚5天/5晚6天自由行（昆明直飞苏梅岛本岛） </a>
+                        昆明直飞往返，海边三星宜必思酒店住宿，直飞苏梅岛本岛免去码头坐船。
+                        <span>出发日期：11月02日 | 11月03日 | 11月04日 | 11月05日</span>
+                    </div>
+                    <span><del>4999元</del><bdo>￥</bdo><font>4199</font>元起</span>
+                    <a href="#">立即预定</a>
+                </div>
+            </div>
+            <div class="pages"><a href="#" class="yling2">《 上一页</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a> <a href="#">8</a> <a href="#">9</a> <a href="#">10</a> <a href="#" class="yling">....</a> <a href="#">29</a> <a href="#">30</a> <a href="#" class="yling2">下一页 》</a></div>
+        </div>
+        <div class="ydiv8 fr">
+            <span>热门商品</span>
+            <div class="y_k_03">
+                <a href="#">天津直飞芽庄4天3晚/5天4晚自由行，入住四...</a>
+                <div class="yddd fix">
+                    <img src="__IMG__/y_05.jpg" class="fl">
+                    <div class="yar1 fr">
+                        上海<br>
+                        泰国  曼谷
+                        <font>￥<span>3480</span>/人起</font>
+                    </div>
+                </div>
+            </div>
+            <div class="y_k_03">
+                <a href="#">天津直飞芽庄4天3晚/5天4晚自由行，入住四...</a>
+                <div class="yddd fix">
+                    <img src="__IMG__/y_05.jpg" class="fl">
+                    <div class="yar1 fr">
+                        上海<br>
+                        泰国  曼谷
+                        <font>￥<span>3480</span>/人起</font>
+                    </div>
+                </div>
+            </div>
+            <div class="y_k_03">
+                <a href="#">天津直飞芽庄4天3晚/5天4晚自由行，入住四...</a>
+                <div class="yddd fix">
+                    <img src="__IMG__/y_05.jpg" class="fl">
+                    <div class="yar1 fr">
+                        上海<br>
+                        泰国  曼谷
+                        <font>￥<span>3480</span>/人起</font>
+                    </div>
+                </div>
+            </div>
+            <div class="y_k_03">
+                <a href="#">天津直飞芽庄4天3晚/5天4晚自由行，入住四...</a>
+                <div class="yddd fix">
+                    <img src="__IMG__/y_05.jpg" class="fl">
+                    <div class="yar1 fr">
+                        上海<br>
+                        泰国  曼谷
+                        <font>￥<span>3480</span>/人起</font>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>

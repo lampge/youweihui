@@ -7,7 +7,7 @@
 	<!-- 按钮工具栏 -->
 	<div class="cf">
 		<div class="fl">
-			<a href="{:U('add')}" class="btn">快速创建</a>
+			<a href="{:U('edit', array('site_id'=>$site_id))}" class="btn">快速创建</a>
 		</div>
 
 		<volist name="nodes" id="val">
@@ -57,7 +57,7 @@
 							<else/>
 							<a href="{:U('changeStatus', array('status'=>1, 'line_id'=>$val['line_id']))}" class="confirm ajax-get">显示</a>
 							</eq>
-							<a href="{:U('price', array('site_id'=>$site_id,'line_id'=>$val['line_id']))}" class="authorize">价格</a>
+							<a href="{:U('edit2', array('site_id'=>$site_id,'line_id'=>$val['line_id']))}" class="authorize">价格</a>
 							<a href="{:U('edit', array('site_id'=>$site_id,'line_id'=>$val['line_id']))}" class="authorize">修改</a>
 			            </td>
                     </tr>

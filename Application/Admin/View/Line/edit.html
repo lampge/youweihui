@@ -27,9 +27,15 @@
 	<!-- 标签页导航 -->
 <div class="tab-wrap">
 	<ul class="tab-nav nav">
-		<volist name="setp" id="val">
-			<li data-tab="tab{$key}" <eq name="val['current']" value="1">class="current"</eq>><a href="{$val['url']}">{$val['title']}</a></li>
-		</volist>
+		<empty name="line_id">
+			<volist name="setp" id="val">
+				<li <eq name="val['current']" value="1">class="current"</eq>><a href="javascript:void(0);">{$val['title']}</a></li>
+			</volist>
+		<else />
+			<volist name="setp" id="val">
+				<li data-tab="tab{$key}" <eq name="val['current']" value="1">class="current"</eq>><a href="{$val['url']}">{$val['title']}</a></li>
+			</volist>
+		</empty>
 	</ul>
 	<div class="tab-content">
 	<!-- 表单 -->
@@ -40,7 +46,7 @@
 					<label class="item-label">所属站点<span class="check-tips">（必填）</span></label>
 					<volist name="nodes" id="val">
 						<label class="radio">
-							<input type="radio" value="{$key}" name="site_id" <eq name="data['site_id']" value="$key">checked="checked"</eq>>{$val['title']}
+							<input readonly type="radio" value="{$key}"  name="site_id" <eq name="data['site_id']" value="$key">checked="checked"</eq>>{$val['title']}
 						</label>
 					</volist>
 				</div>
@@ -114,19 +120,31 @@
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">游客需提前几天报名<span class="check-tips">（必填）</span></label>
-					<input type="text" class="text input-mid" name="earlier_date" value="{$data['earlier_date']}">
+					<input type="text" class="text input-mid" name="earlier_date" value="{$data['earlier_date']|default=3}">
 				</div>
 			</div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">行程天数<span class="check-tips">（必填）</span></label>
-					<input type="text" class="text input-mid" name="daynum" value="{$data['daynum']}">
+					<input type="text" class="text input-mid" name="daynum" value="{$data['daynum']|default=3}">
 				</div>
 			</div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">交通方式<span class="check-tips">（必填）</span></label>
-					<input type="text" class="text input-mid" name="traffic" value="{$data['traffic']}">
+					<input type="text" class="text input-mid" name="traffic" value="{$data['traffic']|default='飞机去飞机回'}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">出发地<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="starting" value="{$data['starting']|default='出发地'}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">目的地<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="dest" value="{$data['dest']|default='目的地'}">
 				</div>
 			</div>
 
@@ -150,24 +168,24 @@
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">详情页显示数据<span class="check-tips"></span></label>
-					游客关注：<input type="text" class="text input-mid" name="base_hits" value="{$data['base_hits']}">
-					最近订单：<input type="text" class="text input-mid" name="base_order" value="{$data['base_order']}">
+					游客关注：<input type="text" class="text input-mid" name="base_hits" value="{$data['base_hits']|default=0}">
+					最近订单：<input type="text" class="text input-mid" name="base_order" value="{$data['base_order']|default=0}">
 				</div>
 			</div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">排序<span class="check-tips"></span></label>
-					<input type="text" class="text input-mid" name="sort" value="{$data['sort']}">
+					<input type="text" class="text input-mid" name="sort" value="{$data['sort']|default=0}">
 				</div>
 			</div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">线路状态<span class="check-tips"></span></label>
 					<label class="radio">
-						<input type="radio" value="1" name="is_display" <eq name="data['is_display']" value="1">checked="checked"</eq>>显示
+						<input type="radio" value="1" name="status" <eq name="data['status']" value="1">checked="checked"</eq>>显示
 					</label>
 					<label class="radio">
-						<input type="radio" value="0" name="is_display" <eq name="data['is_display']" value="0">checked="checked"</eq>>隐藏
+						<input type="radio" value="0" name="status" <eq name="data['status']" value="0">checked="checked"</eq>>隐藏
 					</label>
 				</div>
 			</div>

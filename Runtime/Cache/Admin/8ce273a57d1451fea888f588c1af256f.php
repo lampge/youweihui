@@ -111,7 +111,9 @@
 	<!-- 标签页导航 -->
 <div class="tab-wrap">
 	<ul class="tab-nav nav">
-		<?php if(is_array($setp)): $i = 0; $__LIST__ = $setp;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><li data-tab="tab<?php echo ($key); ?>" <?php if(($val['current']) == "1"): ?>class="current"<?php endif; ?>><a href="<?php echo ($val['url']); ?>"><?php echo ($val['title']); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+		<?php if(empty($line_id)): if(is_array($setp)): $i = 0; $__LIST__ = $setp;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><li <?php if(($val['current']) == "1"): ?>class="current"<?php endif; ?>><a href="javascript:void(0);"><?php echo ($val['title']); ?></a></li><?php endforeach; endif; else: echo "" ;endif; ?>
+		<?php else: ?>
+			<?php if(is_array($setp)): $i = 0; $__LIST__ = $setp;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><li data-tab="tab<?php echo ($key); ?>" <?php if(($val['current']) == "1"): ?>class="current"<?php endif; ?>><a href="<?php echo ($val['url']); ?>"><?php echo ($val['title']); ?></a></li><?php endforeach; endif; else: echo "" ;endif; endif; ?>
 	</ul>
 	<div class="tab-content">
 	<!-- 表单 -->
@@ -121,7 +123,7 @@
 				<div class="controls">
 					<label class="item-label">所属站点<span class="check-tips">（必填）</span></label>
 					<?php if(is_array($nodes)): $i = 0; $__LIST__ = $nodes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><label class="radio">
-							<input type="radio" value="<?php echo ($key); ?>" name="site_id" <?php if(($data['site_id']) == $key): ?>checked="checked"<?php endif; ?>><?php echo ($val['title']); ?>
+							<input readonly type="radio" value="<?php echo ($key); ?>"  name="site_id" <?php if(($data['site_id']) == $key): ?>checked="checked"<?php endif; ?>><?php echo ($val['title']); ?>
 						</label><?php endforeach; endif; else: echo "" ;endif; ?>
 				</div>
 			</div>
@@ -180,19 +182,31 @@
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">游客需提前几天报名<span class="check-tips">（必填）</span></label>
-					<input type="text" class="text input-mid" name="earlier_date" value="<?php echo ($data['earlier_date']); ?>">
+					<input type="text" class="text input-mid" name="earlier_date" value="<?php echo ((isset($data['earlier_date']) && ($data['earlier_date'] !== ""))?($data['earlier_date']):3); ?>">
 				</div>
 			</div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">行程天数<span class="check-tips">（必填）</span></label>
-					<input type="text" class="text input-mid" name="daynum" value="<?php echo ($data['daynum']); ?>">
+					<input type="text" class="text input-mid" name="daynum" value="<?php echo ((isset($data['daynum']) && ($data['daynum'] !== ""))?($data['daynum']):3); ?>">
 				</div>
 			</div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">交通方式<span class="check-tips">（必填）</span></label>
-					<input type="text" class="text input-mid" name="traffic" value="<?php echo ($data['traffic']); ?>">
+					<input type="text" class="text input-mid" name="traffic" value="<?php echo ((isset($data['traffic']) && ($data['traffic'] !== ""))?($data['traffic']):'飞机去飞机回'); ?>">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">出发地<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="starting" value="<?php echo ((isset($data['starting']) && ($data['starting'] !== ""))?($data['starting']):'出发地'); ?>">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">目的地<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="dest" value="<?php echo ((isset($data['dest']) && ($data['dest'] !== ""))?($data['dest']):'目的地'); ?>">
 				</div>
 			</div>
 
@@ -214,24 +228,24 @@
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">详情页显示数据<span class="check-tips"></span></label>
-					游客关注：<input type="text" class="text input-mid" name="base_hits" value="<?php echo ($data['base_hits']); ?>">
-					最近订单：<input type="text" class="text input-mid" name="base_order" value="<?php echo ($data['base_order']); ?>">
+					游客关注：<input type="text" class="text input-mid" name="base_hits" value="<?php echo ((isset($data['base_hits']) && ($data['base_hits'] !== ""))?($data['base_hits']):0); ?>">
+					最近订单：<input type="text" class="text input-mid" name="base_order" value="<?php echo ((isset($data['base_order']) && ($data['base_order'] !== ""))?($data['base_order']):0); ?>">
 				</div>
 			</div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">排序<span class="check-tips"></span></label>
-					<input type="text" class="text input-mid" name="sort" value="<?php echo ($data['sort']); ?>">
+					<input type="text" class="text input-mid" name="sort" value="<?php echo ((isset($data['sort']) && ($data['sort'] !== ""))?($data['sort']):0); ?>">
 				</div>
 			</div>
 			<div class="form-item cf">
 				<div class="controls">
 					<label class="item-label">线路状态<span class="check-tips"></span></label>
 					<label class="radio">
-						<input type="radio" value="1" name="is_display" <?php if(($data['is_display']) == "1"): ?>checked="checked"<?php endif; ?>>显示
+						<input type="radio" value="1" name="status" <?php if(($data['status']) == "1"): ?>checked="checked"<?php endif; ?>>显示
 					</label>
 					<label class="radio">
-						<input type="radio" value="0" name="is_display" <?php if(($data['is_display']) == "0"): ?>checked="checked"<?php endif; ?>>隐藏
+						<input type="radio" value="0" name="status" <?php if(($data['status']) == "0"): ?>checked="checked"<?php endif; ?>>隐藏
 					</label>
 				</div>
 			</div>

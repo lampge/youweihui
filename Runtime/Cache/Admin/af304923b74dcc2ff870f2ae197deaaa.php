@@ -145,7 +145,7 @@
 							</tr><?php endforeach; endif; else: echo "" ;endif; ?>
 						<tr>
 							<td colspan="5" align="center">
-								<a href="<?php echo U('tcEdit', array('line_id'=>$val['line_id']));?>" class="btn">添加</a>
+								<a href="<?php echo U('tcEdit', array('line_id'=>$line_id));?>" class="btn">添加</a>
 							</td>
 						</tr>
 					</tbody>
@@ -155,7 +155,6 @@
 		<div class="form-item cf">
 			<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" name="1" target-form="form-horizontal">确定发布</button>
 			<button class="btn btn-return ajax-post hidden" id="submit" type="submit" name="0" target-form="form-horizontal">确定保存</button>
-			<input type="hidden" name="site_id" value="<?php echo ($site_id); ?>"/>
 			<input type="hidden" name="line_id" value="<?php echo ($data['line_id']); ?>"/>
 		</div>
 	</form>

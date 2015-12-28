@@ -1,47 +1,103 @@
-<!-- 导航条
-================================================== -->
-<div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-        <div class="container">
-            <a class="brand" href="{:U('index/index')}">OneThink</a>
-            <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <div class="nav-collapse collapse">
-                <ul class="nav">
-                    <think:nav name="nav">
-                    	<eq name="nav.pid" value="0">
-                        <li>
-                            <a href="{$nav.url|get_nav_url}" target="<eq name='nav.target' value='1'>_blank<else/>_self</eq>">{$nav.title}</a>
-                        </li>
-                        </eq>
-                    </think:nav>
-                </ul>
-            </div>
-            <div class="nav-collapse collapse pull-right">
-                <if condition="is_login()">
-                    <ul class="nav" style="margin-right:0">
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="padding-left:0;padding-right:0">{:get_username()} <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="{:U('User/profile')}">修改密码</a></li>
-                                <li><a href="{:U('User/logout')}">退出</a></li>
+<!-- 导航条================================================== -->
+<section class="dingbu">
+    <div class="dingbu_nr auto fix">
+        <div class="dingbu_nr_left">欢迎来到游尾会，一起旅游，一起嗨！</div>
+        <div class="dingbu_nr_center">
+            <ul class="ul fix">
+                <li><a href="#" title="">全部尾单<img src="__IMG__/bg18.png" width="7" height="4" alt=""></a>
+                    <div class="xl fix">
+                        <div class="xl_left">
+                            <ul>
+                                <li class="fix">
+                                    <p><img src="__IMG__/bg20.png" width="31" height="24" alt=""> 度假产品</p>
+                                    <span class="fix"> <a href="#" title=""><em>全部尾单</em></a> <a href="#" title="">亚洲</a> <a href="#" title="">邮轮</a> <a href="#" title="">海岛</a> <a href="#" title="">欧洲</a> <a href="#" title="">美洲</a> <a href="#" title="">澳洲</a> <a href="#" title="">港澳台</a> <a href="#" title="">中东非</a><br />
+                                    <br />
+                                    <a href="#" title=""><em>出境特卖</em></a> <a href="#" title="">亚洲</a> <a href="#" title="">邮轮</a> <a href="#" title="">海岛</a> <a href="#" title="">欧洲</a> <a href="#" title="">美洲</a> <a href="#" title="">澳洲</a> <a href="#" title="">港澳台</a> <a href="#" title="">中东非</a><br />
+                                    <br />
+                                    <a href="#" title=""><em>全部尾单</em></a> <a href="#" title="">华北</a> <a href="#" title="">东北</a> <a href="#" title="">西北</a> <a href="#" title="">华东</a> <a href="#" title="">华南</a> <a href="#" title="">西南</a> </span> </li>
+                                <li class="fix">
+                                    <p style="color:#ef4603;"><img src="__IMG__/bg21.png" width="31" height="24" alt=""> 其他</p>
+                                    <span class="fix"> <a href="#" title=""><em style=" width:434px; display:block;">帮助中心</em></a> <a href="#" title=""><em style=" width:434px; display:block;">关于我们</em></a> <a href="#" title=""><em style=" width:434px; display:block;">友情链接</em></a> </span> </li>
                             </ul>
-                        </li>
-                    </ul>
-                <else/>
-                    <ul class="nav" style="margin-right:0">
-                        <li>
-                            <a href="{:U('User/login')}">登录</a>
-                        </li>
-                        <li>
-                            <a href="{:U('User/register')}" style="padding-left:0;padding-right:0">注册</a>
-                        </li>
-                    </ul>
-                </if>
-            </div>
+                        </div>
+                        <div class="xl_center">
+                            <ul>
+                                <li class="fix">
+                                    <p><img src="__IMG__/bg22.png" width="31" height="24" alt=""> 签证</p>
+                                    <span class="fix"> <a href="#" title=""><em>亚洲</em></a> <a href="#" title=""><em>非洲</em></a> <a href="#" title=""><em>欧洲</em></a> <a href="#" title=""><em>澳洲</em></a> <a href="#" title=""><em>美洲</em></a> </span> </li>
+                            </ul>
+                        </div>
+                        <div class="xl_right">
+                            <ul>
+                                <li class="fix">
+                                    <p><img src="__IMG__/bg23.png" width="31" height="24" alt=""> 旅游资讯</p>
+                                    <span class="fix"> <a href="#" title=""><em>旅游资讯</em></a><br />
+                                    <a href="#" title=""><em>旅游公告</em></a><br />
+                                    <a href="#" title=""><em>旅游攻略</em></a><br />
+                                    </span> </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li><a href="#" title="">加入收藏</a></li>
+                <li><a href="#" title="">订单查询</a></li>
+            </ul>
+        </div>
+        <div class="dingbu_nr_right">
+            <ul class="fix">
+                <li>
+                    <p><a href="#" title=""><img src="__IMG__/bg15.png" width="22" height="22" class="img1"><img src="__IMG__/bg15_h.png" width="22" height="22" class="img2"></a></p>
+                </li>
+                <li>
+                    <p><a href="#" title=""><img src="__IMG__/bg16.png" width="22" height="22" class="img1"><img src="__IMG__/bg16_h.png" width="22" height="22" class="img2"></a></p>
+                    <span><img src="__IMG__/pic5.jpg" width="119" height="119"></span> </li>
+            </ul>
         </div>
     </div>
-</div>
+</section>
+<!--顶部内容 end-->
+<header class="header auto fix">
+    <div class="logo"><a href="index.html"><img src="__IMG__/logo.png" width="305" height="59" alt=""></a></div>
+    <div class="search">
+        <div class="search_nr fix">
+            <input name="q" class="seach_in1 search-keyword wbk" type="text" id="search" value="请输入目的地、主题或关键词" onfocus="if(this.value=='请输入目的地、主题或关键词'){this.value='';}"  onblur="if(this.value==''){this.value='请输入目的地、主题或关键词';}"/>
+            <span class="fix"> <a href="#" title="">樱花季</a> <a href="#" title="">父母游</a> <a href="#" title="">欧洲</a> </span>
+            <input type="submit" name="button" id="button" value="" class="btn">
+        </div>
+    </div>
+    <div class="tel fix">
+        <ol>
+            <img src="__IMG__/bg2.png" width="47" height="47" alt="">
+        </ol>
+        <ul>
+            24小时免费咨询 <span>400-876-5261</span>
+        </ul>
+    </div>
+</header>
+<!--header end-->
+<nav class="nav">
+    <div class="nav_nr auto fix">
+        <ul class="ul fix">
+            <li><a href="index.html" title="">首页</a></li>
+            <li><a href="#" title="">全部尾单<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
+                <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>
+            </li>
+            <li><a href="#">出境特卖<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
+                <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>
+            </li>
+            <li><a href="#">国内特卖<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
+                <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>
+            </li>
+            <li><a href="#">签证<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
+                <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>
+            </li>
+            <li><a href="#">旅游资讯</a></li>
+            <li><a href="#">旅游指南</a></li>
+        </ul>
+        <ol class="fix">
+            <li><a href="#"><img src="__IMG__/bg5.png" width="20" height="19"> 注册</a></li>
+            <li><a href="#"><img src="__IMG__/bg4.png" width="20" height="19"> 登录</a></li>
+        </ol>
+    </div>
+</nav>
+<!--nav end-->

@@ -25,6 +25,8 @@ class LineModel extends Model{
     	array('earlier_date', 'require', '游客需提前几天报名不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
     	array('daynum', 'require', '行程天数不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
     	array('traffic', 'require', '交通方式不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
+    	array('starting', 'require', '出发地不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
+    	array('dest', 'require', '目的地不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
     );
 
     protected $_auto = array(

@@ -92,7 +92,7 @@
 	<!-- 按钮工具栏 -->
 	<div class="cf">
 		<div class="fl">
-			<a href="<?php echo U('add');?>" class="btn">快速创建</a>
+			<a href="<?php echo U('edit', array('site_id'=>$site_id));?>" class="btn">快速创建</a>
 		</div>
 
 		<?php if(is_array($nodes)): $i = 0; $__LIST__ = $nodes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$val): $mod = ($i % 2 );++$i;?><a href="<?php echo ($val['url']); ?>" class="btn <?php if(($val['current']) == "1"): ?>disabled<?php endif; ?>"><?php echo ($val['title']); ?></a><?php endforeach; endif; else: echo "" ;endif; ?>
@@ -137,7 +137,7 @@
 							<?php if(($val['status']) == "1"): ?><a href="<?php echo U('changeStatus', array('status'=>0, 'line_id'=>$val['line_id']));?>" class="confirm ajax-get">隐藏</a>
 							<?php else: ?>
 							<a href="<?php echo U('changeStatus', array('status'=>1, 'line_id'=>$val['line_id']));?>" class="confirm ajax-get">显示</a><?php endif; ?>
-							<a href="<?php echo U('price', array('site_id'=>$site_id,'line_id'=>$val['line_id']));?>" class="authorize">价格</a>
+							<a href="<?php echo U('edit2', array('site_id'=>$site_id,'line_id'=>$val['line_id']));?>" class="authorize">价格</a>
 							<a href="<?php echo U('edit', array('site_id'=>$site_id,'line_id'=>$val['line_id']));?>" class="authorize">修改</a>
 			            </td>
                     </tr><?php endforeach; endif; else: echo "" ;endif; ?>

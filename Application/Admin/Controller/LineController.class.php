@@ -15,7 +15,7 @@ use Think\Page;
  * @author huajie <banhuajie@163.com>
  */
 class LineController extends AdminController {
-    private $site_id        =   null; //文档分类id
+    private $site_id        =   null;
     /**
      * 显示左边菜单，进行权限控制
      * @author huajie <banhuajie@163.com>
@@ -77,8 +77,9 @@ class LineController extends AdminController {
     public function index(){
         //获取左边菜单
         $this->getMenu();
-
-        $map['status'] = array('egt', 0);
+        if ($this->site_id) {
+            $map['site_id'] = $this->site_id;
+        }
         $title = I('title');
         if(is_numeric($title)){
             $map['line_id|title'] = array(intval($title),array('like','%'.$title.'%'),'_multi'=>true);
@@ -93,12 +94,9 @@ class LineController extends AdminController {
         if(!is_null($tc_type)){
             $map['tc_type'] = $tc_type;
         }
-
-        $list   = $this->lists('Line', $map);
-
+        $list   = $this->lists('Line', $map, 'status desc, line_id desc');
         int_to_string($list);
         // print_r($list);
-
         $this->assign('_list', $list);
         $this->meta_title = '线路列表';
         $this->display();
@@ -125,55 +123,12 @@ class LineController extends AdminController {
     }
 
     /**
-     * 线路新增
-     */
-    public function add(){
-        //获取左边菜单
-        $this->getMenu();
-
-        $cate_id    =   I('get.cate_id',0);
-        $model_id   =   I('get.model_id',0);
-		$group_id	=	I('get.group_id','');
-
-        empty($cate_id) && $this->error('参数不能为空！');
-        empty($model_id) && $this->error('该分类未绑定模型！');
-
-        //检查该分类是否允许发布
-        $allow_publish = check_category($cate_id);
-        !$allow_publish && $this->error('该分类不允许发布内容！');
-
-        // 获取当前的模型信息
-        $model    =   get_document_model($model_id);
-
-        //处理结果
-        $info['pid']            =   $_GET['pid']?$_GET['pid']:0;
-        $info['model_id']       =   $model_id;
-        $info['category_id']    =   $cate_id;
-		$info['group_id']		=	$group_id;
-
-        if($info['pid']){
-            // 获取上级文档
-            $article            =   M('Document')->field('id,title,type')->find($info['pid']);
-            $this->assign('article',$article);
-        }
-
-        //获取表单字段排序
-        $fields = get_model_attribute($model['id']);
-        $this->assign('info',       $info);
-        $this->assign('fields',     $fields);
-        $this->assign('type_list',  get_type_bycate($cate_id));
-        $this->assign('model',      $model);
-        $this->meta_title = '新增'.$model['title'];
-        $this->display();
-    }
-
-    /**
      * 线路修改
      */
     public function edit(){
         $line_id     =   I('line_id');
         if(empty($line_id)){
-            $this->error('参数不能为空！');
+            // $this->error('参数不能为空！');
         }
         $Line = D('Line');
         if (IS_POST) {
@@ -183,6 +138,9 @@ class LineController extends AdminController {
                 if ($categorys) {
                     // 产品分类
                     $LineType = M('LineType');
+                    if (empty($line_id)) {
+                        $line_id = $result;
+                    }
                     $LineType->where(array('line_id'=>$line_id))->delete();
                     // 批量添加数据
                     $dataList = array();
@@ -191,7 +149,7 @@ class LineController extends AdminController {
                     }
                     $LineType->addAll($dataList);
                 }
-                $this->success('成功');
+                $this->success('成功', U('index'));
             } else {
                 $this->error($Line->getError());
             }
@@ -217,13 +175,18 @@ class LineController extends AdminController {
                 if ($data['images']) {
                     $data['images'] = explode(',', $data['images']);
                 }
-                $this->assign('data', $data);
+                $this->meta_title   =   '编辑线路1';
             } else {
-                $this->error('该线路不存在');
+                $data['site_id'] = $this->site_id;
+                $data['l_type'] = 1;
+                $data['ct_type'] = 1;
+                $data['status'] = 0;
+                $data['is_position'] = 0;
+                $this->meta_title   =   '快速创建线路';
             }
+            $this->assign('data', $data);
             $this->assign('line_tc', $line_tc);
             $this->assign('line_id', $line_id);
-            $this->meta_title   =   '编辑线路1';
             $this->display();
         }
     }
@@ -248,6 +211,7 @@ class LineController extends AdminController {
             // 线路套餐
             $line_tc = M('LineTc')->where(array('line_id'=>$line_id))->select();
             $this->assign('line_tc', $line_tc);
+            $this->assign('line_id', $line_id);
             $this->meta_title   =   '编辑线路2';
             $this->display();
         }

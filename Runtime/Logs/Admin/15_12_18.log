@@ -12547,3 +12547,510 @@ INFO: [ app_end ] --START--
 INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000833s ]
 INFO: [ app_end ] --END-- [ RunTime:0.000900s ]
 
+[ 2015-12-18T18:21:53+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001824s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002155s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000489s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000539s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0031s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0023s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0025s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 224 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000220s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000275s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023075s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023128s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000507s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000547s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000868s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000915s ]
+
+[ 2015-12-18T18:21:56+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit2&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002476s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002928s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000643s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000758s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit2%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0029s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0022s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_tc` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `jfsd_line_tc` WHERE `line_id` = 17  [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000247s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000324s ]
+NOTIC: [8] Undefined variable: data E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\af304923b74dcc2ff870f2ae197deaaa.php 第 159 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013398s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013449s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000362s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000402s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.001077s ]
+INFO: [ app_end ] --END-- [ RunTime:0.001146s ]
+
+[ 2015-12-18T18:21:56+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit3&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001887s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002219s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000492s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000544s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0025s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit3%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0024s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0004s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000441s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000580s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0031s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023563s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023607s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000398s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000439s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000701s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000750s ]
+
+[ 2015-12-18T18:21:57+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit2&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000015s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002498s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002880s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000515s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000566s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0033s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0006s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit2%' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0038s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0030s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_tc` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `jfsd_line_tc` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000168s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000227s ]
+NOTIC: [8] Undefined variable: data E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\af304923b74dcc2ff870f2ae197deaaa.php 第 159 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014778s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014826s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000397s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000439s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000791s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000840s ]
+
+[ 2015-12-18T18:21:57+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000012s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001856s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002173s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000528s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000636s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0030s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0029s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0027s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0024s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0027s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 224 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000222s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000282s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0028s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0003s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.024754s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024810s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000433s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000478s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000683s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000772s ]
+
+[ 2015-12-18T18:21:58+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit2&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000014s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002370s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002909s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000596s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000655s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0029s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit2%' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0027s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0025s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_tc` [ RunTime:0.0049s ]
+SQL: SELECT * FROM `jfsd_line_tc` WHERE `line_id` = 17  [ RunTime:0.0009s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000155s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000209s ]
+NOTIC: [8] Undefined variable: data E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\af304923b74dcc2ff870f2ae197deaaa.php 第 159 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013972s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014036s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000490s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000532s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000681s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000728s ]
+
+[ 2015-12-18T18:21:58+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit3&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001847s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002217s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000575s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000673s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0036s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit3%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0024s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0006s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000250s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000306s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.020855s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.020900s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000423s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000463s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000644s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000712s ]
+
+[ 2015-12-18T18:21:59+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit2&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000040s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002501s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003085s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000577s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000638s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0038s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit2%' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0044s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0030s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_tc` [ RunTime:0.0033s ]
+SQL: SELECT * FROM `jfsd_line_tc` WHERE `line_id` = 17  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000160s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000215s ]
+NOTIC: [8] Undefined variable: data E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\af304923b74dcc2ff870f2ae197deaaa.php 第 159 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013796s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013861s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000648s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000696s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000670s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000731s ]
+
+[ 2015-12-18T18:21:59+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001890s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002253s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000547s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000610s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0024s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0028s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0028s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0026s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0028s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0002s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 224 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000425s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000563s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0024s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.024432s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.024488s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000458s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000497s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000701s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000770s ]
+
+[ 2015-12-18T18:21:59+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit2&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002565s ]
+INFO: [ app_init ] --END-- [ RunTime:0.003005s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000664s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000787s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit2%' ) LIMIT 1   [ RunTime:0.0007s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0032s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0026s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0002s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_tc` [ RunTime:0.0030s ]
+SQL: SELECT * FROM `jfsd_line_tc` WHERE `line_id` = 17  [ RunTime:0.0003s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000160s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000214s ]
+NOTIC: [8] Undefined variable: data E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\af304923b74dcc2ff870f2ae197deaaa.php 第 159 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.014491s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.014541s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000404s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000451s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000886s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000953s ]
+
+[ 2015-12-18T18:22:01+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit3&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000013s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.002187s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002550s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000673s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000728s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0028s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0005s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit3%' ) LIMIT 1   [ RunTime:0.0008s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0030s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0023s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0005s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000248s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000302s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0036s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 2 LIMIT 1   [ RunTime:0.0002s ]
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 137 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 138 行.
+NOTIC: [8] Undefined offset: 2 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [2] in_array() expects parameter 2 to be array, null given E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 139 行.
+NOTIC: [8] Undefined offset: 4 E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\bebf544d0852bdbf0f653f22164a3567.php 第 148 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.021285s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.021330s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000426s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000466s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000696s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000782s ]
+
+[ 2015-12-18T18:22:02+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit2&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000036s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001790s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002133s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000555s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000623s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0032s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit2%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0031s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0026s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_tc` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `jfsd_line_tc` WHERE `line_id` = 17  [ RunTime:0.0004s ]
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000154s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000246s ]
+NOTIC: [8] Undefined variable: data E:\phpStudy\WWW\songjian\youweihui\Runtime\Cache\Admin\af304923b74dcc2ff870f2ae197deaaa.php 第 159 行.
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.013721s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.013796s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000470s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000540s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000855s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000944s ]
+
+[ 2015-12-18T18:22:02+08:00 ] 127.0.0.1 /admin.php?m=Admin&c=Line&a=edit&site_id=0&line_id=17
+INFO: [ app_init ] --START--
+INFO: Run Behavior\BuildLiteBehavior [ RunTime:0.000046s ]
+INFO: Run Common\Behavior\InitHookBehavior [ RunTime:0.001879s ]
+INFO: [ app_init ] --END-- [ RunTime:0.002320s ]
+INFO: [ app_begin ] --START--
+INFO: Run Behavior\ReadHtmlCacheBehavior [ RunTime:0.000511s ]
+INFO: [ app_begin ] --END-- [ RunTime:0.000563s ]
+SQL: SHOW COLUMNS FROM `jfsd_menu` [ RunTime:0.0031s ]
+SQL: SELECT `id`,`title`,`url` FROM `jfsd_menu` WHERE `pid` = 0 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SELECT `pid` FROM `jfsd_menu` WHERE ( pid !=0 AND url like '%Line/edit%' ) LIMIT 1   [ RunTime:0.0006s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 125 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT * FROM `jfsd_menu` WHERE `id` = 93 LIMIT 1   [ RunTime:0.0003s ]
+SQL: SELECT DISTINCT  `group` FROM `jfsd_menu` WHERE `group` <> '' AND `pid` = 93  [ RunTime:0.0004s ]
+SQL: SELECT `id`,`url` FROM `jfsd_menu` WHERE `pid` = 93 AND `hide` = 0  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '旅游线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '签证线路' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0003s ]
+SQL: SELECT `id`,`pid`,`title`,`url`,`tip` FROM `jfsd_menu` WHERE `group` = '分类管理' AND `pid` = 93 AND `hide` = 0 ORDER BY sort asc  [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line` [ RunTime:0.0039s ]
+SQL: SHOW COLUMNS FROM `jfsd_auth_group_access` [ RunTime:0.0020s ]
+SQL: SELECT `extend_id` FROM jfsd_auth_group_access g INNER JOIN jfsd_auth_extend c on g.group_id=c.group_id  WHERE ( g.uid='1' and c.type='3' and !isnull(extend_id) )  [ RunTime:0.0003s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_cate` [ RunTime:0.0033s ]
+SQL: SELECT `id`,`title`,`sort`,`pid`,`display`,`status` FROM `jfsd_line_cate` WHERE `status` > -1 ORDER BY sort  [ RunTime:0.0005s ]
+SQL: SELECT * FROM `jfsd_line` WHERE `line_id` = 17 LIMIT 1   [ RunTime:0.0004s ]
+SQL: SHOW COLUMNS FROM `jfsd_line_type` [ RunTime:0.0031s ]
+SQL: SELECT `type_id` FROM `jfsd_line_type` WHERE `line_id` = 17  [ RunTime:0.0004s ]
+NOTIC: [8] Undefined variable: line_tc E:\phpStudy\WWW\songjian\youweihui\Application\Admin\Controller\LineController.class.php 第 224 行.
+INFO: [ view_parse ] --START--
+INFO: [ template_filter ] --START--
+INFO: Run Behavior\ContentReplaceBehavior [ RunTime:0.000256s ]
+INFO: [ template_filter ] --END-- [ RunTime:0.000347s ]
+SQL: SHOW COLUMNS FROM `jfsd_picture` [ RunTime:0.0029s ]
+SQL: SELECT * FROM `jfsd_picture` WHERE `status` = 1 AND `id` = 3 LIMIT 1   [ RunTime:0.0002s ]
+INFO: Run Behavior\ParseTemplateBehavior [ RunTime:0.023231s ]
+INFO: [ view_parse ] --END-- [ RunTime:0.023289s ]
+INFO: [ view_filter ] --START--
+INFO: Run Behavior\WriteHtmlCacheBehavior [ RunTime:0.000394s ]
+INFO: [ view_filter ] --END-- [ RunTime:0.000439s ]
+INFO: [ app_end ] --START--
+INFO: Run Behavior\ShowPageTraceBehavior [ RunTime:0.000677s ]
+INFO: [ app_end ] --END-- [ RunTime:0.000784s ]
+

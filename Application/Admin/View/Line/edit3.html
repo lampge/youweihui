@@ -53,21 +53,22 @@
 							<textarea name="xingcheng[{$i}][1]" class="textarea textarea470 J_editor"  cols="" rows=""><?php echo $data['xingcheng'][$i][1];?></textarea>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
-							<label class="checkbox"><input type="checkbox" name="xingcheng[{$i}][2][]" <if condition="in_array(1, $data['xingcheng'][$i][2])">checked="checked"</if> value="1">早餐</label>
-							<label class="checkbox"><input type="checkbox" name="xingcheng[{$i}][2][]" <if condition="in_array(2, $data['xingcheng'][$i][2])">checked="checked"</if> value="2">中餐</label>
-							<label class="checkbox"><input type="checkbox" name="xingcheng[{$i}][2][]" <if condition="in_array(3, $data['xingcheng'][$i][2])">checked="checked"</if> value="3">晚餐</label>
+							<input type="text" class="text input-large"  name="xingcheng[{$i}][2]" value="<?php echo $data['xingcheng'][$i][2];?>" placeholder="用餐"/>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
-							<input type="text" class="text input-large"  name="xingcheng[{$i}][3]" value="<?php echo $data['xingcheng'][$i][3];?>" placeholder="住宿"/>
+							<input type="text" class="text input-large"  name="xingcheng[{$i}][3]" value="<?php echo $data['xingcheng'][$i][3];?>" placeholder="交通"/>
+						</div>
+						<div class="rule_check" style="margin:5px 0 5px 50px;">
+							<input type="text" class="text input-large"  name="xingcheng[{$i}][4]" value="<?php echo $data['xingcheng'][$i][4];?>" placeholder="住宿"/>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
 							<div class="controls uploads">
-								<input type="file" name="xingcheng[{$i}][4]">
+								<input type="file" name="xingcheng[{$i}][5]">
 								<div class="upload-img-box">
-									<volist name="data['xingcheng'][$i][4]" id="value" key="n">
+									<volist name="data['xingcheng'][$i][5]" id="value" key="n">
 										<div class="upload-pre-item">
 											<i onclick="removeImage(this)">X</i>
-											<input type="hidden" name="xingcheng[{$i}][4][]" value="{$value}">
+											<input type="hidden" name="xingcheng[{$i}][5][]" value="{$value}">
 											<img src="{:get_cover($value, 'path')}"/>
 										</div>
 									</volist>
@@ -98,8 +99,8 @@
 		    </div>
 		</div>
 		<div class="form-item cf">
-			<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" name="is_display" value="1" target-form="form-horizontal">确定发布</button>
-			<button class="btn btn-return ajax-post hidden" id="submit" type="submit" name="is_display" value="0" target-form="form-horizontal">确定保存</button>
+			<button class="btn ajax-post hidden" id="submit1" type="submit" value="1" target-form="form-horizontal">确定发布</button>
+			<button class="btn ajax-post hidden" id="submit0" type="submit" value="0" target-form="form-horizontal">确定保存</button>
 			<input type="hidden" name="line_id" value="{$data['line_id']}"/>
 		</div>
 	</form>
@@ -117,10 +118,12 @@
 <script type="text/javascript" src="__JS__/editor/jquery-migrate1.2.1.js" charset="utf-8"></script>
 <script type="text/javascript" src="__JS__/editor/editor.js" charset="utf-8"></script>
 <script type="text/javascript">
-$('#submit').click(function(){
-	$('#form').submit();
+$('#submit1').click(function(){
+	$('#form').append('<input type="hidden" name="status" value="1" >');
 });
-
+$('#submit0').click(function(){
+	$('#form').append('<input type="hidden" name="status" value="0" >');
+});
 $(function(){
 	//导航高亮
 	highlight_subnav('{:U('index')}');

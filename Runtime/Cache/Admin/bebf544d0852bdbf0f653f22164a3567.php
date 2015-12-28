@@ -125,7 +125,7 @@
 		    </div>
 			<div class="form-item cf">
 				<label class="item-label">行程安排<span class="check-tips"></span></label>
-			<?php $__FOR_START_5465__=0;$__FOR_END_5465__=$data['daynum'];for($i=$__FOR_START_5465__;$i < $__FOR_END_5465__;$i+=1){ ?><dl class="checkmod">
+			<?php $__FOR_START_19001__=0;$__FOR_END_19001__=$data['daynum'];for($i=$__FOR_START_19001__;$i < $__FOR_END_19001__;$i+=1){ ?><dl class="checkmod">
 					<dt class="hd">
 						<label class="item-label">第<?php echo $i+1;?>天：<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][0]" value="<?php echo $data['xingcheng'][$i][0];?>" /></label>
 					</dt>
@@ -134,20 +134,21 @@
 							<textarea name="xingcheng[<?php echo ($i); ?>][1]" class="textarea textarea470 J_editor"  cols="" rows=""><?php echo $data['xingcheng'][$i][1];?></textarea>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
-							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2][]" <?php if(in_array(1, $data['xingcheng'][$i][2])): ?>checked="checked"<?php endif; ?> value="1">早餐</label>
-							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2][]" <?php if(in_array(2, $data['xingcheng'][$i][2])): ?>checked="checked"<?php endif; ?> value="2">中餐</label>
-							<label class="checkbox"><input type="checkbox" name="xingcheng[<?php echo ($i); ?>][2][]" <?php if(in_array(3, $data['xingcheng'][$i][2])): ?>checked="checked"<?php endif; ?> value="3">晚餐</label>
+							<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][2]" value="<?php echo $data['xingcheng'][$i][2];?>" placeholder="用餐"/>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
-							<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][3]" value="<?php echo $data['xingcheng'][$i][3];?>" placeholder="住宿"/>
+							<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][3]" value="<?php echo $data['xingcheng'][$i][3];?>" placeholder="交通"/>
+						</div>
+						<div class="rule_check" style="margin:5px 0 5px 50px;">
+							<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][4]" value="<?php echo $data['xingcheng'][$i][4];?>" placeholder="住宿"/>
 						</div>
 						<div class="rule_check" style="margin:5px 0 5px 50px;">
 							<div class="controls uploads">
-								<input type="file" name="xingcheng[<?php echo ($i); ?>][4]">
+								<input type="file" name="xingcheng[<?php echo ($i); ?>][5]">
 								<div class="upload-img-box">
-									<?php if(is_array($data['xingcheng'][$i][4])): $n = 0; $__LIST__ = $data['xingcheng'][$i][4];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$value): $mod = ($n % 2 );++$n;?><div class="upload-pre-item">
+									<?php if(is_array($data['xingcheng'][$i][5])): $n = 0; $__LIST__ = $data['xingcheng'][$i][5];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$value): $mod = ($n % 2 );++$n;?><div class="upload-pre-item">
 											<i onclick="removeImage(this)">X</i>
-											<input type="hidden" name="xingcheng[<?php echo ($i); ?>][4][]" value="<?php echo ($value); ?>">
+											<input type="hidden" name="xingcheng[<?php echo ($i); ?>][5][]" value="<?php echo ($value); ?>">
 											<img src="<?php echo get_cover($value, 'path');?>"/>
 										</div><?php endforeach; endif; else: echo "" ;endif; ?>
 								</div>
@@ -176,8 +177,8 @@
 		    </div>
 		</div>
 		<div class="form-item cf">
-			<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" name="is_display" value="1" target-form="form-horizontal">确定发布</button>
-			<button class="btn btn-return ajax-post hidden" id="submit" type="submit" name="is_display" value="0" target-form="form-horizontal">确定保存</button>
+			<button class="btn ajax-post hidden" id="submit1" type="submit" value="1" target-form="form-horizontal">确定发布</button>
+			<button class="btn ajax-post hidden" id="submit0" type="submit" value="0" target-form="form-horizontal">确定保存</button>
 			<input type="hidden" name="line_id" value="<?php echo ($data['line_id']); ?>"/>
 		</div>
 	</form>
@@ -286,10 +287,12 @@
 <script type="text/javascript" src="/Public/Admin/js/editor/jquery-migrate1.2.1.js" charset="utf-8"></script>
 <script type="text/javascript" src="/Public/Admin/js/editor/editor.js" charset="utf-8"></script>
 <script type="text/javascript">
-$('#submit').click(function(){
-	$('#form').submit();
+$('#submit1').click(function(){
+	$('#form').append('<input type="hidden" name="status" value="1" >');
 });
-
+$('#submit0').click(function(){
+	$('#form').append('<input type="hidden" name="status" value="0" >');
+});
 $(function(){
 	//导航高亮
 	highlight_subnav('<?php echo U('index');?>');
