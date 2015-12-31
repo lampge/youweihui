@@ -125,7 +125,7 @@
 		    </div>
 			<div class="form-item cf">
 				<label class="item-label">行程安排<span class="check-tips"></span></label>
-			<?php $__FOR_START_19001__=0;$__FOR_END_19001__=$data['daynum'];for($i=$__FOR_START_19001__;$i < $__FOR_END_19001__;$i+=1){ ?><dl class="checkmod">
+			<?php $__FOR_START_10775__=0;$__FOR_END_10775__=$data['daynum'];for($i=$__FOR_START_10775__;$i < $__FOR_END_10775__;$i+=1){ ?><dl class="checkmod">
 					<dt class="hd">
 						<label class="item-label">第<?php echo $i+1;?>天：<input type="text" class="text input-large"  name="xingcheng[<?php echo ($i); ?>][0]" value="<?php echo $data['xingcheng'][$i][0];?>" /></label>
 					</dt>

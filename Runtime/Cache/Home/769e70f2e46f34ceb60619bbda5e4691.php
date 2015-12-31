@@ -16,7 +16,7 @@
 <script src="/Public/Home/js/pictab.js"></script>
 <script src="/Public/Home/js/wufenggundong.js"></script>
 <!-- 页面header钩子，一般用于加载插件CSS文件和代码 -->
-<?php echo hook('pageHeader');?>
+<!-- <?php echo hook('pageHeader');?> -->
 
 </head>
 <body>
@@ -247,7 +247,7 @@
 (function(){
 	var ThinkPHP = window.Think = {
 		"ROOT"   : "", //当前网站地址
-		"APP"    : "/index.php", //当前项目地址
+		"APP"    : "", //当前项目地址
 		"PUBLIC" : "/Public", //项目公共目录地址
 		"DEEP"   : "<?php echo C('URL_PATHINFO_DEPR');?>", //PATHINFO分割符
 		"MODEL"  : ["<?php echo C('URL_MODEL');?>", "<?php echo C('URL_CASE_INSENSITIVE');?>", "<?php echo C('URL_HTML_SUFFIX');?>"],
