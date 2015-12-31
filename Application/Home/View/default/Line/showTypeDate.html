@@ -1,0 +1,61 @@
+<div id="type_{$line_tc['tc_id']}">
+    <table class="date weeks" width="100%" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+            <th width="68">&nbsp;</th>
+            <th>星期日</th>
+            <th>星期一</th>
+            <th>星期二</th>
+            <th>星期三</th>
+            <th>星期四</th>
+            <th>星期五</th>
+            <th>星期六</th>
+        </tr>
+    </table>
+<?php $n = 0;?>
+<foreach name="date_type" item="value" key="index">
+<?php $n++;?>
+    <table id="date_table12" width="100%" border="0" cellspacing="0" cellpadding="0" class="date" <neq name="n" value="1">style="display:none;"</neq>>
+        <tr>
+            <th class="month" width="68" rowspan="7">
+                <em>{:date('Y年', strtotime($index))}</em>
+                <span>{:date('m月', strtotime($index))}</span>
+            </th>
+        </tr>
+        <tr>
+            <!-- <td class="gray">
+                <em>27</em>
+            </td>
+            <td class="today">
+                <em>28</em>
+            </td>
+            <td>
+                <em>&nbsp;</em>
+            </td> -->
+<?php
+    $z_index = date('w', strtotime($index));
+    $e_index = date('w', strtotime($index . '+1 month -1 day'));
+?>
+        <for start="0" end="$z_index">
+            <td>
+                <em>&nbsp;</em>
+            </td>
+        </for>
+        <volist name="value" id="val">
+                <empty name="val">
+                    <td id="{$key}" class="normal" for_adult="0" for_child="0" for_stock="-1">{:intval(date('j', strtotime($key)))}</td>
+                <else />
+                    <td id="{$key}"><a target="_self" href="javascript:line.view_order('{$key}','{$val[0]}','{$line_tc['tc_id']}','-1','0');">{:date('j', strtotime($key))}<em title="成人价：{$val[0]}元" class="price">{$val[0]}元</em></a></td>
+                </empty>
+            <?php $z_index++; if($z_index%7 == 0) echo '</tr><tr>';  ?>
+        </volist>
+        <for start="0" end="6-$e_index">
+            <td>
+                <em>&nbsp;</em>
+            </td>
+        </for>
+        </tr>
+    </table>
+</foreach>
+
+    <div class="pre_month"><a target="_self" onclick="line.more_month(this,'{$line_tc['tc_id']}')">更多日期</a></div>
+</div>

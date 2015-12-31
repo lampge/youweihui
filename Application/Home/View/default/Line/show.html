@@ -1,81 +1,115 @@
-<extend name="Base/common"/>
+<extend name="Base/common" />
 
 <block name="body">
+<section class="main auto fix">
     <div class="ytip_02 fs">
         <a href="#">首页</a> -> <a href="#">全部尾单</a> -> <a href="#">港澳台</a>
     </div>
-	<div class="abs yfen">
-    	<div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a></div>
+    <div class="abs yfen">
+        <div class="bdsharebuttonbox">
+            <a href="#" class="bds_more" data-cmd="more"></a>
+            <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+            <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+            <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+            <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+        </div>
     </div>
     <div class="ydiv9 fix">
         <div class="ydivzuo">
-            <font><span><{$line_info['ct_type']|get_can_tuan}></span>{$line_info['title']}</font>
+            <font>
+                <span>
+                    <{$line_info[ 'ct_type']|get_can_tuan}>
+                </span>{$line_info['title']}
+            </font>
             {$line_info['sub_title']}
-			<div class="tu">
-            	<div id="demo3" class="slideBox" style="margin-bottom:14px;">
+            <div class="tu">
+                <div id="demo3" class="slideBox" style="margin-bottom:14px;">
                     <ul class="items">
-                    <volist name="line_info['images']" id="val">
-                        <li><a href="javascript:void(0);" title="{$line_info['base_hits']}位游客关注    最近预订数{$line_info['base_order']}"><img src="{$val}"></a></li>
-                    </volist>
+                        <volist name="line_info['images']" id="val">
+                            <li>
+                                <a href="javascript:void(0);" title="{$line_info['base_hits']}位游客关注    最近预订数{$line_info['base_order']}">
+                                    <img src="{$val}">
+                                </a>
+                            </li>
+                        </volist>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="ydivyou fr">
-            <span>门 市 价: </span> <del>￥12999</del><br>
-            <span>优 惠 价: </span> <bdo>￥</bdo><span class="yspp2">10599</span>起<br>
-            <span>发团日期: </span> 指定日期，请提前{$line_info['earlier_date']}天报名<br>
-            <span>出发城市: </span> {$line_info['starting']} <br>
-            <span>行程天数: </span> {$line_info['daynum']}天<br>
-            <span>交通方式: </span> {$line_info['traffic']}<br>
+            <span>门 市 价: </span>
+            <del id="price">￥{$default_tc['price']}</del>
+            <br>
+            <span>优 惠 价: </span>
+            <bdo>￥</bdo><span class="yspp2" id="price_cncn">{$default_tc['best_price']}</span>起
+            <br>
+            <span>发团日期: </span> 指定日期，请提前{$line_info['earlier_date']}天报名
+            <br>
+            <span>出发城市: </span> {$line_info['starting']}
+            <br>
+            <span>行程天数: </span> {$line_info['daynum']}天
+            <br>
+            <span>交通方式: </span> {$line_info['traffic']}
+            <br>
+            <div class="key">
+                <dl class="h40">
+                    <dt>
+                        <span>套餐类型</span>:&nbsp;</dt>
+                    <dd>
+                        <ul id="price_type">
+                            <volist name="line_tc" id="val">
+                                <li <eq name="val['is_default']" value="1">class="selected"</eq> id="li_date_type_{$val['tc_id']}" htmlfor="{$val['tc_id']}">
+                                    <a href="javascript:line.date_type('{$val['tc_id']}','{:date('Y-m-d')}','{$val['price']}','{$val['best_price']}','0',' {$val['typename']}','-1');" title="{$val['update_price_explan']}">{$val['typename']}</a>
+                                </li>
+                            </volist>
+                        </ul>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><span>出发日期</span>:&nbsp;</dt>
+                    <dd>
+                        <input id="start_time" name="start_time" type="text" class="text text110 riqi" value="" placeholder="请选择出发日期" readonly="readyonly" title="点击选择出发日期">
+                    </dd>
+                </dl>
+                <dl id="calendar" style="display:none"><b onClick="line.close_calendar();" id="cal_hide">隐藏</b></dl>
+                <dl>
+                    <dt style="display:none">人数:&nbsp;</dt>
+                    <dd style="display:none">
+                        <form id="line_order" action="{:U('Line/order')}" method="get">
+                            <input id="line_id" name="line_id" type="hidden" value="{$line_info['line_id']}">
+                            <input id="type_id" name="type_id" type="hidden" value="{$default_tc['tc_id']}">
+                            <input id="date" name="date" type="hidden" value="{:date('Y-m-d')}">
+                            <input id="discount" type="hidden" value="0">
+                            <input name="adult_num" id="adult_num" type="text" value="1" class="text text30"> 成人
+                            <span></span>&nbsp;&nbsp;
+                            <input name="child_num" id="child_num" type="text" value="0" class="text text30"> 儿童
+                            <span></span>
+                            <span style="display:none">库存
+                                <em id="stock">-1</em>
+                            </span>
+                        </form>
+                    </dd>
+                </dl>
+                <div class="button">
+                    <span id="stock_explan" style="display:none"></span>
+                    <span style="width:125px; height:36px;">
+                        <input name="imageField" type="submit" class="yspan5" value="立刻预订" onClick="line.order();">
+                    </span>
 
-<div class="key">
-    <dl class="h40">
-        <dt><span>套餐类型</span>:&nbsp;</dt>
-        <dd>
-            <ul id="price_type">
-                <li class="selected" id="li_date_type_1128749" htmlfor="1128749"><a href="javascript:line.date_type('1128749','2016-01-18','7999','6799','0',' 特价尾单','-1');" target="_self" title="费用包含：1、南非签证费；2、北京往返国际机票，团体经济舱，含税；境外机场税；3、南非4星级酒店(开普敦：strand tower或park inn同级   约堡：indaba或sunnyside同级）；香港4星级酒店。4、酒店内西式自助早餐，中式午晚餐（午晚餐：6菜一汤，10-12人一桌，如人数减少，则会根据实际人数做适当调整）或当地餐；(用餐时间在飞机或船上以机船餐为准，不再另补，如因自身原因放弃用餐，则餐费不退)。5、行程所列景点首道门票；6、司机，导游工资；司机饭费、油费、陆桥费、停车费；7、用车标准：（以地接社当地实际情况为准）:例如：20人，南非22座用车。费用不含：1、行李物品保管费用及托运行李超重费、个人消费及行程以外的自选项目；2、因罢工、大风、大雾、航班取消或更改时间等人力不可抗拒原因所导致的额外费用；3、如行李或物品丢失、被盗等意外损失费用；4、10人以上我社派领队；5、晚用车，给司机和导游加班费用；6、以上报价未提及的项目；7、单间差；8、小费。"> 特价尾单</a></li>
-            </ul>
-        </dd>
-    </dl>
-    <dl>
-        <dt>出发日期:&nbsp;</dt>
-        <dd>
-            <input id="start_time" name="start_time" type="text" class="text text110 riqi" value="" placeholder="请选择出发日期" readonly="readyonly" title="点击选择出发日期">
-        </dd>
-    </dl>
-    <dl id="calendar" style="display:none"><b onClick="line.close_calendar();" id="cal_hide">隐藏</b></dl>
-    <dl>
-    <dt style="display:none">人数:&nbsp;</dt>
-    <dd style="display:none">
-        <form id="line_order"  method="post">
-            <input id="line_id" name="line_id" type="hidden" value="230922">
-            <input id="type_id" name="type_id" type="hidden" value="1128749">
-            <input id="date" name="date" type="hidden" value="2016-01-18">
-            <input id="discount" type="hidden" value="0">
-            <input name="adult_num" id="adult_num" type="text" value="1" class="text text30" > 成人<span></span>&nbsp;&nbsp;
-            <input name="child_num" id="child_num" type="text" value="0" class="text text30"> 儿童<span></span>
-            <span style="display:none">库存 <em id="stock">-1</em></span>
-        </form>
-    </dd>
-    </dl>
-    <div class="button">
-        <span id="stock_explan" style="display:none"></span>
-        <span style="width:125px; height:36px;"><input name="imageField" type="image" src="http://xnxwcdn.cncn.net/images/front/home/btn_order.png" alt="立刻预订" onClick="line.order();"></span>
-
-        <s class="tel">或直接拨打<em>400-876-5261</em>咨询/预订</s>
-        <div id="orange">已选择了“<em id="select_typename"> 特价尾单</em>”<em id="from_date"></em></div>
-    </div>
-</div>
-
-
-
-            <span class="yspan5">立即预定</span><b>或直接拨打<font>400-876-5261</font>咨询/预订</b>
+                    <s class="tel">或直接拨打
+                        <em>400-876-5261</em>咨询/预订</s>
+                    <div id="orange">已选择了“
+                        <em id="select_typename"> 特价尾单</em>”
+                        <em id="from_date"></em>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <div class="wmdcn_nr auto fix">
         <div class="wmdcn_nr_left">
-            我们的承诺：<span>OUR COMMITMENT</span>
+            我们的承诺：
+            <span>OUR COMMITMENT</span>
         </div>
         <div class="wmdcn_nr_right2">
             <ul class="fix">
@@ -100,7 +134,8 @@
                             价格只会更低
                         </div>
                     </div>
-                </li><li>
+                </li>
+                <li>
                     <div class="yimg fl">
                         <img src="__IMG__/ytip_03.png" alt="" class="ymg1 fl">
                     </div>
@@ -137,12 +172,12 @@
         <div class="yart_04">
             <a class="ydi" name="ys1"> </a>
             <a class="yspan4">产品特色推荐：</a>
-                <div class="yaa editor">{$line_info['features']}</div>
+            <div class="yaa editor">{$line_info['features']}</div>
 
 
             <a class="ydi" name="ys2"> </a>
             <a class="yspan4">参考行程：</a>
-                <div class="yaa3">
+            <div class="yaa3">
                 <volist name="line_info['xingcheng']" id="val" key="xx">
                     <div class="yyar1">
                         <span>第{$xx}天</span>
@@ -151,121 +186,131 @@
                             <a href="javascript:void(0);" class="yab1">用餐：{$val[2]}</a><a href="#" class="yab2">交通：{$val[3]}</a><a href="#" class="yab3">住宿：{$val[4]}</a>
                             <font class="editor">{$val[1]}</font>
                             <volist name="val[5]" id="v">
-                                <img src="{:get_cover($v, 'path')}" width="100%"/>
+                                <img src="{:get_cover($v, 'path')}" width="100%" />
                             </volist>
                         </div>
                     </div>
                 </volist>
-                </div>
+            </div>
 
 
             <a class="ydi" name="ys2"> </a>
             <a class="yspan4">费用说明：</a>
-                <div class="yaa fix editor">
-                    {$line_info['remark'][1]}
-                </div>
+            <div class="yaa fix editor">
+                {$line_info['remark'][1]}
+            </div>
 
 
 
             <a class="ydi" name="ys3"> </a>
             <a class="yspan4">预定指南：</a>
-                <div class="yaa editor">
-                    {$line_info['remark'][3]}
-                </div>
+            <div class="yaa editor">
+                {$line_info['remark'][3]}
+            </div>
 
             <a class="ydi" name="ys4"> </a>
             <a class="yspan4">游客评价：</a>
-                <div class="yaa">
-                    <div class="ydid2">
-                        昵称：1220****456 <br>
-                        内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！<br>
-                        <span>2015-10-29</span>
-                    </div>
-                    <div class="ydid2">
-                        昵称：1220****456 <br>
-                        内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！<br>
-                        <span>2015-10-29</span>
-                    </div>
-                    <div class="ydid2">
-                        昵称：1220****456 <br>
-                        内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！<br>
-                        <span>2015-10-29</span>
-                    </div>
+            <div class="yaa">
+                <div class="ydid2">
+                    昵称：1220****456
+                    <br> 内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！
+                    <br>
+                    <span>2015-10-29</span>
                 </div>
+                <div class="ydid2">
+                    昵称：1220****456
+                    <br> 内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！
+                    <br>
+                    <span>2015-10-29</span>
+                </div>
+                <div class="ydid2">
+                    昵称：1220****456
+                    <br> 内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！
+                    <br>
+                    <span>2015-10-29</span>
+                </div>
+            </div>
 
-           <a class="ydi" name="ys5"> </a>
+            <a class="ydi" name="ys5"> </a>
             <a class="yspan4">我要咨询：</a>
-                <div class="ybiaodan">
-                    <div class="ydiv3 fix">
-                        <span>我要咨询：</span>
-                        <textarea class="ytex fl putnone"></textarea>
-                    </div>
-                    <div class="ydiv3 fix">
-                        <span>联系方式：</span>
-                        <select class="yselect fl">
-                            <option value=""></option>
-                        </select>
-                        <input type="text" class="y_put3 fl putnone">
-                    </div>
-                    <div class="ydiv3 fix">
-                        <span>验 证 码 ：</span>
-                        <input type="text" class="y_put4 fl putnone">
-                        <img src="__IMG__/yyzm.jpg" alt="">
-                    </div>
-                    <div class="ydiv3 fix">
-                        <input type="button" value="提交" class="y_put5 fl putnone">
-                    </div>
+            <div class="ybiaodan">
+                <div class="ydiv3 fix">
+                    <span>我要咨询：</span>
+                    <textarea class="ytex fl putnone"></textarea>
                 </div>
+                <div class="ydiv3 fix">
+                    <span>联系方式：</span>
+                    <select class="yselect fl">
+                        <option value=""></option>
+                    </select>
+                    <input type="text" class="y_put3 fl putnone">
+                </div>
+                <div class="ydiv3 fix">
+                    <span>验 证 码 ：</span>
+                    <input type="text" class="y_put4 fl putnone">
+                    <img src="__IMG__/yyzm.jpg" alt="">
+                </div>
+                <div class="ydiv3 fix">
+                    <input type="button" value="提交" class="y_put5 fl putnone">
+                </div>
+            </div>
         </div>
     </div>
+</section>
 </block>
 <block name="script">
-    <script src="http://xnxwcdn.cncn.net/js/cp/editor.js"></script>
+    <script type="text/javascript">
+        var _url_show_price_type = '{:U('showTypeDate')}';
+    </script>
+    <script src="__JS__/line.js" type="text/javascript"></script>
+    <script src="__JS__/editor.js"></script>
     <script>
-        $('.editor').each(function(){
+        $('.editor').each(function() {
             var self = $(this);
             var html = self.html();
-            self.html(Editor_cncn.prototype.contentDecode(html,true));
+            self.html(Editor_cncn.prototype.contentDecode(html, true));
         });
-        $(".price_tooltip").hover(function(){
+        $(".price_tooltip").hover(function() {
             var top = $(this).position().top + 23;
             var left = $(this).position().left - 100;
             $(".tooltip_con").css({
-                "top":top,
-                "left":left
+                "top": top,
+                "left": left
             });
             $(".tooltip_con").show();
-        },function(){
+        }, function() {
             $(".tooltip_con").hide();
         });
-        $(".tooltip_con").hover(function(){
+        $(".tooltip_con").hover(function() {
             $(this).show();
-        },function(){
+        }, function() {
             $(this).hide();
         });
     </script>
     <script src="__JS__/jquery.slideBox.min.js" type="text/javascript"></script>
     <script>
-    jQuery(function($){
-    	$('#demo3').slideBox({
-    		duration : 0.3,//滚动持续时间，单位：秒
-    		easing : 'linear',//swing,linear//滚动特效
-    		delay : 5,//滚动延迟时间，单位：秒
-    		hideClickBar : false,//不自动隐藏点选按键
-    		clickBarRadius : 10
-    	});
-    });
+        jQuery(function($) {
+            $('#demo3').slideBox({
+                duration: 0.3, //滚动持续时间，单位：秒
+                easing: 'linear', //swing,linear//滚动特效
+                delay: 5, //滚动延迟时间，单位：秒
+                hideClickBar: false, //不自动隐藏点选按键
+                clickBarRadius: 10
+            });
+        });
     </script>
     <script>
-          $(window).scroll(function(){
-            if($(window).scrollTop()>1030){
-                $('.ytitle_02').css({'position':'fixed','top':'0px'})
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 1030) {
+                $('.ytitle_02').css({
+                    'position': 'fixed',
+                    'top': '0px'
+                })
+            } else {
+                $('.ytitle_02').css({
+                    'position': 'relative'
+                })
             }
-            else{
-                $('.ytitle_02').css({'position':'relative'})
-            }
-      });
+        });
     </script>
-    <!-- 百度分享 -->
-    <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"32"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
 </block>

@@ -12,10 +12,13 @@
  * 所有除开系统级别的前台配置
  */
 return array(
+    /* URL配置 */
+    'URL_CASE_INSENSITIVE' => true, //默认false 表示URL区分大小写 true则表示不区分大小写
+    'URL_MODEL'            => 2, //URL模式
 
     // 预先加载的标签库
     'TAGLIB_PRE_LOAD'     =>    'OT\\TagLib\\Article,OT\\TagLib\\Think',
-        
+
     /* 主题设置 */
     'DEFAULT_THEME' =>  'default',  // 默认模板主题名称
 

@@ -44,12 +44,16 @@ class LineTcModel extends Model{
             foreach ($date_price_data as $key => $val) {
                 $date_price_data2 =  explode('|', $val);
                 list($cr, $rt) = explode('-', $date_price_data2[1]);
-                $price_data[$key]['date'] = $date_price_data2[0];
+                $price_data[$key]['date'] = strtotime($date_price_data2[0]);
                 $price_data[$key]['cr'] = $cr;
                 $price_data[$key]['rt'] = $rt;
             }
+
+            $dates = array_column($price_data, 'date');
+            rsort($dates);
             $crs = array_column($price_data, 'cr');
             sort($crs);
+            $this->end_time = $dates[0];
             $this->best_price = $crs[0];
         }
 

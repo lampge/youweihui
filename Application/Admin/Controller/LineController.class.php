@@ -196,7 +196,6 @@ class LineController extends AdminController {
         if(empty($line_id)){
             $this->error('参数不能为空！');
         }
-        $Line = M('Line');
         if (IS_POST) {
 
         } else  {
@@ -208,8 +207,14 @@ class LineController extends AdminController {
                 3 => array('title'=>'行程内容', 'url'=>U('edit3', array('site_id'=>$this->site_id,'line_id'=>$line_id)), 'current'=>0)
             );
             $this->assign('setp', $setp);
+            $line_info = M('Line')->find($line_id);
             // 线路套餐
             $line_tc = M('LineTc')->where(array('line_id'=>$line_id))->select();
+            foreach ($line_tc as $key => $value) {
+                if ($value['end_time'] < strtotime('+'.$line_info['earlier_date'].'day')) {
+                    $line_tc[$key]['status'] = 0;
+                }
+            }
             $this->assign('line_tc', $line_tc);
             $this->assign('line_id', $line_id);
             $this->meta_title   =   '编辑线路2';
