@@ -18,30 +18,33 @@ class UserController extends HomeController {
 
 	/* 用户中心首页 */
 	public function index(){
-		
+
+		$this->display();
 	}
 
-	/* 注册页面 */
-	public function register($username = '', $password = '', $repassword = '', $email = '', $verify = ''){
-        if(!C('USER_ALLOW_REGISTER')){
-            $this->error('注册已关闭');
-        }
+	// 注册
+	public function register($mobile = '', $password = '', $sms_code = '', $email = ''){
+		if(!C('USER_ALLOW_REGISTER')){
+			$this->error('注册已关闭');
+		}
 		if(IS_POST){ //注册用户
 			/* 检测验证码 */
-			if(!check_verify($verify)){
+			$map = array(
+				'mobile' => $mobile,
+				'code' => $sms_code,
+				'status' => 1
+			);
+			$count = M('SmsLog')->where($map)->count();
+			if(!$count){
 				$this->error('验证码输入错误！');
 			}
 
-			/* 检测密码 */
-			if($password != $repassword){
-				$this->error('密码和重复密码不一致！');
-			}			
-
 			/* 调用注册接口注册用户 */
-            $User = new UserApi;
-			$uid = $User->register($username, $password, $email);
+			$User = new UserApi;
+			$uid = $User->register('', $password, $email, $mobile);
 			if(0 < $uid){ //注册成功
 				//TODO: 发送验证邮件
+				M('SmsLog')->where($map)->save(array('utime'=>NOW_TIME, 'status'=>0));
 				$this->success('注册成功！',U('login'));
 			} else { //注册失败，显示错误信息
 				$this->error($this->showRegError($uid));
@@ -53,16 +56,16 @@ class UserController extends HomeController {
 	}
 
 	/* 登录页面 */
-	public function login($username = '', $password = '', $verify = ''){
+	public function login($mobile = '', $password = '', $verify = ''){
 		if(IS_POST){ //登录验证
 			/* 检测验证码 */
-			if(!check_verify($verify)){
-				$this->error('验证码输入错误！');
-			}
+			// if(!check_verify($verify)){
+			// 	$this->error('验证码输入错误！');
+			// }
 
 			/* 调用UC登录接口登录 */
 			$user = new UserApi;
-			$uid = $user->login($username, $password);
+			$uid = $user->login($mobile, $password, 3);
 			if(0 < $uid){ //UC登录成功
 				/* 登录用户 */
 				$Member = D('Member');
@@ -128,13 +131,35 @@ class UserController extends HomeController {
 
 
     /**
-     * 修改密码提交
-     * @author huajie <banhuajie@163.com>
+     * 修改个人资料
      */
     public function profile(){
-		if ( !is_login() ) {
-			$this->error( '您还没有登陆',U('User/login') );
-		}
+		$this->_checkLogin();
+		$uid = is_login();
+        if ( IS_POST ) {
+            //获取参数
+            $Member = D('Member');
+			$data = $Member->create();
+			$result = $Member->where(array('uid'=>$uid))->save($data);
+			if($result){
+                $this->success('修改成功！');
+            }else{
+                $this->error('修改失败！');
+            }
+        }else{
+			$user_info = D('Member')->info($uid);
+
+
+
+			$this->assign('user_info', $user_info);
+            $this->display();
+        }
+    }
+    /**
+     * 修改密码提交
+     */
+    public function repassword(){
+		$this->_checkLogin();
         if ( IS_POST ) {
             //获取参数
             $uid        =   is_login();
@@ -144,11 +169,9 @@ class UserController extends HomeController {
             empty($password) && $this->error('请输入原密码');
             empty($data['password']) && $this->error('请输入新密码');
             empty($repassword) && $this->error('请输入确认密码');
-
             if($data['password'] !== $repassword){
                 $this->error('您输入的新密码与确认密码不一致');
             }
-
             $Api = new UserApi();
             $res = $Api->updateInfo($uid, $password, $data);
             if($res['status']){
@@ -160,5 +183,79 @@ class UserController extends HomeController {
             $this->display();
         }
     }
+
+	// 订单
+    public function order(){
+		$this->_checkLogin();
+        if ( IS_POST ) {
+
+        }else{
+            $this->display();
+        }
+    }
+
+	// 评价
+    public function comment(){
+		$this->_checkLogin();
+        if ( IS_POST ) {
+
+        }else{
+            $this->display();
+        }
+    }
+
+	// 积分帐号
+    public function score(){
+		$this->_checkLogin();
+        if ( IS_POST ) {
+
+        }else{
+            $this->display();
+        }
+    }
+
+	// 积分帐号
+    public function collect(){
+		$this->_checkLogin();
+        if ( IS_POST ) {
+
+        }else{
+            $this->display();
+        }
+    }
+
+	// 检查手机号是否已经注册
+	public function checkMobile($mobile){
+		$User = new UserApi;
+		$res = $User->checkMobile($mobile);
+		if ($res == 1) {
+			$this->success('true');
+		} else {
+			$this->error('false');
+		}
+	}
+
+	// 发送短信验证码
+	public function sendSms($mobile){
+		if (!preg_match('/^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^17[0,6,7,8]{1}\d{8}$|^18[\d]{9}$/', $mobile)) {
+			$this->error('手机号错误');
+		}
+		$rand = mt_rand(1000, 9999);
+		M('SmsLog')->add(array(
+			'type'		=> '注册',
+			'mobile' 	=> $mobile,
+			'code' 		=> $rand,
+			'ctime'		=> NOW_TIME,
+			'utime'		=> NOW_TIME,
+			'status'	=> 1
+		));
+		$this->success($rand);
+	}
+
+	private function _checkLogin(){
+		if (!is_login()) {
+			$this->error('您还没有登陆', U('User/login'));
+		}
+	}
 
 }

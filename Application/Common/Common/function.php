@@ -12,6 +12,10 @@ const ONETHINK_VERSION    = '1.1.141101';
 const ONETHINK_ADDON_PATH = './Addons/';
 
 // 吴文豹 start
+function send_sms($mobile, $content) {
+
+    return true;
+}
 
 /**
  * 参团类型
@@ -410,28 +414,27 @@ function time_format($time = NULL,$format='Y-m-d H:i'){
 /**
  * 根据用户ID获取用户名
  * @param  integer $uid 用户ID
- * @return string       用户名
+ * @param  string $field  1 2 3
+ * @return string or array
  */
-function get_username($uid = 0){
+function get_userinfo($uid = 0, $field = null){
     static $list;
     if(!($uid && is_numeric($uid))){ //获取当前登录用户名
-        return session('user_auth.username');
+        $uid =  session('user_auth.uid');
     }
-
     /* 获取缓存数据 */
     if(empty($list)){
         $list = S('sys_active_user_list');
     }
-
     /* 查找用户信息 */
     $key = "u{$uid}";
     if(isset($list[$key])){ //已缓存，直接使用
-        $name = $list[$key];
+        $user_info = $list[$key];
     } else { //调用接口获取用户信息
         $User = new User\Api\UserApi();
         $info = $User->info($uid);
-        if($info && isset($info[1])){
-            $name = $list[$key] = $info[1];
+        if($info){
+            $user_info = $list[$key] = $info;
             /* 缓存用户 */
             $count = count($list);
             $max   = C('USER_MAX_CACHE');
@@ -440,10 +443,63 @@ function get_username($uid = 0){
             }
             S('sys_active_user_list', $list);
         } else {
-            $name = '';
+            $user_info = array();
         }
     }
-    return $name;
+    if (empty($field)) {
+        return $user_info;
+    } else {
+        return $user_info[$field];
+    }
+}
+
+/**
+ * 根据用户ID获取用户名
+ * @param  integer $uid 用户ID
+ * @return string       用户名
+ */
+function get_username($uid = 0){
+    static $list;
+    if(!($uid && is_numeric($uid))){ //获取当前登录用户名
+        return session('user_auth.username');
+    }
+    /* 获取缓存数据 */
+    if(empty($list)){
+        $list = S('sys_active_user_list');
+    }
+    /* 查找用户信息 */
+    $key = "u{$uid}";
+    if(isset($list[$key])){ //已缓存，直接使用
+        $user_info = $list[$key];
+    } else { //调用接口获取用户信息
+        $User = new User\Api\UserApi();
+        $info = $User->info($uid);
+        if($info){
+            $user_info = $list[$key] = $info;
+            /* 缓存用户 */
+            $count = count($list);
+            $max   = C('USER_MAX_CACHE');
+            while ($count-- > $max) {
+                array_shift($list);
+            }
+            S('sys_active_user_list', $list);
+        } else {
+            $user_info = array();
+        }
+    }
+    if (empty($user_info[1])) {
+        if (empty($user_info[3])) {
+            if (empty($user_info[2])) {
+                return '未知';
+            } else {
+                return $user_info[2];
+            }
+        } else {
+            return $user_info[3];
+        }
+    } else {
+        return $user_info[1];
+    }
 }
 
 /**
@@ -467,20 +523,19 @@ function get_nickname($uid = 0){
     if(isset($list[$key])){ //已缓存，直接使用
         $name = $list[$key];
     } else { //调用接口获取用户信息
-        $info = M('Member')->field('nickname')->find($uid);
-        if($info !== false && $info['nickname'] ){
-            $nickname = $info['nickname'];
+        $nickname = M('Member')->where(array('uid'=>$uid))->getField('nickname');
+        if($nickname){
             $name = $list[$key] = $nickname;
-            /* 缓存用户 */
-            $count = count($list);
-            $max   = C('USER_MAX_CACHE');
-            while ($count-- > $max) {
-                array_shift($list);
-            }
-            S('sys_user_nickname_list', $list);
         } else {
-            $name = '';
+            $name = $list[$key] = get_username($uid);
         }
+        /* 缓存用户 */
+        $count = count($list);
+        $max   = C('USER_MAX_CACHE');
+        while ($count-- > $max) {
+            array_shift($list);
+        }
+        S('sys_user_nickname_list', $list);
     }
     return $name;
 }

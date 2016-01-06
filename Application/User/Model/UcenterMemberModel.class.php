@@ -41,7 +41,7 @@ class UcenterMemberModel extends Model{
 		array('email', '', -8, self::EXISTS_VALIDATE, 'unique'), //邮箱被占用
 
 		/* 验证手机号码 */
-		array('mobile', '//', -9, self::EXISTS_VALIDATE), //手机格式不正确 TODO:
+		array('mobile', '/^13[\d]{9}$|^14[5,7]{1}\d{8}$|^15[^4]{1}\d{8}$|^17[0,6,7,8]{1}\d{8}$|^18[\d]{9}$/', -9, self::EXISTS_VALIDATE), //手机格式不正确 TODO:
 		array('mobile', 'checkDenyMobile', -10, self::EXISTS_VALIDATE, 'callback'), //手机禁止注册
 		array('mobile', '', -11, self::EXISTS_VALIDATE, 'unique'), //手机号被占用
 	);
@@ -107,6 +107,8 @@ class UcenterMemberModel extends Model{
 		);
 
 		//验证手机
+		if(empty($data['username'])) unset($data['username']);
+		if(empty($data['email'])) unset($data['email']);
 		if(empty($data['mobile'])) unset($data['mobile']);
 
 		/* 添加用户 */
@@ -188,6 +190,37 @@ class UcenterMemberModel extends Model{
 			}
 		} else {
 			return -1; //用户不存在或被禁用
+		}
+	}
+
+	/**
+	 * 获取用户信息
+	 * @param  string  $uid         用户ID或用户名
+	 * @param  boolean $is_username 是否使用用户名查询
+	 * @return array                用户信息
+	 */
+	public function getinfo($uid, $type = 0){
+		$map = array();
+
+		switch ($type) {
+			case 1:
+				$map['username'] = $uid;
+				break;
+			case 2:
+				$map['email'] = $uid;
+				break;
+			case 3:
+				$map['mobile'] = $uid;
+				break;
+			default:
+				$map['id'] = $uid;
+				break;
+		}
+		$user = $this->where($map)->field('id,username,email,mobile,status')->find();
+		if(is_array($user)){
+			return array($user['id'], $user['username'], $user['email'], $user['mobile'], $user['status']);
+		} else {
+			return array();
 		}
 	}
 

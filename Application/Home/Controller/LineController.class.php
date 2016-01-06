@@ -1,5 +1,6 @@
 <?php
 namespace Home\Controller;
+use User\Api\UserApi;
 /**
  * 前台线路控制器
  */
@@ -67,18 +68,59 @@ class LineController extends HomeController {
         $this->display();
     }
 
+    public function checkOrder($order_id = ''){
+        if (empty($order_id)) {
+            $this->error('非法参数');
+        }
+        $order_info = D('Order')->where(array('order_id'=>$order_id))->find();
+        if (empty($order_info)) {
+            $this->error('订单不存在');
+        }
+        $this->assign('order_info', $order_info);
+        $this->display();
+    }
+
     public function order(){
         if (IS_POST) {
+            $Order = D('Order');
+            $order_id = 'NS' . date('YmdHis') . mt_rand(1000, 9999);
+            $uid = is_login();
+            if ($uid) {
+                $result = $Order->input($order_id, $uid, 1);
+            } else {
+                $mobile = I('mobile', '', 'trim');
+                /* 调用注册接口注册用户 */
+                $User = new UserApi;
+                $res = $User->checkMobile($mobile);
+                if ($res == 1) {
+                    $password = mt_rand(100000, 999999);
+                    $uid = $User->register('', $password, '', $mobile);
+                    if(0 < $uid){ //注册成功
+                        send_sms($mobile, '您的密码：'. $password);
+                        $result = $Order->input($order_id, $uid, 1);
+                    }
+                } else {
+                    $user_info = $User->getinfo($mobile, 3);
+                    $result = $Order->input($order_id, $user_info[0], 1);
+                }
+            }
 
+            if ($result) {
+                $this->redirect('checkOrder', array('order_id'=>$order_id));
+            } else {
+                $this->error('订单提交失败');
+            }
         } else {
             $line_id = I('line_id', 0, 'intval');
             $tc_id = I('type_id', 0, 'intval');
+            $date = I('date', 0, 'strtotime');
 
-            if (empty($line_id) || empty($tc_id)) {
+            if (empty($line_id) || empty($tc_id) || empty($date)) {
                 $this->error('无效参数');
             }
             // 线路信息
             $line_info = M('Line')->find($line_id);
+
 
             // 套餐信息
             $map = array(
@@ -90,23 +132,57 @@ class LineController extends HomeController {
             if (empty($line_tc)) {
                 $this->error('没有报价方案');
             }
-            $default_tc = array();
+            $tc_info = array();
             foreach ($line_tc as $key => $value) {
-                if ($value['is_default']) {
-                    $default_tc = $value;
+                if ($value['tc_id'] == $tc_id) {
+                    $tc_info = $value;
                     break;
                 }
             }
-            if (empty($default_tc)) {
-                $default_tc = $line_tc[0];
+            $ext_time = strtotime('+'.$line_info['earlier_date'].'day');
+            $tc_str = explode(',', $tc_info['date_price_data']);
+            foreach ($tc_str as $value) {
+                list($k, $val) = explode('|', $value);
+                $k = strtotime($k);
+                if ($k <= $ext_time) {
+                    continue;
+                }
+                if ($k == $date) {
+                    $tc_info['price_info'] = explode('-', $val);
+                    $tc_info['price_info'][] = date('Y-m-d', $k);
+                    break;
+                }
             }
+            if (empty($tc_info['price_info'])) {
+                $this->error('没有价格');
+            }
+
+
             $this->assign('line_info', $line_info);
             $this->assign('line_tc', $line_tc);
-            $this->assign('default_tc', $default_tc);
+            $this->assign('tc_info', $tc_info);
             $this->display();
         }
 
     }
+
+    // 检查验证码
+    public function checkCode($verify = ''){
+        if (check_verify($verify)) {
+            $this->success('成功');
+        } else {
+            $this->error('失败');
+        }
+    }
+
+    /* 验证码 */
+	public function verify(){
+		$verify = new \Think\Verify();
+        $verify->length   = 4;
+        $verify->codeSet = '0123456789';
+        $verify->useCurve = false;
+		$verify->entry(1);
+	}
 
     // 价格方案
     public function showTypeDate($line_id, $type_id){
@@ -144,6 +220,43 @@ class LineController extends HomeController {
         $this->assign('line_tc', $line_tc);
         $this->assign('date_type', $date_type);
         $this->display();
+    }
+
+    // 查看价格方案
+    public function showSpecifyPrice($line_id, $date){
+        $line_info = M('Line')->find($line_id);
+        $line_tcs = M('LineTc')->where(array('line_id'=>$line_id))->select();
+        $data = array('status' => 0);
+        $date = date('Y-n-j', strtotime($date));
+        foreach ($line_tcs as $key => $line_tc) {
+            $ext_time = strtotime('+'.$line_info['earlier_date'].'day');
+            $tc_str = explode(',', $line_tc['date_price_data']);
+            $tc = array();
+            foreach ($tc_str as $value) {
+                list($k, $val) = explode('|', $value);
+                if (strtotime($k) <= $ext_time) {
+                    continue;
+                }
+                $tc[$k] = explode('-', $val);
+                $tc[$k][] = $k;
+            }
+            foreach ($tc as $key => $value) {
+                if ($date == $key) {
+                    $data['msg'][] = array(
+                        'date' => date('Y-m-d', strtotime($date)),
+                        'price' => $line_tc['price'],
+                        'price_child_d' => $value[1],
+                        'price_d' => $value[0],
+                        'stock' => '-1',
+                        'type_id' => $line_tc['tc_id'],
+                        'typename' => $line_tc['typename'],
+                        'typename_s' => $line_tc['typename'],
+                    );
+                }
+            }
+        }
+        $this->ajaxReturn($data);
+        exit;
     }
 
 }

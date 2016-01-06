@@ -64,3 +64,46 @@ CREATE TABLE IF NOT EXISTS `jfsd_product_cate` (
   PRIMARY KEY (`id`),
   KEY `pid` (`pid`)
 ) ENGINE=INNODB  DEFAULT CHARSET=utf8 COMMENT='产品分类表';
+
+drop table if exists `jfsd_order`;
+create table if not exists `jfsd_order` (
+    `order_id` char(20) not null default '' comment '订单id',
+    `site_id` int unsigned not null default 0 comment '站点id',
+    `user_id` int unsigned not null default 0 comment '用户id',
+    `order_type` char(10) not null default '' comment '订单类型line,visa',
+    `product_id` int unsigned not null default 0 comment '产品id',
+    `product_num` int unsigned not null default 0 comment '产品购买数量',
+    `reserve_info` varchar(999) not null default '' comment '预定信息',
+    `truename` varchar(20) not null default '' comment '用户名',
+    `mobile` varchar(20) not null default '' comment '手机号',
+    `user_intro` varchar(255) not null default '' comment '用户备注',
+    `kefu_intro` varchar(255) not null default '' comment '客服备注',
+    `product_price` double(10,2) unsigned not null default 0 comment '产品总价格',
+    `order_price` double(10,2) unsigned not null default 0 comment '订单价格',
+    `order_status` int unsigned not null default 0 comment '订单状态',
+    `pay_status` int unsigned not null default 0 comment '订单状态',
+    `create_time` int unsigned not null default 0 comment '创建时间',
+    `update_time` int unsigned not null default 0 comment '更新时间',
+    `is_read` tinyint unsigned not null default 0 comment '是否阅读',
+    primary key (`order_id`),
+    index (`site_id`),
+    index (`user_id`),
+    index (`order_type`),
+    index (`product_id`),
+    index (`order_status`),
+    index (`pay_status`)
+) engine innodb charset utf8 comment '订单记录表';
+
+create table `jfsd_sms_log` (
+	`id` int unsigned not null auto_increment comment '',
+	`type` char(20) not null default '' comment '类型',
+	`mobile` char(11) not null default '' comment '手机号',
+	`code` char(4) not null default '' comment '验证码',
+	`ctime` int unsigned not null default 0 comment '创建时间',
+	`utime` int unsigned not null default 0 comment '更新时间',
+	`status` tinyint unsigned not null default 0 comment '状态',
+	primary key (`id`),
+	index (`type`),
+	index (`mobile`),
+	index (`code`)
+) engine innodb charset utf8;

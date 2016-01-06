@@ -23,13 +23,13 @@ class PublicController extends \Think\Controller {
     public function login($username = null, $password = null, $verify = null){
         if(IS_POST){
             /* 检测验证码 TODO: */
-            if(!check_verify($verify)){
-                $this->error('验证码输入错误！');
-            }
+            // if(!check_verify($verify)){
+            //     $this->error('验证码输入错误！');
+            // }
 
             /* 调用UC登录接口登录 */
             $User = new UserApi;
-            $uid = $User->login($username, $password);
+            $uid = $User->login(tirm($username), $password);
             if(0 < $uid){ //UC登录成功
                 /* 登录用户 */
                 $Member = D('Member');
@@ -79,7 +79,7 @@ class PublicController extends \Think\Controller {
     public function verify(){
         $verify = new \Think\Verify();
         $verify->length    = 4;
-        $verify->codeSet = '0123456789'; 
+        $verify->codeSet = '0123456789';
         $verify->entry(1);
     }
 

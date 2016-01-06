@@ -1,93 +1,34 @@
 <extend name="Base/common" />
-<block name="header">
-<header class="jumbotron subhead" id="overview">
-  <div class="container">
-    <h2>用户登录</h2>
-    <p><span><span class="pull-left"><span>还没有账号? <a href="{:U('User/register')}">立即注册</a></span> </span></p>
-  </div>
-</header>
-</block>
-
+<block name="nav"></block>
 <block name="body">
-<section>
-	<div class="span12">
-        <form class="login-form" action="__SELF__" method="post">
-          <div class="control-group">
-            <label class="control-label" for="inputEmail">用户名</label>
-            <div class="controls">
-              <input type="text" id="inputEmail" class="span3" placeholder="请输入用户名"  ajaxurl="/member/checkUserNameUnique.html" errormsg="请填写1-16位用户名" nullmsg="请填写用户名" datatype="*1-16" value="" name="username">
+    <section class="dl_main" style="background:url(__IMG__/dlzc_bg.jpg) no-repeat center top">
+    	<div class="dl_main_nr auto">
+        	<div class="dl_main_nrk">
+            	<div class="dl_main_nrk_top">用户登录</div>
+            	<div class="dl_main_nrk_bottom fix">
+                    <form class="" action="" method="post">
+                	<div class="dl_main_nrk_bottom_left">
+                    	<ol class="fix">
+                        	<p><img src="__IMG__/bg47.png" width="21" height="19"></p>
+                            <span><input name="mobile" class="seach_in1 search-keyword wbk" type="text" id="search" value="请输入手机号"onfocus="if(this.value=='请输入手机号'){this.value='';}"  onblur="if(this.value==''){this.value='请输入手机号/邮箱';}"/></span>
+                            <em><img src="__IMG__/bg49.png" width="17" height="17"> 请输入手机号</em>
+                        </ol>
+                    	<ol class="fix">
+                        	<p><img src="__IMG__/bg45.png" width="22" height="19"></p>
+                            <span><input name="password" class="seach_in1 search-keyword wbk" type="text" id="search" value="请输入密码"onfocus="if(this.value=='请输入密码'){this.value='';}"  onblur="if(this.value==''){this.value='请输入密码';}"/></span>
+                            <em><img src="__IMG__/bg49.png" width="17" height="17"> 请输入密码</em>
+                        </ol>
+                        <ul class="fix">
+                        	<span>
+                        	<input name="checkbox" type="checkbox" id="checkbox" checked> 一周内自动登录</span>
+                            <a href="#" title="">找回密码</a>
+                        </ul>
+                        <dl><input type="submit" name="button2" id="button2" value="登录" class="btn"></dl>
+                    </div>
+                    </form>
+                	<div class="dl_main_nrk_bottom_right">还没有游尾会旅游账号？<a href="zhuce.html" title="">立即注册 -></a></div>
+                </div>
             </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">密码</label>
-            <div class="controls">
-              <input type="password" id="inputPassword"  class="span3" placeholder="请输入密码"  errormsg="密码为6-20位" nullmsg="请填写密码" datatype="*6-20" name="password">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label" for="inputPassword">验证码</label>
-            <div class="controls">
-              <input type="text" id="inputPassword" class="span3" placeholder="请输入验证码"  errormsg="请填写5位验证码" nullmsg="请填写验证码" datatype="*5-5" name="verify">
-            </div>
-          </div>
-          <div class="control-group">
-            <label class="control-label"></label>
-            <div class="controls">
-                <img class="verifyimg reloadverify" alt="点击切换" src="{:U('verify')}" style="cursor:pointer;">
-            </div>
-            <div class="controls Validform_checktip text-warning"></div>
-          </div>
-          <div class="control-group">
-            <div class="controls">
-              <label class="checkbox">
-                <input type="checkbox"> 自动登陆
-              </label>
-              <button type="submit" class="btn">登 陆</button>
-            </div>
-          </div>
-        </form>
-	</div>
-</section>
-</block>
-
-<block name="side"> </block>
-<block name="script">
-	<script type="text/javascript">
-
-    	$(document)
-	    	.ajaxStart(function(){
-	    		$("button:submit").addClass("log-in").attr("disabled", true);
-	    	})
-	    	.ajaxStop(function(){
-	    		$("button:submit").removeClass("log-in").attr("disabled", false);
-	    	});
-
-
-    	$("form").submit(function(){
-    		var self = $(this);
-    		$.post(self.attr("action"), self.serialize(), success, "json");
-    		return false;
-
-    		function success(data){
-    			if(data.status){
-    				window.location.href = data.url;
-    			} else {
-    				self.find(".Validform_checktip").text(data.info);
-    				//刷新验证码
-    				$(".reloadverify").click();
-    			}
-    		}
-    	});
-
-		$(function(){
-			var verifyimg = $(".verifyimg").attr("src");
-            $(".reloadverify").click(function(){
-                if( verifyimg.indexOf('?')>0){
-                    $(".verifyimg").attr("src", verifyimg+'&random='+Math.random());
-                }else{
-                    $(".verifyimg").attr("src", verifyimg.replace(/\?.*$/,'')+'?'+Math.random());
-                }
-            });
-		});
-	</script>
+        </div>
+    </section>
 </block>

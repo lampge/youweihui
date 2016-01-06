@@ -15,9 +15,13 @@ use User\Api\UserApi;
  * 文档基础模型
  */
 class MemberModel extends Model{
+    // 自动验证
+    protected $_validate = array();
 
     /* 用户模型自动完成 */
     protected $_auto = array(
+        array('papers', 'serialize', self::MODEL_BOTH, 'function'),
+        array('address', 'serialize', self::MODEL_BOTH, 'function'),
         array('login', 0, self::MODEL_INSERT),
         array('reg_ip', 'get_client_ip', self::MODEL_INSERT, 'function', 1),
         array('reg_time', NOW_TIME, self::MODEL_INSERT),
@@ -25,6 +29,15 @@ class MemberModel extends Model{
         array('last_login_time', 0, self::MODEL_INSERT),
         array('status', 1, self::MODEL_INSERT),
     );
+
+    public function info($uid){
+        $info = $this->find($uid);
+        if ($info) {
+            $info['papers'] = unserialize($info['papers']);
+            $info['address'] = unserialize($info['address']);
+        }
+        return $info;
+    }
 
     /**
      * 登录指定用户
