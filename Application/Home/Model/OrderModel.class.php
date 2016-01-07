@@ -6,7 +6,7 @@ class OrderModel extends Model{
 
     // 字段映射
     protected $_map = array(
-        'line_id' =>'product_id',
+        'line_id' =>'product_id'
     );
 
     // 自动验证

@@ -97,7 +97,7 @@ class MemberModel extends Model{
         /* 记录登录SESSION和COOKIES */
         $auth = array(
             'uid'             => $user['uid'],
-            'username'        => get_username($user['uid']),
+            'username'        => get_nickname($user['uid']),
             'last_login_time' => $user['last_login_time'],
         );
 

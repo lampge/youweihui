@@ -323,7 +323,8 @@ function format_bytes($size, $delimiter = '') {
  * 使用函数再次封装，方便以后选择不同的存储方式（目前使用cookie存储）
  * @author 麦当苗儿 <zuojiazi@vip.qq.com>
  */
-function set_redirect_url($url){
+function set_redirect_url($url = ''){
+    $url = $url ? $url : $_SERVER['HTTP_REFERER'];
     cookie('redirect_url', $url);
 }
 
@@ -441,7 +442,7 @@ function get_userinfo($uid = 0, $field = null){
             while ($count-- > $max) {
                 array_shift($list);
             }
-            S('sys_active_user_list', $list);
+            S('sys_active_user_list', $list, 7200);
         } else {
             $user_info = array();
         }
@@ -482,7 +483,7 @@ function get_username($uid = 0){
             while ($count-- > $max) {
                 array_shift($list);
             }
-            S('sys_active_user_list', $list);
+            S('sys_active_user_list', $list, 7200);
         } else {
             $user_info = array();
         }
@@ -512,18 +513,17 @@ function get_nickname($uid = 0){
     if(!($uid && is_numeric($uid))){ //获取当前登录用户名
         return session('user_auth.username');
     }
-
     /* 获取缓存数据 */
     if(empty($list)){
         $list = S('sys_user_nickname_list');
     }
-
     /* 查找用户信息 */
     $key = "u{$uid}";
     if(isset($list[$key])){ //已缓存，直接使用
         $name = $list[$key];
     } else { //调用接口获取用户信息
         $nickname = M('Member')->where(array('uid'=>$uid))->getField('nickname');
+
         if($nickname){
             $name = $list[$key] = $nickname;
         } else {
@@ -535,7 +535,7 @@ function get_nickname($uid = 0){
         while ($count-- > $max) {
             array_shift($list);
         }
-        S('sys_user_nickname_list', $list);
+        S('sys_user_nickname_list', $list, 7200);
     }
     return $name;
 }

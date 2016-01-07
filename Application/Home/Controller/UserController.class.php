@@ -71,7 +71,7 @@ class UserController extends HomeController {
 				$Member = D('Member');
 				if($Member->login($uid)){ //登录用户
 					//TODO:跳转到登录前页面
-					$this->success('登录成功！',U('Home/Index/index'));
+					$this->success('登录成功！', get_redirect_url());
 				} else {
 					$this->error($Member->getError());
 				}
@@ -86,6 +86,7 @@ class UserController extends HomeController {
 			}
 
 		} else { //显示登录表单
+			set_redirect_url(I('referer'));
 			$this->display();
 		}
 	}
@@ -184,14 +185,63 @@ class UserController extends HomeController {
         }
     }
 
-	// 订单
+	/**
+	 * 个人中心订单
+	 * @return [type] [description]
+	 */
     public function order(){
 		$this->_checkLogin();
-        if ( IS_POST ) {
+		$uid = is_login();
+		$Order = M('Order');
+		$map = array(
+			'user_id' => $uid,
+			'order_status' => 1,
+		);
 
-        }else{
-            $this->display();
-        }
+		$order_lists = $Order->where($map)->order(`create_time desc`)->select();
+		$order_status = array(
+			1 => '待审核',
+			2 => '用户取消',
+			3 => '无效订单',
+			4 => '已确认',
+			5 => '交易完成',
+			6 => '交易评价',
+			7 => '退款中',
+			8 => '已退款',
+		);
+		$pay_status = array(
+			1 => '未支付',
+			2 => '已支付'
+		);
+		foreach ($order_lists as $key => $value) {
+			$order_lists[$key]['reserve_info'] = unserialize($value['reserve_info']);
+			$order_lists[$key]['order_status_text'] = $order_status[$value['order_status']];
+			$order_lists[$key]['pay_status_text'] = $pay_status[$value['pay_status']];
+
+			switch ($value['order_type']) {
+				case 'line':
+					$line = M('Line')->field('title,images,starting')->where(array('line_id'=>$value['product_id']))->find();
+					if ($line) {
+						$order_lists[$key]['title'] = $line['title'];
+						$order_lists[$key]['image'] = get_cover(array_shift(explode(',', $line['images'])), 'path');
+						$order_lists[$key]['starting'] = $line['starting'];
+					} else {
+						$order_lists[$key]['title'] = '不存在';
+						$order_lists[$key]['image'] = '';
+						$order_lists[$key]['starting'] = '';
+					}
+					break;
+
+				default:
+					break;
+			}
+		}
+
+		// print_r($order_lists);
+
+
+		$this->assign('order_lists', $order_lists);
+        $this->display();
     }
 
 	// 评价
