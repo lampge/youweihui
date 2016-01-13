@@ -15,7 +15,6 @@ use User\Api\UserApi;
  * 包括用户中心，用户登录及注册
  */
 class UserController extends HomeController {
-
 	/* 用户中心首页 */
 	public function index(){
 
@@ -194,29 +193,25 @@ class UserController extends HomeController {
 		$uid = is_login();
 		$Order = M('Order');
 		$map = array(
-			'user_id' => $uid,
-			'order_status' => 1,
+			'user_id' => $uid
 		);
-
+		$order_status = I('status', 1);
+		switch ($order_status) {
+			case '2':
+				$map['order_status'] = 1;
+				break;
+			case '3':
+				$map['order_status'] = array('in', '5,6');
+				break;
+			default:
+				break;
+		}
+		$sousuo['status'] = $order_status;
 		$order_lists = $Order->where($map)->order(`create_time desc`)->select();
-		$order_status = array(
-			1 => '待审核',
-			2 => '用户取消',
-			3 => '无效订单',
-			4 => '已确认',
-			5 => '交易完成',
-			6 => '交易评价',
-			7 => '退款中',
-			8 => '已退款',
-		);
-		$pay_status = array(
-			1 => '未支付',
-			2 => '已支付'
-		);
 		foreach ($order_lists as $key => $value) {
 			$order_lists[$key]['reserve_info'] = unserialize($value['reserve_info']);
-			$order_lists[$key]['order_status_text'] = $order_status[$value['order_status']];
-			$order_lists[$key]['pay_status_text'] = $pay_status[$value['pay_status']];
+			$order_lists[$key]['order_status_text'] = order_status_text($value['order_status']);
+			$order_lists[$key]['pay_status_text'] = pay_status_text($value['pay_status']);
 
 			switch ($value['order_type']) {
 				case 'line':
@@ -236,14 +231,57 @@ class UserController extends HomeController {
 					break;
 			}
 		}
-
 		// print_r($order_lists);
-
-
 		$this->assign('order_lists', $order_lists);
+		$this->assign('sousuo', $sousuo);
         $this->display();
     }
+	// 订单详情
+	public function orderShow($order_id = ''){
+		$this->_checkLogin();
+		if (empty($order_id)) {
+			$this->error('非法参数...');
+		}
+		$Order = D('Order');
+		$map = array(
+			'user_id' => is_login(),
+			'order_id' => $order_id
+		);
+		$order_info = $Order->where($map)->find();
+		if (empty($order_info)) {
+			$this->error('订单不存在...');
+		}
+		$order_info['reserve_info'] = unserialize($order_info['reserve_info']);
+		$order_info['order_status_text'] = order_status_text($order_info['order_status']);
+		$order_info['pay_status_text'] = pay_status_text($order_info['pay_status']);
+		switch ($order_info['order_type']) {
+			case 'line':
+				$line = M('Line')->field('title,images,starting')->where(array('line_id'=>$order_info['product_id']))->find();
+				if ($line) {
+					$order_info['title'] = $line['title'];
+					$order_info['image'] = get_cover(array_shift(explode(',', $line['images'])), 'path');
+					$order_info['starting'] = $line['starting'];
+				} else {
+					$order_info['title'] = '不存在';
+					$order_info['image'] = '';
+					$order_info['starting'] = '';
+				}
+				break;
 
+			default:
+				break;
+		}
+		// echo '<pre>'; print_r($order_info); echo '</pre>';
+		$this->assign('order_info', $order_info);
+		$this->display();
+	}
+	// 取消订单
+	public function orderUndo($order_id = ''){
+		$this->_checkLogin();
+
+
+		$this->success('成功');
+	}
 	// 评价
     public function comment(){
 		$this->_checkLogin();

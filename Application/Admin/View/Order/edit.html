@@ -1,209 +1,211 @@
 <extend name="Public/base" />
 
-<!-- 子导航 -->
-<block name="sidebar">
-    <include file="sidemenu" />
-</block>
-
 <block name="body">
+	<style media="screen">
+		.upload-pre-item{
+			position: relative;
+			widht:120px;
+			height:120px;
+			float:left;
+			margin-right: 5px;
+		}
+		.upload-pre-item i{
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-size: 20px;
+			font-style: normal;
+			line-height: 20px;
+			padding:5px;
+
+		}
+	</style>
 	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
 	<div class="main-title cf">
-		<h2>
-			编辑{$data.model_id|get_document_model='title'} [
-			<volist name="rightNav" id="nav">
-			<a href="{:U('article/index','cate_id='.$nav['id'])}">{$nav.title}</a>
-			<if condition="count($rightNav) gt $i"><i class="ca"></i></if>
-			</volist>
-			<present name="article">：<a href="{:U('article/index','cate_id='.$data['category_id'].'&pid='.$article['id'])}">{$article.title}</a></present>
-			]
-		</h2>
+		<h2>{$meta_title}</h2>
 	</div>
 	<!-- 标签页导航 -->
 <div class="tab-wrap">
 	<ul class="tab-nav nav">
-		<volist name=":parse_config_attr($model['field_group'])" id="group">
-			<li data-tab="tab{$key}" <eq name="key" value="1">class="current"</eq>><a href="javascript:void(0);">{$group}</a></li>
-		</volist>
+		<empty name="line_id">
+			<volist name="setp" id="val">
+				<li <eq name="val['current']" value="1">class="current"</eq>><a href="javascript:void(0);">{$val['title']}</a></li>
+			</volist>
+		<else />
+			<volist name="setp" id="val">
+				<li data-tab="tab{$key}" <eq name="val['current']" value="1">class="current"</eq>><a href="{$val['url']}">{$val['title']}</a></li>
+			</volist>
+		</empty>
 	</ul>
 	<div class="tab-content">
 	<!-- 表单 -->
-	<form id="form" action="{:U('update')}" method="post" class="form-horizontal">
-		<!-- 基础文档模型 -->
-		<volist name=":parse_config_attr($model['field_group'])" id="group">
-        <div id="tab{$key}" class="tab-pane <eq name="key" value="1">in</eq> tab{$key}">
-            <volist name="fields[$key]" id="field">
-                <if condition="$field['is_show'] == 1 || $field['is_show'] == 3">
-                <div class="form-item cf">
-                    <label class="item-label">{$field['title']}<span class="check-tips"><notempty name="field['remark']">（{$field['remark']}）</notempty></span></label>
-                    <div class="controls">
-                        <switch name="field.type">
-                            <case value="num">
-                                <input type="text" class="text input-mid" name="{$field.name}" value="{$data[$field['name']]}">
-                            </case>
-                            <case value="string">
-                                <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
-                            </case>
-                            <case value="textarea">
-                                <label class="textarea input-large">
-                                <textarea name="{$field.name}">{$data[$field['name']]}</textarea>
-                                </label>
-                            </case>
-                            <case value="date">
-                                <input type="text" name="{$field.name}" class="text date" value="{$data[$field['name']]|date='Y-m-d',###}" placeholder="请选择日期" />
-                            </case>
-                            <case value="datetime">
-                                <input type="text" name="{$field.name}" class="text time" value="{$data[$field['name']]|time_format}" placeholder="请选择时间" />
-                            </case>
-                            <case value="bool">
-                                <select name="{$field.name}">
-                                    <volist name=":parse_field_attr($field['extra'])" id="vo">
-                                        <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
-                                    </volist>
-                                </select>
-                            </case>
-                            <case value="select">
-                                <select name="{$field.name}">
-                                    <volist name=":parse_field_attr($field['extra'])" id="vo">
-                                        <option value="{$key}" <eq name="data[$field['name']]" value="$key">selected</eq>>{$vo}</option>
-                                    </volist>
-                                </select>
-                            </case>
-                            <case value="radio">
-                                <volist name=":parse_field_attr($field['extra'])" id="vo">
-                                	<label class="radio">
-                                    <input type="radio" value="{$key}" name="{$field.name}" <eq name="data[$field['name']]" value="$key">checked="checked"</eq>>{$vo}
-                                	</label>
-                                </volist>
-                            </case>
-                            <case value="checkbox">
-                                <volist name=":parse_field_attr($field['extra'])" id="vo">
-                                	<label class="checkbox">
-                                    <input type="checkbox" value="{$key}" name="{$field.name}[]" <if condition="check_document_position($data[$field['name']],$key)">checked="checked"</if>>{$vo}
-                                	</label>
-                                </volist>
-                            </case>
-                            <case value="editor">
-                                <label class="textarea">
-                                <textarea name="{$field.name}">{$data[$field['name']]}</textarea>
-                                {:hook('adminArticleEdit', array('name'=>$field['name'],'value'=>$data[$field['name']]))}
-                                </label>
-                            </case>
-                            <case value="picture">
-                                <div class="controls">
-									<input type="file" id="upload_picture_{$field.name}">
-									<input type="hidden" name="{$field.name}" id="cover_id_{$field.name}" value="{$data[$field['name']]}"/>
-									<div class="upload-img-box">
-									<notempty name="data[$field['name']]">
-										<div class="upload-pre-item"><img src="{$data[$field['name']]|get_cover='path'}"/></div>
-									</notempty>
-									</div>
-								</div>
-								<script type="text/javascript">
-								//上传图片
-							    /* 初始化上传插件 */
-								$("#upload_picture_{$field.name}").uploadify({
-							        "height"          : 30,
-							        "swf"             : "__STATIC__/uploadify/uploadify.swf",
-							        "fileObjName"     : "download",
-							        "buttonText"      : "上传图片",
-							        "uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
-							        "width"           : 120,
-							        'removeTimeout'	  : 1,
-							        'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
-							        "onUploadSuccess" : uploadPicture{$field.name},
-							        'onFallback' : function() {
-							            alert('未检测到兼容版本的Flash.');
-							        }
-							    });
-								function uploadPicture{$field.name}(file, data){
-							    	var data = $.parseJSON(data);
-							    	var src = '';
-							        if(data.status){
-							        	$("#cover_id_{$field.name}").val(data.id);
-							        	src = data.url || '__ROOT__' + data.path
-							        	$("#cover_id_{$field.name}").parent().find('.upload-img-box').html(
-							        		'<div class="upload-pre-item"><img src="' + src + '"/></div>'
-							        	);
-							        } else {
-							        	updateAlert(data.info);
-							        	setTimeout(function(){
-							                $('#top-alert').find('button').click();
-							                $(that).removeClass('disabled').prop('disabled',false);
-							            },1500);
-							        }
-							    }
-								</script>
-                            </case>
-                            <case value="file">
-								<div class="controls">
-									<input type="file" id="upload_file_{$field.name}">
-									<input type="hidden" name="{$field.name}" value="{:think_encrypt(json_encode(get_table_field($data[$field['name']],'id','','File')))}"/>
-									<div class="upload-img-box">
-										<present name="data[$field['name']]">
-											<div class="upload-pre-file"><span class="upload_icon_all"></span>{$data[$field['name']]|get_table_field=###,'id','name','File'}</div>
-										</present>
-									</div>
-								</div>
-								<script type="text/javascript">
-								//上传图片
-							    /* 初始化上传插件 */
-								$("#upload_file_{$field.name}").uploadify({
-							        "height"          : 30,
-							        "swf"             : "__STATIC__/uploadify/uploadify.swf",
-							        "fileObjName"     : "download",
-							        "buttonText"      : "上传附件",
-							        "uploader"        : "{:U('File/upload',array('session_id'=>session_id()))}",
-							        "width"           : 120,
-							        'removeTimeout'	  : 1,
-							        "onUploadSuccess" : uploadFile{$field.name},
-							        'onFallback' : function() {
-							            alert('未检测到兼容版本的Flash.');
-							        }
-							    });
-								function uploadFile{$field.name}(file, data){
-									var data = $.parseJSON(data);
-							        if(data.status){
-							        	var name = "{$field.name}";
-							        	$("input[name="+name+"]").val(data.data);
-							        	$("input[name="+name+"]").parent().find('.upload-img-box').html(
-							        		"<div class=\"upload-pre-file\"><span class=\"upload_icon_all\"></span>" + data.info + "</div>"
-							        	);
-							        } else {
-							        	updateAlert(data.info);
-							        	setTimeout(function(){
-							                $('#top-alert').find('button').click();
-							                $(that).removeClass('disabled').prop('disabled',false);
-							            },1500);
-							        }
-							    }
-								</script>
-                            </case>
-                            <default/>
-                            <input type="text" class="text input-large" name="{$field.name}" value="{$data[$field['name']]}">
-                        </switch>
-                    </div>
-                </div>
-                </if>
-            </volist>
-        </div>
-		</volist>
+	<form id="form" action="" method="post" class="form-horizontal">
+        <div id="tab1" class="tab-pane tab1 in">
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">所属站点<span class="check-tips">（必填）</span></label>
+					<volist name="nodes" id="val">
+						<label class="radio">
+							<input readonly type="radio" value="{$key}"  name="site_id" <eq name="data['site_id']" value="$key">checked="checked"</eq>>{$val['title']}
+						</label>
+					</volist>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路类型<span class="check-tips">（必填）</span></label>
+					<volist name=":C('LINE_TYPE')" id="val">
+						<label class="radio">
+							<input type="radio" value="{$key}" name="l_type" <eq name="data['l_type']" value="$key">checked="checked"</eq>>{$val}
+						</label>
+					</volist>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">参团性质<span class="check-tips">（必填）</span></label>
+					<volist name=":C('CAN_TUAN')" id="val">
+						<label class="radio">
+							<input type="radio" value="{$key}" name="ct_type" <eq name="data['l_type']" value="$key">checked="checked"</eq>>{$val}
+						</label>
+					</volist>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路主标题<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-large" name="title" value="{$data['title']}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路副标题<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-large" name="sub_title" value="{$data['sub_title']}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<label class="item-label">产品分类<span class="check-tips">（必填）</span></label>
+				<volist name="categorys" id="node">
+						<dl class="checkmod">
+							<dt class="hd">
+								<label class="checkbox"><input class="auth_rules rules_all" type="checkbox" name="categorys[]" value="{$node['id']}">{$node.title}管理</label>
+							</dt>
+							<dd class="bd" style="margin-left:20px;">
+								<present name="node['_']">
+								<volist name="node['_']" id="child" >
+                                    <div class="rule_check">
+                                        <div>
+                                            <label class="checkbox">
+                                           <input class="auth_rules rules_row" type="checkbox" name="categorys[]" value="{$child['id']}"/>{$child.title}
+                                            </label>
+                                        </div>
+                                       <notempty name="child['_']">
+                                           <span class="divsion">&nbsp;</span>
+                                           <span class="child_row">
+                                               <volist name="child['_']" id="op">
+                                                   <label class="checkbox">
+                                                       <input class="auth_rules rules_child" type="checkbox" name="categorys[]"
+                                                       value="{$op['id']}"/>{$op.title}
+                                                   </label>
+                                               </volist>
+                                           </span>
+                                       </notempty>
+				                    </div>
+								</volist>
+								</present>
+							</dd>
+						</dl>
+				</volist>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">游客需提前几天报名<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="earlier_date" value="{$data['earlier_date']|default=3}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">行程天数<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="daynum" value="{$data['daynum']|default=3}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">交通方式<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="traffic" value="{$data['traffic']|default='飞机去飞机回'}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">出发地<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="starting" value="{$data['starting']|default='出发地'}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">目的地<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-mid" name="dest" value="{$data['dest']|default='目的地'}">
+				</div>
+			</div>
 
+			<div class="form-item cf">
+				<div class="controls">
+					<div class="item-label">线路图片描述<span class="check-tips">（必填）</span></div>
+					<div class="controls uploads">
+						<input type="file" name="images">
+						<div class="upload-img-box">
+						<volist name="data['images']" id="val">
+							<div class="upload-pre-item">
+								<i onclick="removeImage(this)">X</i>
+								<input type="hidden" name="images[]" value="{$val}">
+								<img src="{:get_cover($val, 'path')}"/>
+							</div>
+						</volist>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">详情页显示数据<span class="check-tips"></span></label>
+					游客关注：<input type="text" class="text input-mid" name="base_hits" value="{$data['base_hits']|default=0}">
+					最近订单：<input type="text" class="text input-mid" name="base_order" value="{$data['base_order']|default=0}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">排序<span class="check-tips"></span></label>
+					<input type="text" class="text input-mid" name="sort" value="{$data['sort']|default=0}">
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路状态<span class="check-tips"></span></label>
+					<label class="radio">
+						<input type="radio" value="1" name="status" <eq name="data['status']" value="1">checked="checked"</eq>>显示
+					</label>
+					<label class="radio">
+						<input type="radio" value="0" name="status" <eq name="data['status']" value="0">checked="checked"</eq>>隐藏
+					</label>
+				</div>
+			</div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">是否推荐<span class="check-tips"></span></label>
+					<label class="radio">
+						<input type="radio" value="1" name="is_position" <eq name="data['is_position']" value="1">checked="checked"</eq>>推荐
+					</label>
+					<label class="radio">
+						<input type="radio" value="0" name="is_position" <eq name="data['is_position']" value="0">checked="checked"</eq>>不推荐
+					</label>
+				</div>
+			</div>
+		</div>
 		<div class="form-item cf">
-			<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
-			<a class="btn btn-return" href="{$Think.cookie.__forward__}">返 回</a>
-			<if condition="C('OPEN_DRAFTBOX') and (ACTION_NAME eq 'add' or $data['status'] eq 3)">
-			<button class="btn save-btn" url="{:U('article/autoSave')}" target-form="form-horizontal" id="autoSave">
-				存草稿
-			</button>
-			</if>
-			<input type="hidden" name="id" value="{$data.id|default=''}"/>
-			<input type="hidden" name="pid" value="{$data.pid|default=''}"/>
-			<input type="hidden" name="model_id" value="{$data.model_id|default=''}"/>
-			<input type="hidden" name="group_id" value="{$data.group_id|default=''}"/>
-			<input type="hidden" name="category_id" value="{$data.category_id|default=''}">
+			<button class="btn btn-return ajax-post hidden" id="submit" type="submit" name="0" target-form="form-horizontal">确定保存</button>
+			<input type="hidden" name="line_id" value="{$data['line_id']}"/>
 		</div>
 	</form>
-	</div>
 </div>
 </block>
 
@@ -223,6 +225,32 @@ $('#submit').click(function(){
 });
 
 $(function(){
+	//导航高亮
+	highlight_subnav('{:U('index')}');
+
+	var rules = [{$data['line_type']}];
+	$('.auth_rules').each(function(){
+		if( $.inArray( parseInt(this.value,10),rules )>-1 ){
+			$(this).prop('checked',true);
+		}
+		if(this.value==''){
+			$(this).closest('span').remove();
+		}
+	});
+
+	//全选节点
+	$('.rules_all').on('change',function(){
+		$(this).closest('dl').find('dd').find('input').prop('checked',this.checked);
+	});
+	$('.rules_row').on('change',function(){
+		$(this).closest('.checkmod').find('.rules_all').prop('checked', true);
+		$(this).closest('.rule_check').find('.child_row').find('input').prop('checked',this.checked);
+	});
+	$('.rules_child').on('change', function(){
+		$(this).closest('.checkmod').find('.rules_all').prop('checked', true);
+		$(this).closest('.rule_check').find('.rules_row').prop('checked', true);
+	});
+
     $('.date').datetimepicker({
         format: 'yyyy-mm-dd',
         language:"zh-CN",
@@ -236,61 +264,41 @@ $(function(){
         autoclose:true
     });
     showTab();
-
-	<if condition="C('OPEN_DRAFTBOX') and (ACTION_NAME eq 'add' or $data['status'] eq 3)">
-	//保存草稿
-	var interval;
-	$('#autoSave').click(function(){
-        var target_form = $(this).attr('target-form');
-        var target = $(this).attr('url')
-        var form = $('.'+target_form);
-        var query = form.serialize();
-        var that = this;
-
-        $(that).addClass('disabled').attr('autocomplete','off').prop('disabled',true);
-        $.post(target,query).success(function(data){
-            if (data.status==1) {
-                updateAlert(data.info ,'alert-success');
-                $('input[name=id]').val(data.data.id);
-            }else{
-                updateAlert(data.info);
-            }
-            setTimeout(function(){
-                $('#top-alert').find('button').click();
-                $(that).removeClass('disabled').prop('disabled',false);
-            },1500);
-        })
-
-        //重新开始定时器
-        clearInterval(interval);
-        autoSaveDraft();
-        return false;
-    });
-
-	//Ctrl+S保存草稿
-	$('body').keydown(function(e){
-		if(e.ctrlKey && e.which == 83){
-			$('#autoSave').click();
-			return false;
+});
+</script>
+<script type="text/javascript">
+$(".uploads").each(function(i){
+	var Obj = $(this),
+		Upload = $(this).find('[type=file]'),
+		Name = Upload.attr('name') ? Upload.attr('name') : 'img';
+	Upload.attr('id', 'id_' + (new Date()).getTime()+Math.floor(Math.random()*1000));
+	Upload.uploadify({
+		"height"          : 30,
+		"swf"             : "__STATIC__/uploadify/uploadify.swf",
+		"fileObjName"     : "download",
+		"buttonText"      : "选择图片",
+		"uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+		"width"           : 120,
+		'removeTimeout'	  : 1,
+		'multi'			  : true,
+		'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+		"onUploadSuccess" : function(file, data){
+			var data = $.parseJSON(data);
+			var src = '';
+			if(data.status){
+				src = data.url || '__ROOT__' + data.path
+				Obj.find('.upload-img-box').append(
+					'<div class="upload-pre-item"><i onclick="removeImage(this)">X</i><input type="hidden" name="'+Name+'[]" value="' + data.id + '"/><img src="' + src + '"/></div>'
+				);
+			}
+		},
+		'onFallback' : function() {
+			alert('未检测到兼容版本的Flash.');
 		}
 	});
-
-	//每隔一段时间保存草稿
-	function autoSaveDraft(){
-		interval = setInterval(function(){
-			//只有基础信息填写了，才会触发
-			var title = $('input[name=title]').val();
-			var name = $('input[name=name]').val();
-			var des = $('textarea[name=description]').val();
-			if(title != '' || name != '' || des != ''){
-				$('#autoSave').click();
-			}
-		}, 1000*parseInt({:C('DRAFT_AOTOSAVE_INTERVAL')}));
-	}
-	autoSaveDraft();
-
-	</if>
-
-});
+})
+function removeImage(dom){
+	$(dom).parent().remove();
+}
 </script>
 </block>

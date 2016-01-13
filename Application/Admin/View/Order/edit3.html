@@ -1,0 +1,191 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<style media="screen">
+		.upload-pre-item{
+			position: relative;
+			widht:120px;
+			height:120px;
+			float:left;
+			margin-right: 5px;
+		}
+		.upload-pre-item i{
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-size: 20px;
+			font-style: normal;
+			line-height: 20px;
+			padding:5px;
+
+		}
+	</style>
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title cf">
+		<h2>{$meta_title}</h2>
+	</div>
+	<!-- 标签页导航 -->
+<div class="tab-wrap">
+	<ul class="tab-nav nav">
+		<volist name="setp" id="val">
+			<li data-tab="tab{$key}" <eq name="val['current']" value="1">class="current"</eq>><a href="{$val['url']}">{$val['title']}</a></li>
+		</volist>
+	</ul>
+	<div class="tab-content">
+	<!-- 表单 -->
+	<form id="form" action="" method="post" class="form-horizontal">
+		<div id="tab3" class="tab-pane tab3 in">
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">线路特色<span class="check-tips">（必填）</span></label>
+			        <textarea name="features" class="textarea textarea470 J_editor"  cols="" rows="">{$data['features']}</textarea>
+		    	</div>
+		    </div>
+			<div class="form-item cf">
+				<label class="item-label">行程安排<span class="check-tips"></span></label>
+			<for start="0" end="$data['daynum']">
+				<dl class="checkmod">
+					<dt class="hd">
+						<label class="item-label">第<?php echo $i+1;?>天：<input type="text" class="text input-large"  name="xingcheng[{$i}][0]" value="<?php echo $data['xingcheng'][$i][0];?>" /></label>
+					</dt>
+					<dd class="bd">
+						<div class="rule_check" style="margin:5px 0 5px 50px;">
+							<textarea name="xingcheng[{$i}][1]" class="textarea textarea470 J_editor"  cols="" rows=""><?php echo $data['xingcheng'][$i][1];?></textarea>
+						</div>
+						<div class="rule_check" style="margin:5px 0 5px 50px;">
+							<input type="text" class="text input-large"  name="xingcheng[{$i}][2]" value="<?php echo $data['xingcheng'][$i][2];?>" placeholder="用餐"/>
+						</div>
+						<div class="rule_check" style="margin:5px 0 5px 50px;">
+							<input type="text" class="text input-large"  name="xingcheng[{$i}][3]" value="<?php echo $data['xingcheng'][$i][3];?>" placeholder="交通"/>
+						</div>
+						<div class="rule_check" style="margin:5px 0 5px 50px;">
+							<input type="text" class="text input-large"  name="xingcheng[{$i}][4]" value="<?php echo $data['xingcheng'][$i][4];?>" placeholder="住宿"/>
+						</div>
+						<div class="rule_check" style="margin:5px 0 5px 50px;">
+							<div class="controls uploads">
+								<input type="file" name="xingcheng[{$i}][5]">
+								<div class="upload-img-box">
+									<volist name="data['xingcheng'][$i][5]" id="value" key="n">
+										<div class="upload-pre-item">
+											<i onclick="removeImage(this)">X</i>
+											<input type="hidden" name="xingcheng[{$i}][5][]" value="{$value}">
+											<img src="{:get_cover($value, 'path')}"/>
+										</div>
+									</volist>
+								</div>
+							</div>
+						</div>
+					</dd>
+				</dl>
+			</for>
+
+
+			</div>
+
+
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">预订须知<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-large" style="margin-bottom:10px;" name="remark[0]" value="{$data['remark'][0]}" />
+					<textarea name="remark[1]" class="textarea textarea470 J_editor"  style="display: none;">{$data['remark'][1]}</textarea>
+		    	</div>
+		    </div>
+			<div class="form-item cf">
+				<div class="controls">
+					<label class="item-label">温馨提示<span class="check-tips">（必填）</span></label>
+					<input type="text" class="text input-large" style="margin-bottom:10px;" name="remark[2]" value="{$data['remark'][2]}" />
+					<textarea name="remark[3]" class="textarea textarea470 J_editor" style="display: none;">{$data['remark'][3]}</textarea>
+		    	</div>
+		    </div>
+		</div>
+		<div class="form-item cf">
+			<button class="btn ajax-post hidden" id="submit1" type="submit" value="1" target-form="form-horizontal">确定发布</button>
+			<button class="btn ajax-post hidden" id="submit0" type="submit" value="0" target-form="form-horizontal">确定保存</button>
+			<input type="hidden" name="line_id" value="{$data['line_id']}"/>
+		</div>
+	</form>
+</div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<link href="__JS__/editor/form.css" rel="stylesheet" type="text/css">
+<link href="__JS__/editor/editor.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript" src="__JS__/editor/jquery-migrate1.2.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="__JS__/editor/editor.js" charset="utf-8"></script>
+<script type="text/javascript">
+$('#submit1').click(function(){
+	$('#form').append('<input type="hidden" name="status" value="1" >');
+});
+$('#submit0').click(function(){
+	$('#form').append('<input type="hidden" name="status" value="0" >');
+});
+$(function(){
+	//导航高亮
+	highlight_subnav('{:U('index')}');
+});
+</script>
+<script>
+//生成编辑器
+    var make_editor = function(){
+        $($('.J_editor:not(.has_editor)').sort(function(){return 1})).each(function(){
+            if($(this).hasClass('has_editor')){
+                return;
+            }
+            $(this).addClass('has_editor');
+            var num = (new Date()).getTime()+Math.floor(Math.random()*1000);
+            var editor_id = 'J_xingcheng_con_'+num;
+            $(this).attr('id',editor_id);
+            Editor_cncn({
+                textareaID:editor_id,
+                toolbarId : "J_EditorToolbar_"+num,
+                iframeId : "J_EditorIframe_"+num
+            })
+        })
+    }
+    if ($.browser.msie && $.browser.version=="6.0") {
+
+    }else{
+        make_editor();
+    }
+</script>
+<script type="text/javascript">
+$(".uploads").each(function(i){
+	var Obj = $(this),
+		Upload = $(this).find('[type=file]'),
+		Name = Upload.attr('name') ? Upload.attr('name') : 'img';
+	Upload.attr('id', 'id_' + (new Date()).getTime()+Math.floor(Math.random()*1000));
+	Upload.uploadify({
+		"height"          : 30,
+		"swf"             : "__STATIC__/uploadify/uploadify.swf",
+		"fileObjName"     : "download",
+		"buttonText"      : "选择图片",
+		"uploader"        : "{:U('File/uploadPicture',array('session_id'=>session_id()))}",
+		"width"           : 120,
+		'removeTimeout'	  : 1,
+		'multi'			  : true,
+		'fileTypeExts'	  : '*.jpg; *.png; *.gif;',
+		"onUploadSuccess" : function(file, data){
+			var data = $.parseJSON(data);
+			var src = '';
+			if(data.status){
+				src = data.url || '__ROOT__' + data.path
+				Obj.find('.upload-img-box').append(
+					'<div class="upload-pre-item"><i onclick="removeImage(this)">X</i><input type="hidden" name="'+Name+'[]" value="' + data.id + '"/><img src="' + src + '"/></div>'
+				);
+			}
+		},
+		'onFallback' : function() {
+			alert('未检测到兼容版本的Flash.');
+		}
+	});
+})
+function removeImage(dom){
+	$(dom).parent().remove();
+}
+</script>
+</block>

@@ -1,0 +1,329 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<div class="main-title cf">
+		<h2>{$meta_title}</h2>
+	</div>
+	<!-- 标签页导航 -->
+	<div class="">
+		<div class="main_top_menu">
+			<div class="tag_top">
+				<div class="js_tag_tab">
+					<h4>订单编号：{$order_info['order_id']}</h4>
+				</div>
+			</div>
+			<div class="edit"></div>
+		</div>
+		<div class="new_order_con">
+			<p class="order_stutas">订单状态：
+				<b class="unfinished">{$order_info['order_status_text']}</b>
+				<i> / </i>
+				<span class="">{$order_info['pay_status_text']}</span>
+			</p>
+			<div class="order_box_series">
+				<div class="order_box_c">
+					<div class="new_order_bar">
+						<strong>游客信息</strong>
+					</div>
+					<div class="box_m_list">
+						<dl class="fn-clear">
+							<dt>游客姓名：</dt>
+							<dd class="w170"><b>{$order_info['reserve_info']['truename']}&nbsp;</b>&nbsp;</dd>
+							<dt>手机号码：</dt>
+							<dd class="w170"><b>{$order_info['reserve_info']['mobile']}</b>&nbsp;</dd>
+							<dt>电子邮箱：</dt>
+							<dd class="w170"><b>{$order_info['reserve_info']['user_eamil']}</b>&nbsp;</dd>
+						</dl>
+						<dl class="fn-clear">
+							<dt>下单时间：</dt>
+							<dd class="w170">{:date('Y-m-d H:i:s', $order_info['create_time'])}&nbsp;</dd>
+						</dl>
+						<dl class="fn-clear">
+							<dt>客人备注：</dt>
+							<dd>{$order_info['reserve_info']['userintro']|default='无'}</dd>
+						</dl>
+					</div>
+				</div>
+
+				<div class="order_box_c">
+					<div class="new_order_bar">
+						<strong>预订信息</strong>
+					</div>
+					<div class="box_m_list">
+						<!--线路-->
+						<table class="order_info_series">
+							<tbody>
+								<tr>
+									<th>产品名称</th>
+									<th>成人价</th>
+									<th>儿童价</th>
+									<th>出发日期</th>
+									<th>参团人数</th>
+								</tr>
+								<tr>
+									<td style="text-align:left; padding-left:5px;">
+										<a href="{:U('Home/Line/show', array('id'=>$order_info['product_id']))}" target="_blank">{$order_info['title']}</a>
+									</td>
+									<td>{$order_info['reserve_info']['adult_price']|default='0.00'} 元/人</td>
+									<td>{$order_info['reserve_info']['child_price']|default='0.00'} 元/人</td>
+									<td>{$order_info['reserve_info']['start_time']}</td>
+									<td>{$order_info['product_num']}（{$order_info['reserve_info']['adult_num']|default=0}大人/{$order_info['reserve_info']['child_num']|default=0}儿童）</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="order_box_c">
+					<div class="new_order_bar">
+						<strong>支付信息</strong>
+					</div>
+					<div class="box_m_list mt10">
+						<dl class="fn-clear">
+							<dt>产品总价：</dt>
+							<dd>{$order_info['product_price']}</dd>
+						</dl>
+						<dl class="fn-clear">
+							<dt>订单金额：</dt>
+							<dd class="w250">
+								<span id="price_tal" class="pay_price">￥
+									<em>{$order_info['order_price']}</em>
+								</span>
+								<span id="price_tal2" style="display:none">
+									<input type="text" class="text" name="total_price" value="{$order_info['order_price']}" autocomplete="off">
+								</span>&nbsp;
+								<a href="javascript:void(0)" id="save_price_tal" onclick="save_price()" style="display:none;">保存</a>
+								<a href="javascript:void(0)" onclick="chg_price_show()">
+									<span id="price_tal3">修改价格</span>
+								</a>
+							</dd>
+						</dl>
+						<dl class="fn-clear">
+							<dt>支付状态：</dt>
+							<dd>
+								<span class="">{$order_info['pay_status_text']}</span>
+								<if condition="$order_info['order_status'] == 1">
+								（确认订单后游客才能支付）
+								</if>
+							</dd>
+						</dl>
+					</div>
+				</div>
+			</div>
+			<div id="order_handel" class="mg_t40">
+				<p class="order_stutas">订单处理：</p>
+				<div class="order_deal">
+					<form id="form" action="{:U('edit')}" method="post" class="form-horizontal">
+					<input type="hidden" name="order_id" value="{$order_info['order_id']}">
+					<dl id="checkDl">
+						<switch name="order_info['order_status']">
+							<case value="1">
+								<dt>确认订单：
+									<em>&nbsp;</em>
+								</dt>
+								<dd>
+									<label>
+										<input name="order_status" onclick="radio_handel(this)" checked="checked" type="radio" value="4"><b>有效</b>
+									</label>
+									<label>
+										<input name="order_status" onclick="radio_handel(this);" type="radio" value="3"><b>无效</b>
+									</label>
+								</dd>
+							</case>
+							<case value="2|3">
+								<dt>确认订单：
+									<em>&nbsp;</em>
+								</dt>
+								<dd>无效订单</dd>
+							</case>
+							<case value="4">
+								<dt>确认订单：
+									<em>&nbsp;</em>
+								</dt>
+								<dd>
+									<label>
+										<input name="order_status" checked="checked" type="radio" value="4"><b>确认</b>
+									</label>
+									<label>
+										<input name="order_status" type="radio" value="3"><b>无效</b>
+									</label>
+								</dd>
+							</case>
+							<case value="5|6">
+								<dt>确认订单：
+									<em>&nbsp;</em>
+								</dt>
+								<dd>已完成交易</dd>
+							</case>
+							<case value="7">
+								<dt>处理退款：
+									<em>&nbsp;</em>
+								</dt>
+								<dd>
+									<label>
+										<input name="order_status" checked="checked" type="radio" value="8"><b>确认</b>
+									</label>
+									<label>
+										<input name="order_status" type="radio" value="9"><b>拒绝</b>
+									</label>
+								</dd>
+							</case>
+							<case value="8">
+								<dt>处理退款：
+									<em>&nbsp;</em>
+								</dt>
+								<dd>退款成功</dd>
+							</case>
+							<case value="9">
+								<dt>处理退款：
+									<em>&nbsp;</em>
+								</dt>
+								<dd>退款拒绝</dd>
+							</case>
+						</switch>
+					</dl>
+					<eq name="order_info['order_status']" value="4">
+					<dl class="fn-clear whether_pay">
+						<dt>是否支付：
+							<em>&nbsp;</em>
+						</dt>
+						<dd>
+							<label>
+								<input <eq name="order_info['pay_status']" value="1">checked="checked"</eq> name="pay_status" type="radio" value="1">未支付
+							</label>
+							<label>
+								<input <eq name="order_info['pay_status']" value="2">checked="checked"</eq> name="pay_status" type="radio" value="2">已完成付款
+							</label>
+						</dd>
+					</dl>
+					</eq>
+					<dl>
+						<dt>客服备注：
+							<em>&nbsp;</em>
+						</dt>
+						<dd>
+							<textarea rows="3" cols="75" name="kefu_intro" class="kefu_intro" placeholder="备注信息作为您对这笔订单的备忘记录，仅自己可见">{$order_info['kefu_intro']}</textarea>
+						</dd>
+					</dl>
+					<dl>
+						<dt>&nbsp;</dt>
+						<dd>
+							<button class="btn ajax-post hidden" id="submit" type="submit" name="0" target-form="form-horizontal">确认处理</button>
+							<button class="btn" onclick="javascript:history.go(-1);">返回</button>
+						</dd>
+					</dl>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</block>
+
+<block name="script">
+	<link href="__CSS__/order-show.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript">
+		$(function() {
+			//导航高亮
+			highlight_subnav('{:U('index')}');
+		});
+	</script>
+	<script>
+		function radio_handel(_this) {
+			var radio_val = $(_this).val();
+			if (radio_val == 3) {
+				$('.whether_pay').hide();
+			} else if (radio_val == 4) {
+				$('.whether_pay').show();
+			}
+		}
+
+		function checkDl_status() {
+			var input = document.getElementById('checkDl').getElementsByTagName('input');
+			//alert(input.length)
+
+			for (var i = 0; i < input.length; i++) {
+				if (input[i].checked) {
+					var type = input[i].value
+				}
+			}
+			if (type == 3) {
+				$('.whether_pay').hide();
+				//$('.sms_colleague').show();
+			} else if (type == 1) {
+				//$('.sms_colleague').hide();
+				$('.whether_pay').show();
+			}
+
+		}
+		checkDl_status();
+	</script>
+	<script type="text/javascript">
+		function show_all(obj) {
+			var s = document.getElementById(obj).style;
+			if (obj == 'share') {
+				v = document.getElementById("dest_control")
+				if (s.display == 'block') {
+					s.display = 'none';
+					v.innerHTML = '<i></i>+添加备注';
+					// v.parentNode.className = 'on';
+					document.getElementById('share2').style.display = 'none'
+				} else {
+					s.display = 'block';
+					v.innerHTML = '<i></i>收起';
+					//v.parentNode.className = 'off';
+					document.getElementById('share2').style.display = 'block'
+				}
+			}
+		}
+
+		function chg_price_show() {
+			if (document.getElementById('price_tal').style.display == 'none') {
+				document.getElementById('save_price_tal').style.display = 'none';
+				document.getElementById('price_tal').style.display = 'inline';
+				document.getElementById('price_tal2').style.display = 'none';
+				document.getElementById('price_tal3').innerHTML = '修改';
+				document.getElementById('price_tal_edit_yn').value = '0';
+			} else {
+				document.getElementById('save_price_tal').style.display = 'inline';
+				document.getElementById('price_tal').style.display = 'none';
+				document.getElementById('price_tal2').style.display = 'inline';
+				document.getElementById('price_tal3').innerHTML = '取消修改';
+				document.getElementById('price_tal_edit_yn').value = '1';
+				var price = $('#price_tal em').html();
+				$('#price_tal2 .text').val(price);
+			}
+		}
+
+		function save_price() {
+			var total_price = $('#price_tal2 .text').val();
+			var regular = /^(\d+)(\.\d{2})?$/;
+			var judge = regular.test(total_price);
+			if (total_price == '') {
+				alert('请填写订单金额')
+				return false;
+			} else if (!judge) {
+				alert('必须为正数');
+				$('#price_tal2 .text').val($('#price_tal em').html());
+				return false;
+			}
+			var orderid = '{$order_info['order_id']}';
+			$.post(
+				"{:U('updateMoney')}", {
+					'order_price': total_price,
+					'order_id': orderid
+				},
+				function(res) {
+					if (res.status) {
+						$('#price_tal2').hide();
+						$('#save_price_tal').hide();
+						$('#price_tal').show();
+						$('#price_tal em').html(total_price)
+					} else {
+						alert(res.info);
+						$('#price_tal2 .text').val($('#price_tal em').html());
+					}
+				}
+			)
+		}
+	</script>
+</block>

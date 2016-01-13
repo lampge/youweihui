@@ -1,0 +1,111 @@
+<extend name="Public/base" />
+
+<block name="body">
+	<style media="screen">
+		.upload-pre-item{
+			position: relative;
+			widht:120px;
+			height:120px;
+			float:left;
+			margin-right: 5px;
+		}
+		.upload-pre-item i{
+			position: absolute;
+			right: 0;
+			top: 0;
+			font-size: 20px;
+			font-style: normal;
+			line-height: 20px;
+			padding:5px;
+
+		}
+	</style>
+	<script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+	<div class="main-title cf">
+		<h2>{$meta_title}</h2>
+	</div>
+	<!-- 标签页导航 -->
+<div class="tab-wrap">
+	<ul class="tab-nav nav">
+		<volist name="setp" id="val">
+			<li data-tab="tab{$key}" <eq name="val['current']" value="1">class="current"</eq>><a href="{$val['url']}">{$val['title']}</a></li>
+		</volist>
+	</ul>
+	<div class="tab-content">
+	<!-- 表单 -->
+	<form id="form" action="" method="post" class="form-horizontal">
+		<div id="tab2" class="tab-pane tab2 in">
+
+			<div class="data-table">
+				<table>
+					<thead>
+						<tr>
+							<th>价格类型</th>
+							<th>门市价</th>
+							<th>优惠价</th>
+							<th>状态</th>
+							<th>操作</th>
+						</tr>
+					</thead>
+					<tbody>
+						<volist name="line_tc" id="val">
+							<tr>
+								<td>{$val['typename']} </td>
+								<td>{$val['price']}</td>
+								<td>{$val['best_price']}</td>
+								<td><span>{$val['status']?'正常':'关闭'}</span></td>
+								<td>
+									<eq name="val['is_default']" value="1">
+										<a href="javascript:void(0);" class="disabled">已经默认</a>
+									<else />
+										<a href="{:U('tcChangeIsDefault', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']))}" class="confirm ajax-get">设置默认</a>
+									</eq>
+									<a href="{:U('tcEdit', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']))}" class="">修改</a>
+									<a href="{:U('tcDel', array('line_id'=>$val['line_id'],'tc_id'=>$val['tc_id']))}" class="confirm ajax-get">删除</a>
+								</td>
+							</tr>
+						</volist>
+						<tr>
+							<td colspan="5" align="center">
+								<a href="{:U('tcEdit', array('line_id'=>$line_id))}" class="btn">添加</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="form-item cf">
+			<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" name="1" target-form="form-horizontal">确定发布</button>
+			<button class="btn btn-return ajax-post hidden" id="submit" type="submit" name="0" target-form="form-horizontal">确定保存</button>
+			<input type="hidden" name="line_id" value="{$data['line_id']}"/>
+		</div>
+	</form>
+</div>
+</block>
+
+<block name="script">
+<link href="__STATIC__/datetimepicker/css/datetimepicker.css" rel="stylesheet" type="text/css">
+<php>if(C('COLOR_STYLE')=='blue_color') echo '<link href="__STATIC__/datetimepicker/css/datetimepicker_blue.css" rel="stylesheet" type="text/css">';</php>
+<link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
+<link href="__JS__/editor/form.css" rel="stylesheet" type="text/css">
+<link href="__JS__/editor/editor.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+<script type="text/javascript" src="__JS__/editor/jquery-migrate1.2.1.js" charset="utf-8"></script>
+<script type="text/javascript" src="__JS__/editor/editor.js" charset="utf-8"></script>
+<script type="text/javascript">
+
+Think.setValue("type", {$data.type|default='""'});
+Think.setValue("display", {$data.display|default=0});
+
+$('#submit').click(function(){
+	$('#form').submit();
+});
+
+$(function(){
+	//导航高亮
+	highlight_subnav('{:U('index')}');
+});
+</script>
+
+</block>

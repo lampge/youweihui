@@ -16,7 +16,7 @@ return array(
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
     'DEFAULT_MODULE'     => 'Home',
     'DEFAULT_CONTROLLER' => 'Line',
-    'MODULE_DENY_LIST'   => array('Common','User','Admin','Install'),
+    'MODULE_DENY_LIST'   => array('Common','User','Install'),
     'MODULE_ALLOW_LIST'  => array('Home','Admin'),
 
     /* 系统数据加密设置 */
