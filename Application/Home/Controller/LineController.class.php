@@ -8,21 +8,36 @@ class LineController extends HomeController {
 
     // 线路列表
     public function index(){
-        $Line = M('Line');
-        $map = array();
-        $order = 'update_time desc, line_id desc';
-        $line_lists = $Line->where($map)->order($order)->limit()->select();
-        foreach ($line_lists as $key => $val) {
+        //$Line_type = M('Line_type');
+        $catid =  I('get.catid',1);
+        $sql = "select count(*) as num from __LINE_TYPE__ as a,__LINE__ as b
+        where a.type_id = $catid and a.line_id = b.line_id and b.status=1";
+        $pageNum = 15;
+        $_page = pages($sql,$pageNum);
+        $nowPage =  I('get.p',1);
+        $firstRow = ($nowPage-1)*$pageNum;
 
-            $line_lists[$key]['img'] = get_cover(array_shift(explode(',', $val['images'])), 'path');
-            $line_lists[$key]['url'] = U('show', array('id'=>$val['line_id']));
+       $Model = new \Think\Model();
+       $line_lists =  $Model->query("select a.*, b.* from __LINE_TYPE__ as a,
+       __LINE__ as b where a.type_id = $catid and a.line_id = b.line_id and b.status=1
+       order by b.update_time desc, b.line_id desc limit $firstRow,$pageNum");
+        $line_lists = array_filter($line_lists);
+
+        foreach ($line_lists as $key => $val) {
+      		    $map_two = array();
+      		    $map_two['line_id&is_default'] =array($val['line_id'],1,'_multi'=>true);
+      		    $res = get_tc_val($map_two);
+
+              $line_lists[$key]['price'] = $res['price'];
+              $line_lists[$key]['best_price'] = $res['best_price'];
+      		    $line_lists[$key]['start_date'] = get_start_date($res['date_price_data']);
+              $line_lists[$key]['img'] = get_cover(array_shift(explode(',', $val['images'])), 'path');
+              $line_lists[$key]['url'] = U('show', array('id'=>$val['line_id']));
         }
 
-        echo '<pre><!-- ';
-        print_r($line_lists);
-        echo ' --></pre>';
 
         $this->assign('line_lists', $line_lists);
+        $this->assign('_page', $_page);
         $this->display();
     }
 
@@ -62,6 +77,8 @@ class LineController extends HomeController {
         if (empty($default_tc)) {
             $default_tc = $line_tc[0];
         }
+
+
         $this->assign('line_info', $line_info);
         $this->assign('line_tc', $line_tc);
         $this->assign('default_tc', $default_tc);

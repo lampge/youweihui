@@ -642,7 +642,7 @@
 .yul2 li:hover a{ color:#0091ed;}
 
 .pages{ width:100%; text-align:center; padding: 38px 0px 20px 0px;}
-.pages a{ display:inline-block; border:1px solid #cecece; font-size:12px; padding:6px; color:#6B6B6B;}
+.pages a{ display:inline-block; border:1px solid #cecece; font-size:12px; padding:6px 10px 6px 10px; color:#6B6B6B; margin-left: 10px;}
 .pages a.yling{ border:none;}
 .pages a.yling2{ border:1px solid #8c8c8c;}
 .pages a:hover{ background:#6B6B6B; color:#FFF;}

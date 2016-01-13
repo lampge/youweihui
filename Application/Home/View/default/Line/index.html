@@ -42,9 +42,9 @@
             </div>
         </div>
         <div class="yk_01 fix">
-            <span>旅行时间：</span>
+            <span>旅行天数：</span>
             <div class="yy1">
-                <a href="#" class="ya3">全部</a><a href="#">10月</a><a href="#">11月</a><a href="#">12月</a><a href="#">1月</a><a href="#">2月</a><a href="#">3月</a><a href="#">4月</a><a href="#">圣诞</a><a href="#">元旦</a><a href="#">春节</a>
+                <a href="#" class="ya3">全部</a><a href="#">7天</a><a href="#">15天</a><a href="#">1月</a>
             </div>
         </div>
         <div class="yk_01 fix ybbb">
@@ -67,73 +67,37 @@
                             <a href="{$val['url']}" class="y_a3 fs">{$val['starting']} - {$val['dest']}</a>
                             <a href="{$val['url']}" class="y_a4">{$val['title']}</a>
                             {$val['sub_title']}
-                            <span>出发日期：11月02日 | 11月03日 | 11月04日 | 11月05日</span>
+                            <span>出发日期：{$val['start_date']}</span>
                         </div>
-                        <span><del>4999元</del><bdo>￥</bdo><font>4199</font>元起</span>
+                      <span><del>{$val['price']}元</del><bdo>￥</bdo><font>{$val['best_price']}</font>元起</span>
                         <a href="{$val['url']}">立即预定</a>
                     </div>
                 </volist>
 
-                <div class="y_k02 fix">
-                    <img src="__IMG__/y_04.jpg" alt="" class="fl">
-                    <div class="y_art02 fl">
-                        <a href="#" class="y_a3 fs">昆明 - 泰国 苏梅岛</a>
-                        <a href="#" class="y_a4">温柔海岛 | 苏梅岛4晚5天/5晚6天自由行（昆明直飞苏梅岛本岛） </a>
-                        昆明直飞往返，海边三星宜必思酒店住宿，直飞苏梅岛本岛免去码头坐船。
-                        <span>出发日期：11月02日 | 11月03日 | 11月04日 | 11月05日</span>
-                    </div>
-                    <span><del>4999元</del><bdo>￥</bdo><font>4199</font>元起</span>
-                    <a href="#">立即预定</a>
-                </div>
+
             </div>
-            <div class="pages"><a href="#" class="yling2">《 上一页</a> <a href="#">1</a> <a href="#">2</a> <a href="#">3</a> <a href="#">4</a> <a href="#">5</a> <a href="#">6</a> <a href="#">7</a> <a href="#">8</a> <a href="#">9</a> <a href="#">10</a> <a href="#" class="yling">....</a> <a href="#">29</a> <a href="#">30</a> <a href="#" class="yling2">下一页 》</a></div>
+            <div class="pages">{$_page}</div>
         </div>
         <div class="ydiv8 fr">
             <span>热门商品</span>
+
+      <volist name=":get_line_position(2)" id="val">
+
             <div class="y_k_03">
-                <a href="#">天津直飞芽庄4天3晚/5天4晚自由行，入住四...</a>
+                <a href="{$val['url']}">{$val['sub_title']}</a>
                 <div class="yddd fix">
-                    <img src="__IMG__/y_05.jpg" class="fl">
+                    <a href="{$val['url']}"><img src="<empty name="val['img']">__IMG__/y_04.jpg<else/>{$val['img']}</empty>" width="160" height="118" class="fl"></a>
                     <div class="yar1 fr">
-                        上海<br>
-                        泰国  曼谷
-                        <font>￥<span>3480</span>/人起</font>
+                        {$val['starting']}<br>
+                        {$val['dest']}
+                        <font>￥<span>{$val['best_price']}</span>/人起</font>
                     </div>
                 </div>
             </div>
-            <div class="y_k_03">
-                <a href="#">天津直飞芽庄4天3晚/5天4晚自由行，入住四...</a>
-                <div class="yddd fix">
-                    <img src="__IMG__/y_05.jpg" class="fl">
-                    <div class="yar1 fr">
-                        上海<br>
-                        泰国  曼谷
-                        <font>￥<span>3480</span>/人起</font>
-                    </div>
-                </div>
-            </div>
-            <div class="y_k_03">
-                <a href="#">天津直飞芽庄4天3晚/5天4晚自由行，入住四...</a>
-                <div class="yddd fix">
-                    <img src="__IMG__/y_05.jpg" class="fl">
-                    <div class="yar1 fr">
-                        上海<br>
-                        泰国  曼谷
-                        <font>￥<span>3480</span>/人起</font>
-                    </div>
-                </div>
-            </div>
-            <div class="y_k_03">
-                <a href="#">天津直飞芽庄4天3晚/5天4晚自由行，入住四...</a>
-                <div class="yddd fix">
-                    <img src="__IMG__/y_05.jpg" class="fl">
-                    <div class="yar1 fr">
-                        上海<br>
-                        泰国  曼谷
-                        <font>￥<span>3480</span>/人起</font>
-                    </div>
-                </div>
-            </div>
+      </volist>
+
+
+
         </div>
     </section>
 </section>

@@ -151,14 +151,26 @@
         <div class="nav_nr auto fix">
             <ul class="ul fix">
                 <li><a href="index.html" title="">首页</a></li>
-                <li><a href="#" title="">全部尾单<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
-                    <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>
+                <li><a href="{:get_line_cate(1,'url')}" title="">{:get_line_cate(1,'catname')}<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
+                    <div class="xl">
+                        <volist name=":get_line_cate_lists(1,10)" id="val">
+                            <a href="{$val['url']}" title="{$val['title']}">{$val['title']}</a>
+                        </volist>
+                     </div>
                 </li>
-                <li><a href="#">出境特卖<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
-                    <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>
+                <li><a href="{:get_line_cate(6,'url')}">{:get_line_cate(6,'catname')}<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
+                    <div class="xl">
+                          <volist name=":get_line_cate_lists(6,10)" id="val">
+                              <a href="{$val['url']}" title="{$val['title']}">{$val['title']}</a>
+                          </volist>
+                    </div>
                 </li>
-                <li><a href="#">国内特卖<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
-                    <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>
+                <li><a href="{:get_line_cate(5,'url')}">{:get_line_cate(5,'catname')}<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
+                    <div class="xl">
+                          <volist name=":get_line_cate_lists(5,10)" id="val">
+                              <a href="{$val['url']}" title="{$val['title']}">{$val['title']}</a>
+                          </volist>
+                    </div>
                 </li>
                 <li><a href="#">签证<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
                     <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>

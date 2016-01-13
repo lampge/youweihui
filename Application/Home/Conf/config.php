@@ -13,7 +13,7 @@
  */
 return array(
     /* URL配置 */
-    'URL_CASE_INSENSITIVE' => true, //默认false 表示URL区分大小写 true则表示不区分大小写
+    'URL_CASE_INSENSITIVE' => false, //默认false 表示URL区分大小写 true则表示不区分大小写
     'URL_MODEL'            => 2, //URL模式
 
     // 预先加载的标签库
