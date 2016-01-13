@@ -1,47 +1,574 @@
 <extend name="Base/common"/>
-
-<block name="header">
-    <header class="jumbotron subhead" id="overview">
-        <div class="container">
-            <h2>源自相同起点，演绎不同精彩！</h2>
-            <p class="lead"></p>
-        </div>
-    </header>
-</block>
-
-<block name="side">
-<!-- 左侧 nav
-================================================== -->
-    <div class="span3 bs-docs-sidebar">
-        <ul class="nav nav-list bs-docs-sidenav">
-            {:W('Category/lists', array(1, true))}
-        </ul>
-    </div>
-</block>
-
 <block name="body">
-    <div class="span9">
-        <!-- Contents
-        ================================================== -->
-        <section id="contents">
-            <article:list name="article" category="1" child="true">
-                <div class="">
-                    <h3><a href="{:U('Article/detail?id='.$article['id'])}">{$article.title}</a></h3>
+  <section class="banner">
+      <div id="js" class="js"> <a class="aa" href="#"><IMG class="imgb" src="__IMG__/banner1.jpg" width="1660" height="441"></a> <a class="aa" href="#"><IMG class="imgb" src="__IMG__/banner2.jpg" width="1660" height="441"></a> <a class="aa" href="#"><IMG class="imgb" src="__IMG__/banner1.jpg" width="1660" height="441"></a> <a class="aa" href="#"><IMG class="imgb" src="__IMG__/banner2.jpg" width="1660" height="441"></a> <a class="aa" href="#"><IMG class="imgb" src="__IMG__/banner1.jpg" width="1660" height="441"></a>
+          <div class="jsnr">
+              <div id="jsNav" class="jsNav fix"> <A class="trigger xz" href="javascript:void(0)"><img src="__IMG__/pic3.jpg" width="98" height="51"></A> <A class="trigger"  href="javascript:void(0)"><img src="__IMG__/pic4.jpg" width="98" height="51"></A> <A class="trigger"  href="javascript:void(0)"><img src="__IMG__/pic3.jpg" width="98" height="51"></A> <A class="trigger" href="javascript:void(0)"><img src="__IMG__/pic4.jpg" width="98" height="51"></A> <A class="trigger" href="javascript:void(0)"><img src="__IMG__/pic3.jpg" width="98" height="51"></A> </div>
+          </div>
+          <div class="ilx-qksch">
+              <div class="ilx-qksch-bg">
+                  <div class="ilx-schtx sch1">
+                      <h1 class="ico-pl">出发城市</h1>
+                      <input class="ilx-schinput" type="text" data-utype="city" data-can="1" value="北京">
+                      <div class="ilx-schlist" style="display: none;">
+                          <div class="ilx-schlist-wrap clearfix">
+                              <div class="ilx-clsprt"></div>
+                              <ul>
+                                  <li class="ilx-sch-li" data-type="city" data-city="">全部</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="1">北京/天津</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="2">上海/杭州</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="3">广东/港澳</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="5">重庆/成都</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="4">武汉/长沙</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="6">国内其他</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="ilx-schtx sch2">
+                      <h1 class="ico-am">目的地</h1>
+                      <input class="ilx-schinput" type="text" data-utype="place" data-can="8" value="上海">
+                      <div class="ilx-schlist pl-ctas" style="display: none;">
+                          <div class="ilx-schlist-wrap clearfix">
+                              <div class="ilx-clsprt"></div>
+                              <ul class="pl-ctpl">
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="414">全部</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="1">瑞士</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="91">希腊</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="131">法国</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="142">意大利</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="151">德国</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="159">荷兰</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="165">比利时</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="176">土耳其</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="195">俄罗斯</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="201">英国</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="211">西班牙</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="217">葡萄牙</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="339">奥地利</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="340">梵蒂冈</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="341">芬兰</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="342">丹麦</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="343">瑞典</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="344">挪威</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="380">匈牙利</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="381">捷克</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="382">斯洛伐克</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="383">拉普兰德</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="443">卢森堡</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="520">爱尔兰</li>
+                              </ul>
+                              <ul class="pl-ctpl">
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="411">全部</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="41">塞舌尔</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="46">毛里求斯</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="171">埃及</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="183">南非</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="361">肯尼亚</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="379">坦桑尼亚</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="472">牙买加</li>
+                              </ul>
+                              <ul class="pl-ctpl">
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="500">全部</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="79">澳大利亚</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="85">新西兰</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="364">帕劳</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="374">大溪地</li>
+                              </ul>
+                              <ul class="pl-ctpl">
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="498">全部</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="106">加拿大</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="493">巴哈马</li>
+                              </ul>
+                              <ul class="pl-ctpl">
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="499">全部</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="405">巴西</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="408">阿根廷</li>
+                                  <li class="ilx-sch-li ilx-slas" data-type="place" data-place="474">墨西哥</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="ilx-schtx sch3">
+                      <h1 class="ico-st">线路类型</h1>
+                      <input class="ilx-schinput" type="text" data-utype="ptype" data-can="1" value="全部尾单">
+                      <div class="ilx-schlist" style="display: none;">
+                          <div class="ilx-schlist-wrap clearfix">
+                              <div class="ilx-clsprt"></div>
+                              <ul>
+                                  <li class="ilx-sch-li" data-type="ptype" data-ptype="1">全部尾单</li>
+                                  <li class="ilx-sch-li" data-type="ptype" data-ptype="3">全部尾单</li>
+                                  <li class="ilx-sch-li" data-type="ptype" data-ptype="4">全部尾单</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="ilx-schtx sch4">
+                      <h1 class="ico-xz">参团性质</h1>
+                      <input class="ilx-schinput" type="text" data-utype="city" data-can="1" value="跟团游">
+                      <div class="ilx-schlist" style="display: none;">
+                          <div class="ilx-schlist-wrap clearfix">
+                              <div class="ilx-clsprt"></div>
+                              <ul>
+                                  <li class="ilx-sch-li" data-type="city" data-city="">全部</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="1">跟团游</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="2">跟团游</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="3">跟团游</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="5">跟团游</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="4">跟团游</li>
+                                  <li class="ilx-sch-li" data-type="city" data-city="6">跟团游</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="ilx-schtx sch5">
+                      <h1 class="ico-da">旅行日期</h1>
+                      <input class="ilx-schinput" type="text" data-utype="tdate" data-can="" value="11月">
+                      <div class="ilx-schlist" style="display: none;">
+                          <div class="ilx-schlist-wrap clearfix">
+                              <div class="ilx-clsprt"></div>
+                              <ul>
+                                  <li class="ilx-sch-li" data-type="tdate" data-tdate="b1">圣诞</li>
+                                  <li class="ilx-sch-li" data-type="tdate" data-tdate="b2">元旦</li>
+                                  <li class="ilx-sch-li" data-type="tdate" data-tdate="b3">春节</li>
+                              </ul>
+                          </div>
+                      </div>
+                  </div>
+                  <a class="ilx-qka">一键搜索</a> </div>
+          </div>
+      </div>
+  </section>
+  <!--banner end-->
+    <section class="wmdcn">
+    	<div class="wmdcn_nr auto fix">
+        	<div class="wmdcn_nr_left">
+            	我们的承诺：<span>OUR COMMITMENT</span>
+            </div>
+        	<div class="wmdcn_nr_right">
+                <ul>
+                    <li>
+                        <div class="yimg fl">
+                            <img src="__IMG__/ytip_01.png" alt="" class="ymg1 fl">
+                            <img src="__IMG__/ytip_011.png" alt="" class="ymg2 fl">
+                        </div>
+                        <div class="yzi fl">
+                            <div class="y_zi1">
+                                <span>特价不二</span>
+                                价格只会更低
+                            </div>
+                            <div class="y_zi2">
+                                <span>特价不二</span>
+                                专业的操作，优秀的领队，让您有个舒心又放松邮轮假期；完全放松，多项免费娱乐设施供
+    您自由选择，您可以随意安排自己的整个游程。
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="yimg fl">
+                            <img src="__IMG__/ytip_02.png" alt="" class="ymg1 fl">
+                            <img src="__IMG__/ytip_022.png" alt="" class="ymg2 fl">
+                        </div>
+                        <div class="yzi fl">
+                            <div class="y_zi1">
+                                <span>特价不二</span>
+                                价格只会更低
+                            </div>
+                            <div class="y_zi2">
+                                <span>特价不二</span>
+                                专业的操作，优秀的领队，让您有个舒心又放松邮轮假期；完全放松，多项免费娱乐设施供
+    您自由选择，您可以随意安排自己的整个游程。
+                            </div>
+                        </div>
+                    </li><li>
+                        <div class="yimg fl">
+                            <img src="__IMG__/ytip_03.png" alt="" class="ymg1 fl">
+                            <img src="__IMG__/ytip_033.png" alt="" class="ymg2 fl">
+                        </div>
+                        <div class="yzi fl">
+                            <div class="y_zi1">
+                                <span>特价不二</span>
+                                价格只会更低
+                            </div>
+                            <div class="y_zi2">
+                                <span>特价不二</span>
+                                专业的操作，优秀的领队，让您有个舒心又放松邮轮假期；完全放松，多项免费娱乐设施供
+    您自由选择，您可以随意安排自己的整个游程。
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="yimg fl">
+                            <img src="__IMG__/ytip_04.png" alt="" class="ymg1 fl">
+                            <img src="__IMG__/ytip_044.png" alt="" class="ymg2 fl">
+                        </div>
+                        <div class="yzi fl">
+                            <div class="y_zi1">
+                                <span>特价不二</span>
+                                品牌质量保证 支付安全
+                            </div>
+                            <div class="y_zi2">
+                                <span>特价不二</span>
+                                专业的操作，优秀的领队，让您有个舒心又放松邮轮假期；完全放松，多项免费娱乐设施供
+    您自由选择，您可以随意安排自己的整个游程。
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <!--我们的承诺 end-->
+    <section class="main auto">
+    	<div class="main1">
+        	<div class="main1_top fix">
+            	<span><img src="__IMG__/bg25.png" width="29" height="28" alt=""> 特价旅游</span>
+                <a href="#" title="">更多 ></a>
+            </div>
+        	<div class="main1_bottom fix">
+            	<dl>
+                	<dt><a href="#" title="">
+    	               	<img src="__IMG__/pic7.jpg" width="268" height="197">
+                        <em>立省 ￥2300</em>
+                        <p>峨眉仙境 4/7日</p>
+                        <span>"歌诗达大西洋号" 济州岛4晚5日多房 型可供选择</span></a>
+                    </dt>
+                    <dd class="fix">
+                    	<p><em>￥10999</em>￥8699 起</p>
+                        <span><a href="#" title="">抢购</a></span>
+                    </dd>
+                </dl>
+            	<dl>
+                	<dt><a href="#" title="">
+    	               	<img src="__IMG__/pic7.jpg" width="268" height="197">
+                        <em>立省 ￥2300</em>
+                        <p>峨眉仙境 4/7日</p>
+                        <span>"歌诗达大西洋号" 济州岛4晚5日多房 型可供选择</span></a>
+                    </dt>
+                    <dd class="fix">
+                    	<p><em>￥10999</em>￥8699 起</p>
+                        <span><a href="#" title="">抢购</a></span>
+                    </dd>
+                </dl>
+            	<dl>
+                	<dt><a href="#" title="">
+    	               	<img src="__IMG__/pic7.jpg" width="268" height="197">
+                        <em>立省 ￥2300</em>
+                        <p>峨眉仙境 4/7日</p>
+                        <span>"歌诗达大西洋号" 济州岛4晚5日多房 型可供选择</span></a>
+                    </dt>
+                    <dd class="fix">
+                    	<p><em>￥10999</em>￥8699 起</p>
+                        <span><a href="#" title="">抢购</a></span>
+                    </dd>
+                </dl>
+            	<dl>
+                	<dt><a href="#" title="">
+    	               	<img src="__IMG__/pic7.jpg" width="268" height="197">
+                        <em>立省 ￥2300</em>
+                        <p>峨眉仙境 4/7日</p>
+                        <span>"歌诗达大西洋号" 济州岛4晚5日多房 型可供选择</span></a>
+                    </dt>
+                    <dd class="fix">
+                    	<p><em>￥10999</em>￥8699 起</p>
+                        <span><a href="#" title="">抢购</a></span>
+                    </dd>
+                </dl>
+            </div>
+        </div>
+    	<div class="main2">
+        	<div class="main2_top fix">
+            	<span>全部尾单</span>
+                <a href="#" title="">更多 ></a>
+            </div>
+        	<div class="main2_bottom fix">
+            	<div class="title fix">
+                  <div class="title1 xz">精选</div>
+                      <volist name=":get_line_cate_lists(1,10)" id="val">
+                      <div class="title1">{$val['title']}</div>
+                      </volist>
                 </div>
-                <div>
-                    <p class="lead">{$article.description}</p>
-                </div>
-                <div>
-                    <span><a href="{:U('Article/detail?id='.$article['id'])}">查看全文</a></span>
-                    <span class="pull-right">
-                        <span class="author">{$article.uid|get_username}</span>
-                        <span>于 {$article.create_time|date='Y-m-d H:i',###}</span> 发表在 <span>
-                        <a href="{:U('Article/lists?category='.get_category_name($article['category_id']))}">{$article.category_id|get_category_title}</a></span> ( 阅读：{$article.view} )
-                    </span>
-                </div>
-                <hr/>
-            </article:list>
+                <div class="title_nr">
 
-        </section>
-    </div>
+                   <div class="title_nr1 fix">
+                       <div class="title_nr1_left">
+                         <div class="flexslider">
+                               <ul class="slides">
+                                   <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                   <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                   <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                   <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                               </ul>
+                           </div>
+                           <script type="text/javascript">
+                               $(document).ready(function(){
+                                   $('.flexslider').flexslider({
+                                       directionNav: true,
+                                       pauseOnAction: false
+                                   });
+                               });
+                           </script>
+                       </div>
+                       <div class="title_nr1_right fix">
+                         <volist name=":get_line_position(1,1,6)" id="v">
+                              	<dl>
+                                  	<dt>
+                                     		<img src="{$v['img']}" width="262" height="194">
+                                      	<span><a href="{$v['url']}" title="">立即抢购</a></span>
+                                      </dt>
+                                      <dd class="fix">
+                                      	<a href="{$v['url']}" title="">{$v['title']}</a>
+                                          <p>市场价：{$v['price']}元</p>
+                                          <span><em>￥{$v['best_price']}</em>元起</span>
+                                      </dd>
+                                  </dl>
+                          </volist>
+                       </div>
+                   </div>
+
+            <volist name=":get_line_cate_lists(1,10)" id="val">
+                    <div class="title_nr1 fix" style="display:none;">
+                        <div class="title_nr1_left">
+                        	<div class="flexslider">
+                                <ul class="slides">
+                                    <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                    <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                    <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                    <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                </ul>
+                            </div>
+                            <script type="text/javascript">
+                                $(document).ready(function(){
+                                    $('.flexslider').flexslider({
+                                        directionNav: true,
+                                        pauseOnAction: false
+                                    });
+                                });
+                            </script>
+                        </div>
+                        <div class="title_nr1_right fix">
+                         <volist name=":get_line_position($val['id'],0,6)" id="v">
+                              	<dl>
+                                  	<dt>
+                                     		<img src="{$v['img']}" width="262" height="194">
+                                      	<span><a href="{$v['url']}" title="">立即抢购</a></span>
+                                      </dt>
+                                      <dd class="fix">
+                                      	<a href="{$v['url']}" title="">{$v['title']}</a>
+                                          <p>市场价：{$v['price']}元</p>
+                                          <span><em>￥{$v['best_price']}</em>元起</span>
+                                      </dd>
+                                  </dl>
+                          </volist>
+
+                        </div>
+                    </div>
+           </volist>
+
+                </div>
+            </div>
+        </div>
+        	<div class="main2_top fix">
+            	<span>出境特卖</span>
+                <a href="#" title="">更多 ></a>
+            </div>
+
+
+        <div class="main2_bottom fix">
+            <div class="title fix">
+                <div class="title1 xz">精选</div>
+                    <volist name=":get_line_cate_lists(6,10)" id="val">
+                    <div class="title1">{$val['title']}</div>
+                    </volist>
+              </div>
+              <div class="title_nr">
+
+                 <div class="title_nr1 fix">
+                     <div class="title_nr1_left">
+                       <div class="flexslider">
+                             <ul class="slides">
+                                 <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                 <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                 <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                 <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                             </ul>
+                         </div>
+                         <script type="text/javascript">
+                             $(document).ready(function(){
+                                 $('.flexslider').flexslider({
+                                     directionNav: true,
+                                     pauseOnAction: false
+                                 });
+                             });
+                         </script>
+                     </div>
+                     <div class="title_nr1_right fix">
+                       <volist name=":get_line_position(6,1,6)" id="v">
+                              <dl>
+                                  <dt>
+                                      <img src="{$v['img']}" width="262" height="194">
+                                      <span><a href="{$v['url']}" title="">立即抢购</a></span>
+                                    </dt>
+                                    <dd class="fix">
+                                      <a href="{$v['url']}" title="">{$v['title']}</a>
+                                        <p>市场价：{$v['price']}元</p>
+                                        <span><em>￥{$v['best_price']}</em>元起</span>
+                                    </dd>
+                                </dl>
+                        </volist>
+                     </div>
+                 </div>
+
+          <volist name=":get_line_cate_lists(6,10)" id="val">
+                  <div class="title_nr1 fix" style="display:none;">
+                      <div class="title_nr1_left">
+                        <div class="flexslider">
+                              <ul class="slides">
+                                  <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                  <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                  <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                  <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                              </ul>
+                          </div>
+                          <script type="text/javascript">
+                              $(document).ready(function(){
+                                  $('.flexslider').flexslider({
+                                      directionNav: true,
+                                      pauseOnAction: false
+                                  });
+                              });
+                          </script>
+                      </div>
+                      <div class="title_nr1_right fix">
+                       <volist name=":get_line_position($val['id'],0,6)" id="v">
+                              <dl>
+                                  <dt>
+                                      <img src="{$v['img']}" width="262" height="194">
+                                      <span><a href="{$v['url']}" title="">立即抢购</a></span>
+                                    </dt>
+                                    <dd class="fix">
+                                      <a href="{$v['url']}" title="">{$v['title']}</a>
+                                        <p>市场价：{$v['price']}元</p>
+                                        <span><em>￥{$v['best_price']}</em>元起</span>
+                                    </dd>
+                                </dl>
+                        </volist>
+
+                      </div>
+                  </div>
+         </volist>
+
+              </div>
+          </div>
+
+
+
+
+
+
+
+
+
+          <div class="main2_top fix">
+            	<span>国内特卖</span>
+                <a href="#" title="">更多 ></a>
+            </div>
+
+
+        <div class="main2_bottom fix">
+            <div class="title fix">
+                <div class="title1 xz">精选</div>
+                    <volist name=":get_line_cate_lists(5,10)" id="val">
+                    <div class="title1">{$val['title']}</div>
+                    </volist>
+              </div>
+              <div class="title_nr">
+
+                 <div class="title_nr1 fix">
+                     <div class="title_nr1_left">
+                       <div class="flexslider">
+                             <ul class="slides">
+                                 <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                 <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                 <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                 <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                             </ul>
+                         </div>
+                         <script type="text/javascript">
+                             $(document).ready(function(){
+                                 $('.flexslider').flexslider({
+                                     directionNav: true,
+                                     pauseOnAction: false
+                                 });
+                             });
+                         </script>
+                     </div>
+                     <div class="title_nr1_right fix">
+                       <volist name=":get_line_position(5,1,6)" id="v">
+                              <dl>
+                                  <dt>
+                                      <img src="{$v['img']}" width="262" height="194">
+                                      <span><a href="{$v['url']}" title="">立即抢购</a></span>
+                                    </dt>
+                                    <dd class="fix">
+                                      <a href="{$v['url']}" title="">{$v['title']}</a>
+                                        <p>市场价：{$v['price']}元</p>
+                                        <span><em>￥{$v['best_price']}</em>元起</span>
+                                    </dd>
+                                </dl>
+                        </volist>
+                     </div>
+                 </div>
+
+          <volist name=":get_line_cate_lists(5,10)" id="val">
+                  <div class="title_nr1 fix" style="display:none;">
+                      <div class="title_nr1_left">
+                        <div class="flexslider">
+                              <ul class="slides">
+                                  <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                  <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                  <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                                  <li style="background:url(__IMG__/pic9.jpg) 50% 0 no-repeat;"><a href="#"></a></li>
+                              </ul>
+                          </div>
+                          <script type="text/javascript">
+                              $(document).ready(function(){
+                                  $('.flexslider').flexslider({
+                                      directionNav: true,
+                                      pauseOnAction: false
+                                  });
+                              });
+                          </script>
+                      </div>
+                      <div class="title_nr1_right fix">
+                       <volist name=":get_line_position($val['id'],0,6)" id="v">
+                              <dl>
+                                  <dt>
+                                      <img src="{$v['img']}" width="262" height="194">
+                                      <span><a href="{$v['url']}" title="">立即抢购</a></span>
+                                    </dt>
+                                    <dd class="fix">
+                                      <a href="{$v['url']}" title="">{$v['title']}</a>
+                                        <p>市场价：{$v['price']}元</p>
+                                        <span><em>￥{$v['best_price']}</em>元起</span>
+                                    </dd>
+                                </dl>
+                        </volist>
+
+                      </div>
+                  </div>
+         </volist>
+
+              </div>
+          </div>
+
+
+
+
+
+
+
+
+  </div>
+</section>
 </block>

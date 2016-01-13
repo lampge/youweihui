@@ -11,6 +11,8 @@
 const ONETHINK_VERSION    = '1.1.141101';
 const ONETHINK_ADDON_PATH = './Addons/';
 
+
+
 // 吴文豹 start
 function send_sms($mobile, $content) {
 
@@ -71,6 +73,120 @@ function get_site_list($id = 0){
 
 
 // end
+
+//start  李震
+
+
+/**
+ * 获取旅游路线套餐字段值
+ * @param int $where
+ * @param string $field
+ * @return 完整的数据  或者  指定的$field字段值
+ * @author huajie <banhuajie@163.com>
+ */
+function get_tc_val($where = array()){
+    $fields = M('line_tc')->where($where)->find();
+    return $fields;
+}
+
+
+/**
+ * 获取旅游列表出发日期
+ * @param int $data
+ * @author huajie <banhuajie@163.com>
+ */
+function get_start_date($data){
+  $res = explode(',',$data);
+  foreach($res as $v){
+   $row = explode('|',$v);
+   $start_date[] =  $row[0];
+  }
+
+    $result = implode(' &nbsp;&nbsp; ',array_slice($start_date,0,3));
+    return $result;
+}
+
+/**
+ * 获取旅游推荐路线
+ * @param int $data
+ * @author huajie <banhuajie@163.com>
+ */
+function get_line_position($catid='',$posid=1,$num=5,$order='line_id desc'){
+    $Line = M('Line');
+    $Line_type = M('Line_type');
+    $Line_tc = M('Line_tc');
+    $map_type = array();
+    $map_type['type_id'] = $catid ? $catid : '';
+
+    $line_id = $Line_type->field('line_id')->where($map_type)->order("$order")->select();
+    $line_lists = array();
+    foreach($line_id as $lid){
+         $lid = $lid['line_id'];
+         $line_list = $Line->where("line_id=$lid AND is_position=$posid AND status = 1")->select();
+         $line_lists[] =  $line_list[0];
+    }
+    $line_lists = array_filter($line_lists);
+    $line_lists = array_slice($line_lists,0,$num);
+    foreach ($line_lists as $key => $val) {
+          $map = array();
+          $map['line_id&is_default'] =array($val['line_id'],1,'_multi'=>true);
+          $res = get_tc_val($map);
+          $line_lists[$key]['price'] = $res['price'];
+          $line_lists[$key]['best_price'] = $res['best_price'];
+          $line_lists[$key]['img'] = get_cover(array_shift(explode(',', $val['images'])), 'path');
+          $line_lists[$key]['url'] = U('show', array('id'=>$val['line_id']));
+    }
+
+
+    return $line_lists;
+}
+/*
+   获取线路栏目名称
+*/
+function get_line_cate($catid='', $field='', $order='sort asc'){
+          $Line_cate = M('Line_cate');
+          switch($field){
+              case 'url':
+              $catname = $Line_cate->field('id')->where(array('id'=>$catid,'status'=>1))->find();
+              $url = U('index', array('catid'=>$catname['id']));
+              return $url;
+              break;
+              case 'catname':
+              $catname = $Line_cate->field('title')->where(array('id'=>$catid,'status'=>1))->find();
+              $catname = $catname['title'];
+              return $catname;
+              break;
+          }
+
+}
+
+/*
+   获取线路栏目列表
+*/
+function get_line_cate_lists($catid='', $num=5, $order='sort asc'){
+            $Line_cate = M('Line_cate');
+            $cat_info = $Line_cate->field('id,title')->where(array('pid'=>$catid,'status'=>1))
+                                  ->order($order)->limit(0,$num)->select();
+            foreach($cat_info as $key => $cat){
+                 $cat_info[$key]['url'] = U('index',array('catid'=>$cat['id']));
+            }
+            return $cat_info;
+}
+/**
+ * 分页
+ */
+function pages($sql,$num=5){
+      $Model = new \Think\Model();
+      $count =  $Model->query($sql);
+      $count = $count[0]['num'];
+			$Page  = new \Think\Page($count,$num);
+			$show  = $Page->show();// 分页显示输出
+			return $show;
+}
+
+
+
+//end 李震
 
 
 /**
@@ -1053,6 +1169,7 @@ function get_cover($cover_id, $field = null){
     }
     return empty($field) ? $picture : $picture[$field];
 }
+
 
 /**
  * 检查$pos(推荐位的值)是否包含指定推荐位$contain

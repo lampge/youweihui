@@ -15,8 +15,8 @@ return array(
     /* 模块相关配置 */
     'AUTOLOAD_NAMESPACE' => array('Addons' => ONETHINK_ADDON_PATH), //扩展模块列表
     'DEFAULT_MODULE'     => 'Home',
-    'DEFAULT_CONTROLLER' => 'Line',
-    'MODULE_DENY_LIST'   => array('Common','User','Install'),
+    'DEFAULT_CONTROLLER' => 'Index',
+    'MODULE_DENY_LIST'   => array('Common','User','Admin','Install'),
     'MODULE_ALLOW_LIST'  => array('Home','Admin'),
 
     /* 系统数据加密设置 */
@@ -38,9 +38,9 @@ return array(
     /* 数据库配置 */
     'DB_TYPE'   => 'mysql', // 数据库类型
     'DB_HOST'   => '127.0.0.1', // 服务器地址
-    'DB_NAME'   => 'jfsd_youweihui', // 数据库名
+    'DB_NAME'   => 'youweihui', // 数据库名
     'DB_USER'   => 'root', // 用户名
-    'DB_PWD'    => 'root',  // 密码
+    'DB_PWD'    => '',  // 密码
     'DB_PORT'   => '3306', // 端口
     'DB_PREFIX' => 'jfsd_', // 数据库表前缀
 
