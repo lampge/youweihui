@@ -17,7 +17,76 @@ use User\Api\UserApi;
 class UserController extends HomeController {
 	/* 用户中心首页 */
 	public function index(){
+		$uid = is_login();
+		$Order = M('Order');
+		$map = array(
+			'user_id' => $uid
+		);
+		$map['order_status'] = array('in', '1,4,5,6,7');
+		$order_lists = $Order->where($map)->order('order_id desc')->select();
+		foreach ($order_lists as $key => $value) {
+			$order_lists[$key]['reserve_info'] = unserialize($value['reserve_info']);
+			$order_lists[$key]['order_status_text'] = order_status_text($value['order_status']);
+			$order_lists[$key]['pay_status_text'] = pay_status_text($value['pay_status']);
+			switch ($value['order_type']) {
+				case 'line':
+					$line = M('Line')->field('title,images,starting')->where(array('line_id'=>$value['product_id']))->find();
+					if ($line) {
+						$order_lists[$key]['title'] = $line['title'];
+						$order_lists[$key]['image'] = get_cover(array_shift(explode(',', $line['images'])), 'path');
+						$order_lists[$key]['starting'] = $line['starting'];
+						$order_lists[$key]['product_url'] = U('Line/show', array('id'=>$value['product_id']));
+					} else {
+						$order_lists[$key]['title'] = '不存在';
+						$order_lists[$key]['image'] = '';
+						$order_lists[$key]['starting'] = '';
+						$order_lists[$key]['product_url'] = 'javascript:void(0);';
+					}
+					break;
+				case 'visa':
+					$visa = M('Visa')->field('title,images,starting')->where(array('visa_id'=>$value['product_id']))->find();
+					if ($visa) {
+						$order_lists[$key]['title'] = $visa['title'];
+						$order_lists[$key]['image'] = get_cover(array_shift(explode(',', $visa['images'])), 'path');
+						$order_lists[$key]['starting'] = $visa['starting'];
+						$order_lists[$key]['product_url'] = U('Visa/show', array('id'=>$value['product_id']));
+					} else {
+						$order_lists[$key]['title'] = '不存在';
+						$order_lists[$key]['image'] = '';
+						$order_lists[$key]['starting'] = '';
+						$order_lists[$key]['product_url'] = 'javascript:void(0);';
+					}
+					break;
 
+				default:
+					break;
+			}
+		}
+		// echo '<pre>'; print_r($order_lists); echo '</pre>';
+		// 待处理订单
+		$map['order_status'] = array('in', '1,4,5,7');
+		$chuli_count = $Order->where($map)->count();
+		// 待评价订单
+		$map['order_status'] = array('in', '6');
+		$pingjia_count = $Order->where($map)->count();
+		// 我的收藏
+		$map = array(
+			'user_id' => $uid
+		);
+		$collect_count = M('Collect')->where($map)->count();
+		// 已回复咨询
+		// $map = array(
+		// 	'user_id' => $uid,
+		// 	'status' => 2
+		// );
+		// $reply_count = M('Message')->where($map)->count();
+
+		$this->assign('chuli_count', $chuli_count);
+		$this->assign('pingjia_count', $pingjia_count);
+		$this->assign('collect_count', $collect_count);
+
+
+		$this->assign('order_lists', $order_lists);
 		$this->display();
 	}
 
@@ -149,8 +218,6 @@ class UserController extends HomeController {
         }else{
 			$user_info = D('Member')->info($uid);
 
-
-
 			$this->assign('user_info', $user_info);
             $this->display();
         }
@@ -198,16 +265,19 @@ class UserController extends HomeController {
 		$order_status = I('status', 1);
 		switch ($order_status) {
 			case '2':
-				$map['order_status'] = 1;
+				$map['order_status'] = array('in', '1,4,5,7');
 				break;
 			case '3':
-				$map['order_status'] = array('in', '5,6');
+				$map['order_status'] = array('in', '2,3,8,9,10');
+				break;
+			case '4': //待评价
+				$map['order_status'] = array('in', '6');
 				break;
 			default:
 				break;
 		}
 		$sousuo['status'] = $order_status;
-		$order_lists = $Order->where($map)->order(`create_time desc`)->select();
+		$order_lists = $Order->where($map)->order('order_id desc')->select();
 		foreach ($order_lists as $key => $value) {
 			$order_lists[$key]['reserve_info'] = unserialize($value['reserve_info']);
 			$order_lists[$key]['order_status_text'] = order_status_text($value['order_status']);
@@ -220,10 +290,26 @@ class UserController extends HomeController {
 						$order_lists[$key]['title'] = $line['title'];
 						$order_lists[$key]['image'] = get_cover(array_shift(explode(',', $line['images'])), 'path');
 						$order_lists[$key]['starting'] = $line['starting'];
+						$order_lists[$key]['product_url'] = U('Line/show', array('id'=>$value['product_id']));
 					} else {
 						$order_lists[$key]['title'] = '不存在';
 						$order_lists[$key]['image'] = '';
 						$order_lists[$key]['starting'] = '';
+						$order_lists[$key]['product_url'] = 'javascript:void(0);';
+					}
+					break;
+				case 'visa':
+					$visa = M('Visa')->field('title,images,starting')->where(array('visa_id'=>$value['product_id']))->find();
+					if ($visa) {
+						$order_lists[$key]['title'] = $visa['title'];
+						$order_lists[$key]['image'] = get_cover(array_shift(explode(',', $visa['images'])), 'path');
+						$order_lists[$key]['starting'] = $visa['starting'];
+						$order_lists[$key]['product_url'] = U('Visa/show', array('id'=>$value['product_id']));
+					} else {
+						$order_lists[$key]['title'] = '不存在';
+						$order_lists[$key]['image'] = '';
+						$order_lists[$key]['starting'] = '';
+						$order_lists[$key]['product_url'] = 'javascript:void(0);';
 					}
 					break;
 
@@ -231,7 +317,7 @@ class UserController extends HomeController {
 					break;
 			}
 		}
-		// print_r($order_lists);
+		// echo '<pre>'; print_r($order_lists); echo '</pre>';
 		$this->assign('order_lists', $order_lists);
 		$this->assign('sousuo', $sousuo);
         $this->display();
@@ -261,13 +347,28 @@ class UserController extends HomeController {
 					$order_info['title'] = $line['title'];
 					$order_info['image'] = get_cover(array_shift(explode(',', $line['images'])), 'path');
 					$order_info['starting'] = $line['starting'];
+					$order_info['product_url'] = U('Line/show', array('id'=>$order_info['product_id']));
 				} else {
 					$order_info['title'] = '不存在';
 					$order_info['image'] = '';
 					$order_info['starting'] = '';
+					$order_info['product_url'] = 'javascript:void(0);';
 				}
 				break;
-
+			case 'visa':
+				$visa = M('Visa')->field('title,images,starting')->where(array('visa_id'=>$order_info['product_id']))->find();
+				if ($visa) {
+					$order_info['title'] = $visa['title'];
+					$order_info['image'] = get_cover(array_shift(explode(',', $visa['images'])), 'path');
+					$order_info['starting'] = $visa['starting'];
+					$order_info['product_url'] = U('Visa/show', array('id'=>$order_info['product_id']));
+				} else {
+					$order_info['title'] = '不存在';
+					$order_info['image'] = '';
+					$order_info['starting'] = '';
+					$order_info['product_url'] = 'javascript:void(0);';
+				}
+				break;
 			default:
 				break;
 		}
@@ -275,19 +376,148 @@ class UserController extends HomeController {
 		$this->assign('order_info', $order_info);
 		$this->display();
 	}
+	public function orderBuy($order_id = ''){
+
+		$this->assign('order_id', $order_id);
+		$this->display();
+	}
 	// 取消订单
 	public function orderUndo($order_id = ''){
 		$this->_checkLogin();
-
-
-		$this->success('成功');
+		$order_info = M('Order')->find($order_id);
+		if (empty($order_info)) {
+			$this->error('订单不存在...');
+		}
+		$data = array(
+			'user_id' => is_login(),
+			'order_id' => $order_id,
+			'order_status' => 2,
+			'update_time' =>NOW_TIME
+		);
+		$result = M('Order')->save($data);
+		if ($result) {
+			$this->success('成功');
+		} else {
+			$this->error('失败');
+		}
 	}
+	// 订单退款
+	public function orderRefund($order_id = ''){
+		$this->_checkLogin();
+		$order_info = M('Order')->find($order_id);
+		if (empty($order_info)) {
+			$this->error('订单不存在...');
+		}
+		$data = array(
+			'user_id' => is_login(),
+			'order_id' => $order_id,
+			'order_status' => 7,
+			'update_time' =>NOW_TIME
+		);
+		$result = M('Order')->save($data);
+		if ($result) {
+			$this->success('成功');
+		} else {
+			$this->error('失败');
+		}
+	}
+	// 订单确认
+	public function orderTrue($order_id = ''){
+		$this->_checkLogin();
+		$order_info = M('Order')->find($order_id);
+		if (empty($order_info)) {
+			$this->error('订单不存在...');
+		}
+		$data = array(
+			'user_id' => is_login(),
+			'order_id' => $order_id,
+			'order_status' => 6,
+			'update_time' =>NOW_TIME
+		);
+		$result = M('Order')->save($data);
+		if ($result) {
+			$this->success('成功');
+		} else {
+			$this->error('失败');
+		}
+	}
+
 	// 评价
     public function comment(){
 		$this->_checkLogin();
         if ( IS_POST ) {
-
+			$order_id = I('request.order_id');
+			$content = I('content');
+			if (empty($order_id)) {
+				$this->error('订单编号不能为空...');
+			}
+			if (empty($content)) {
+				$this->error('评价内容不能为空...');
+			}
+			$order_info = M('Order')->find($order_id);
+			if (empty($order_info)) {
+				$this->error('订单不存在...');
+			}
+			if ($order_info['order_status'] != 6) {
+				$this->error('订单不能评价...');
+			}
+			$data = array(
+				'user_id' => is_login(),
+				'order_id' => $order_id,
+				'order_status' => 10,
+				'update_time' => NOW_TIME
+			);
+			M('Order')->save($data);
+			$data = array(
+				'user_id' => is_login(),
+				'order_id' => $order_id,
+				'product_id' => $order_info['product_id'],
+				'order_price' => $order_info['order_price'],
+				'create_time' => NOW_TIME,
+				'update_time' => NOW_TIME,
+				'content' => $content,
+				'status' => 1
+			);
+			$result = M('Comment')->add($data);
+			if ($result) {
+				$this->success('成功');
+			} else {
+				$this->error('失败');
+			}
         }else{
+			$map = array(
+				'user_id' => is_login()
+			);
+			$comment = M('Comment')->where($map)->order('id desc')->select();
+			foreach ($comment as $key => $value) {
+				$order_info = M('Order')->field('order_type')->find($value['order_id']);
+				switch ($order_info['order_type']) {
+					case 'line':
+						$line = M('Line')->field('title')->where(array('line_id'=>$value['product_id']))->find();
+						if ($line) {
+							$comment[$key]['title'] = $line['title'];
+							$comment[$key]['product_url'] = U('Line/show', array('id'=>$value['product_id']));
+						} else {
+							$comment[$key]['title'] = '不存在';
+							$comment[$key]['product_url'] = 'javascript:void(0);';
+						}
+						break;
+					case 'visa':
+						$visa = M('Visa')->field('title')->where(array('visa_id'=>$value['product_id']))->find();
+						if ($visa) {
+							$comment[$key]['title'] = $visa['title'];
+							$comment[$key]['product_url'] = U('Visa/show', array('id'=>$value['product_id']));
+						} else {
+							$comment[$key]['title'] = '不存在';
+							$comment[$key]['product_url'] = 'javascript:void(0);';
+						}
+						break;
+					default:
+						break;
+				}
+			}
+			// echo '<pre>'; print_r($comment); echo '</pre>';
+			$this->assign('comment', $comment);
             $this->display();
         }
     }
@@ -302,7 +532,7 @@ class UserController extends HomeController {
         }
     }
 
-	// 积分帐号
+	// 收藏
     public function collect(){
 		$this->_checkLogin();
         if ( IS_POST ) {

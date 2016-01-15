@@ -189,8 +189,19 @@ class OrderController extends AdminController {
                 $data['kefu_intro'] = I('kefu_intro');
                 $result = $Order->save($data);
                 break;
+            case '8':
+                $data['order_status'] = 8;
+                $data['kefu_intro'] = I('kefu_intro');
+                $result = $Order->save($data);
+                break;
+            case '9':
+                $data['order_status'] = 9;
+                $data['kefu_intro'] = I('kefu_intro');
+                $result = $Order->save($data);
+                break;
             default:
-                # code...
+                $data['kefu_intro'] = I('kefu_intro');
+                $result = $Order->save($data);
                 break;
         }
         if ($result) {
