@@ -135,7 +135,7 @@ function get_line_position($catid='',$posid=1,$num=5,$order='line_id desc'){
           $line_lists[$key]['price'] = $res['price'];
           $line_lists[$key]['best_price'] = $res['best_price'];
           $line_lists[$key]['img'] = get_cover(array_shift(explode(',', $val['images'])), 'path');
-          $line_lists[$key]['url'] = U('show', array('id'=>$val['line_id']));
+          $line_lists[$key]['url'] = U('Line/show', array('id'=>$val['line_id']));
     }
 
 
@@ -149,7 +149,7 @@ function get_line_cate($catid='', $field='', $order='sort asc'){
           switch($field){
               case 'url':
               $catname = $Line_cate->field('id')->where(array('id'=>$catid,'status'=>1))->find();
-              $url = U('index', array('catid'=>$catname['id']));
+              $url = U('Line/index', array('catid'=>$catname['id']));
               return $url;
               break;
               case 'catname':
@@ -169,23 +169,50 @@ function get_line_cate_lists($catid='', $num=5, $order='sort asc'){
             $cat_info = $Line_cate->field('id,title')->where(array('pid'=>$catid,'status'=>1))
                                   ->order($order)->limit(0,$num)->select();
             foreach($cat_info as $key => $cat){
-                 $cat_info[$key]['url'] = U('index',array('catid'=>$cat['id']));
+                 $cat_info[$key]['url'] = U('Line/index',array('catid'=>$cat['id']));
             }
             return $cat_info;
 }
 /**
- * 分页
+ * 线路分页
  */
 function pages($sql,$num=5){
       $Model = new \Think\Model();
       $count =  $Model->query($sql);
       $count = $count[0]['num'];
 			$Page  = new \Think\Page($count,$num);
+      $Page->setConfig('prev','《上一页');
+      $Page->setConfig('next','下一页》');
 			$show  = $Page->show();// 分页显示输出
 			return $show;
 }
 
 
+function get_article_position($catid=1,$posid=1,$num=5){
+      $Document = M('Document');
+      $map = array();
+      $map['category_id'] = $catid;
+      $map['status'] = 1;
+      $map['position'] = $posid;
+      $article_list = $Document->where($map)->order('id desc,create_time desc')->limit(0,$num)->select();
+      foreach($article_list as $key=>$val){
+         $article_list[$key]['thumb']=  get_cover($val['cover_id'],'path');
+         $article_list[$key]['url'] = U('Article/detail',array('id'=>$val['id']));
+      }
+      return $article_list;
+}
+
+
+/**
+ * 内容分页
+ */
+function article_pages($count,$num=5){
+			$Page  = new \Think\Page($count,$num);
+      $Page->setConfig('prev','《上一页');
+      $Page->setConfig('next','下一页》');
+			$show  = $Page->show();// 分页显示输出
+			return $show;
+}
 
 //end 李震
 

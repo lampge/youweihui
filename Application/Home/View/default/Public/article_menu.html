@@ -1,0 +1,19 @@
+<div class="ymain_left fl">
+    <ul>
+        <li><a href="#">关于游尾会</a>
+            <ul class="yul1">
+                <li><a href="#">公司简介</a></li>
+                <li><a href="#">联系我们</a></li>
+                <li><a href="#">媒体报道</a></li>
+            </ul>
+        </li>
+        <li <eq name="category['id']" value="1"> class="xz" </eq> ><a href="{:U('Article/index/catid/1')}">旅游资讯</a></li>
+        <li><a href="{:U('Article/index/catid/2')}">旅游指南</a>
+             <ul class="yul1" style="display:block;">
+              <volist name="cateList" id="val">
+                <li <eq name="category['id']" value="$val['id']"> class="xz" </eq>><a href="{:U('Article/index',array('catid'=>$val['id']))}">{$val['title']}</a></li>
+              </volist>
+            </ul>
+        <li <eq name="category['id']" value="40"> class="xz" </eq>><a href="{:U('Article/index/catid/40')}">帮助中心</a></li>
+    </ul>
+</div>

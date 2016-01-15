@@ -4,7 +4,7 @@
         <div class="dingbu_nr_left">欢迎来到游尾会，一起旅游，一起嗨！</div>
         <div class="dingbu_nr_center">
             <ul class="ul fix">
-                <li><a href="#" title="">全部尾单<img src="__IMG__/bg18.png" width="7" height="4" alt=""></a>
+                <li><a href="javascript:void(0);" title="">全部尾单<img src="__IMG__/bg18.png" width="7" height="4" alt=""></a>
                     <div class="xl fix">
                         <div class="xl_left">
                             <ul>
@@ -12,25 +12,35 @@
                                     <p>
                                         <img src="__IMG__/bg20.png" width="31" height="24" alt=""> 度假产品</p>
                                     <span class="fix">
-                                        <a href="#" title="">
+                                        <a href="{:U('Line/index',array('catid'=>1))}" title="">
                                             <em>全部尾单</em>
-                                        </a> <a href="#" title="">亚洲</a> <a href="#" title="">邮轮</a> <a href="#" title="">海岛</a> <a href="#" title="">欧洲</a> <a href="#" title="">美洲</a> <a href="#" title="">澳洲</a> <a href="#" title="">港澳台</a> <a href="#" title="">中东非</a>
+                                        </a>
+                                        <volist name=":get_line_cate_lists(1,10)" id="val">
+                                           <a href="{$val['url']}" title="">{$val['title']}</a>
+                                        </volist>
                                         <br />
                                         <br />
-                                        <a href="#" title="">
+                                        <a href="{:U('Line/index',array('catid'=>6))}" title="">
                                             <em>出境特卖</em>
-                                        </a> <a href="#" title="">亚洲</a> <a href="#" title="">邮轮</a> <a href="#" title="">海岛</a> <a href="#" title="">欧洲</a> <a href="#" title="">美洲</a> <a href="#" title="">澳洲</a> <a href="#" title="">港澳台</a> <a href="#" title="">中东非</a>
+                                        </a>
+                                        <volist name=":get_line_cate_lists(6,10)" id="val">
+                                           <a href="{$val['url']}" title="">{$val['title']}</a>
+                                        </volist>
                                         <br />
                                         <br />
-                                        <a href="#" title="">
-                                            <em>全部尾单</em>
-                                        </a> <a href="#" title="">华北</a> <a href="#" title="">东北</a> <a href="#" title="">西北</a> <a href="#" title="">华东</a> <a href="#" title="">华南</a> <a href="#" title="">西南</a> </span>
+                                        <a href="{:U('Line/index',array('catid'=>5))}" title="">
+                                            <em>国内特卖</em>
+                                        </a>
+                                        <volist name=":get_line_cate_lists(5,10)" id="val">
+                                           <a href="{$val['url']}" title="">{$val['title']}</a>
+                                        </volist>
+                                       </span>
                                 </li>
                                 <li class="fix">
                                     <p style="color:#ef4603;">
                                         <img src="__IMG__/bg21.png" width="31" height="24" alt=""> 其他</p>
                                     <span class="fix">
-                                        <a href="#" title="">
+                                        <a href="{:U('Article/index',array('catid'=>40))}" title="">
                                             <em style=" width:434px; display:block;">帮助中心</em>
                                         </a>
                                         <a href="#" title="">
@@ -74,7 +84,7 @@
                                     <p>
                                         <img src="__IMG__/bg23.png" width="31" height="24" alt=""> 旅游资讯</p>
                                     <span class="fix">
-                                        <a href="#" title="">
+                                        <a href="{:U('Article/index',array('catid'=>1))}" title="">
                                             <em>旅游资讯</em>
                                         </a>
                                         <br />
@@ -82,7 +92,7 @@
                                             <em>旅游公告</em>
                                         </a>
                                         <br />
-                                        <a href="#" title="">
+                                        <a href="{:U('Article/index',array('catid'=>2))}" title="">
                                             <em>旅游攻略</em>
                                         </a>
                                         <br />
@@ -124,7 +134,7 @@
 <!--顶部内容 end-->
 <header class="header auto fix">
     <div class="logo">
-        <a href="index.html">
+        <a href="/">
             <img src="__IMG__/logo.png" width="305" height="59" alt="">
         </a>
     </div>
@@ -175,8 +185,8 @@
                 <li><a href="#">签证<img src="__IMG__/bg3.png" width="8" height="5" alt=""></a>
                     <div class="xl"> <a href="#" title="">华北</a><a href="#" title="">东北</a><a href="#" title="">西北</a><a href="#" title="">华东</a><a href="#" title="">华南</a><a href="#" title="">西南</a> </div>
                 </li>
-                <li><a href="#">旅游资讯</a></li>
-                <li><a href="#">旅游指南</a></li>
+                <li><a href="{:U('Article/index/catid/1')}">旅游资讯</a></li>
+                <li><a href="{:U('Article/index/catid/2')}">旅游指南</a></li>
             </ul>
             <ol class="fix">
                 <if condition="is_login()">

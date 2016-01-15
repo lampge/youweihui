@@ -19,54 +19,54 @@ $(function(){
                                      })
                  }
           })
-	
+
 	//TAB切换
 	$('.title').each(function(){
-		 $(this).children('.title1').eq(0).addClass('xz');	
+		 $(this).children('.title1').eq(0).addClass('xz');
 	})
-	
+
 	$('.title_nr').each(function(){
-		 $(this).children('.title_nr1').eq(0).show();	
+		 $(this).children('.title_nr1').eq(0).show();
 	})
-	
+
 	$('.title1').mouseover(function(){
 		$(this).addClass('xz').siblings().removeClass('xz');
 		$(this).parent().siblings('.title_nr').children('.title_nr1').eq($(this).index()).show().siblings().hide();
 	})
-	
+
 	//内容居中
 	$('.zc_main_nrk').css('margin-top',($('.zc_main').height()-$('.zc_main_nrk').height()-50)/2);
 	$('.dl_main_nrk').css('margin-top',($('.dl_main').height()-$('.dl_main_nrk').height()-50)/2);
 	$('.zccg_main_nrk').css('margin-top',($('.zccg_main').height()-$('.zccg_main_nrk').height()-150)/2);
-	
+
 	//登录注册文本框点击
 	$('.zc_main_nrk_bottom_left ol').click(function(){
 		$(this).css('border','1px solid #ff9e02');
 		$(this).siblings('ol').css('border','1px solid #cfcfcf');
 		$(this).siblings('ul').find('.wbk').css({'border':'1px solid #cfcfcf','border-right':'0px'});
 	})
-	
+
 	$('.zc_main_nrk_bottom_left ul .wbk').click(function(){
 		$(this).css({'border':'1px solid #ff9e02','border-right':'0px'});
 		$(this).parent('ul').siblings('ol').css('border','1px solid #cfcfcf')
 	})
-	
+
 	$('.dl_main_nrk_bottom_left ol').click(function(){
 		$(this).css('border','1px solid #ff9e02');
 		$(this).siblings('ol').css('border','1px solid #cfcfcf');
 	})
-	
+
 	$('.zhmm_main1_nrk_bottom1_center ol').click(function(){
 		$(this).css('border','1px solid #ff9e02');
 		$(this).parents('.zhmm_main1_nrk_bottom1').siblings('.zhmm_main1_nrk_bottom1').find('ol').css('border','1px solid #cfcfcf');
 		$(this).parents('.zhmm_main1_nrk_bottom1').siblings('.zhmm_main1_nrk_bottom1').find('ul .wbk').css({'border':'1px solid #cfcfcf','border-right':'0px'});
 	})
-	
+
 	$('.zhmm_main1_nrk_bottom1_center ul .wbk').click(function(){
 		$(this).css({'border':'1px solid #ff9e02','border-right':'0px'});
 		$(this).parents('.zhmm_main1_nrk_bottom1').siblings('.zhmm_main1_nrk_bottom1').find('ol').css('border','1px solid #cfcfcf')
 	})
-	
+
 	//弹窗
 	$('.zx1').height($(window).height());
 		$('.tanchuang1').click(function(){
@@ -76,7 +76,7 @@ $(function(){
 	$('.gb').click(function(){
 		$('.zx1').hide();
 		})
-	
+
 	$('.zx2').height($(window).height());
 		$('.tanchuang2').click(function(){
 		$('.zx2').fadeIn();
@@ -85,8 +85,8 @@ $(function(){
 	$('.zx2').click(function(){
 		$('.zx2').hide();
 		})
-		
-	
+
+
   //--------------------------------------W
   //首页切换图标
   $('.wmdcn_nr_right ul li').hover(function(){
@@ -104,15 +104,7 @@ $(function(){
         $('.y_zi1').show();
         $(this).siblings().css('width','250px');
   })
-  //内页左侧导航
-  $('.ymain_left ul>li>a').click(function(){
-    $(this).siblings('ul').slideToggle();
-    $(this).parents().toggleClass('xz');
-    $(this).parent().siblings().removeClass('xz');
-    $(this).parent().siblings().children('ul').slideUp()
-  })
-  $('.xz').parent('li').parent('ul').siblings('a').addClass('xz');
-
+  
   //签证页面tip滚动
 
 
@@ -140,14 +132,14 @@ $(function(){
       $(this).parents('.yk_01').css({'border-left':'1px solid #e4e4e4','border-right':'1px solid #e4e4e4','border-top':'none','border-bottom':'1px dashed #dfdfdf'})
       $('.yfff').css('border-bottom','none')
   })
-  
-  
-  
+
+
+
   $('.yy1 a').click(function(){
-	  $('.ydiv6').find('.yydiv').eq($(this).index()).show().siblings().hide()  
+	  $('.ydiv6').find('.yydiv').eq($(this).index()).show().siblings().hide()
   })
-  
-  
-  
-  
+
+
+
+
 })
