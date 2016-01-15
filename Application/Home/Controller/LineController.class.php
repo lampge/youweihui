@@ -12,7 +12,7 @@ class LineController extends HomeController {
         $catid =  I('get.catid',1);
         $sql = "select count(*) as num from __LINE_TYPE__ as a,__LINE__ as b
         where a.type_id = $catid and a.line_id = b.line_id and b.status=1";
-        $pageNum = 15;
+        $pageNum = 10;
         $_page = pages($sql,$pageNum);
         $nowPage =  I('get.p',1);
         $firstRow = ($nowPage-1)*$pageNum;
@@ -32,7 +32,7 @@ class LineController extends HomeController {
               $line_lists[$key]['best_price'] = $res['best_price'];
       		    $line_lists[$key]['start_date'] = get_start_date($res['date_price_data']);
               $line_lists[$key]['img'] = get_cover(array_shift(explode(',', $val['images'])), 'path');
-              $line_lists[$key]['url'] = U('show', array('id'=>$val['line_id']));
+              $line_lists[$key]['url'] = U('Line/show', array('id'=>$val['line_id']));
         }
 
 
