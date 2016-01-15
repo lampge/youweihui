@@ -1,0 +1,109 @@
+<extend name="Base/common" />
+
+<block name="body">
+    <section class="hyzx_main auto fix">
+        <include file="User/left"/>
+        <div class="hyzx_main_right">
+            <h2 class="fix"> <span>订单详情</span> <a href="#" title="">更多订单 >></a> </h2>
+            <div class="ddxq_main">
+                <div class="ddxq_main_top">
+                    <ol>
+                        订单状态：<span>订单{$order_info['order_status_text']}</span>
+                    </ol>
+                    <ul>
+                        <switch name="order_info['order_status']">
+                            <case value="1|2|3">
+                                <img src="__IMG__/order-status-2.png" width="951" height="33" alt="旅行社确认">
+                            </case>
+                            <case value="4">
+                                <img src="__IMG__/order-status-3.png" width="951" height="33" alt="签约/付款">
+                            </case>
+                            <case value="5">
+                                <img src="__IMG__/order-status-4.png" width="951" height="33" alt="开心出游">
+                            </case>
+                            <case value="6">
+                                <img src="__IMG__/order-status-5.png" width="951" height="33" alt="归来点评">
+                            </case>
+                            <case value="7|8|9">
+                                <img src="__IMG__/order-status-6.png" width="951" height="33" alt="完成">
+                            </case>
+                        </switch>
+                    </ul>
+                </div>
+                <div class="ddxq_main_center">
+                    <!-- <h3><a href="#" title="" class="xz">全部订单</a>|<a href="#" title="">未处理订单</a>|<a href="#" title="">已完成订单</a></h3> -->
+                    <table width="952" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="style1 style8">预定产品信息</td>
+                            <td class="style2 style8">单元(元)</td>
+                            <td class="style3 style8">预定人数</td>
+                            <td class="style4 style8">出发日期</td>
+                            <td class="style5 style8">订单金额</td>
+                            <td class="style6 style8">订单状态</td>
+                            <td class="style7">操作</td>
+                        </tr>
+                        <tr>
+                            <td valign="middle" class="style9">
+                                <dl class="auto fix">
+                                    <dt>
+                                        <a href="{:U('Line/show', array('id'=>$order_info['product_id']))}" target="_blank">
+                                            <img src="{$order_info['image']}" width="104" height="78" alt="">
+                                        </a>
+                                    </dt>
+                                    <dd> <a href="{:U('Line/show', array('id'=>$order_info['product_id']))}" target="_blank">{:msubstr($order_info['title'], 0, 15)}</a>下单时间：{:date('Y-m-d', $order_info['create_time'])} 出发城市：{$order_info['starting']}
+                                        <br /> 订单号：{$order_info['order_id']}</dd>
+                                </dl>
+                            </td>
+                            <td align="center" valign="middle" class="style9">{$order_info['reserve_info']['adult_price']}</td>
+                            <td align="center" valign="middle" class="style9">{$order_info['product_num']}个人</td>
+                            <td align="center" valign="middle" class="style9">{$order_info['reserve_info']['start_time']}</td>
+                            <td align="center" valign="middle" class="style9">{$order_info['order_price']}</td>
+                            <td align="center" valign="middle" class="style9">{$order_info['order_status_text']}<br />{$order_info['pay_status_text']}</td>
+                            <td align="center" valign="middle" class="style9">
+                        <switch name="order_info['order_status']">
+                            <case value="1|2|3">
+                                <a href="">取消</a>
+                            </case>
+                            <case value="4">
+                                <a href="">取消</a><br /><a href="">付款</a>
+                            </case>
+                            <case value="5">
+                                <a href="">开心出游</a><br /><a href="">申请退款</a>
+                            </case>
+                            <case value="6">
+                                <a href="">归来点评</a>
+                            </case>
+                            <default />
+                                {$order_info['order_status_text']}
+                        </switch>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="ddxq_main_bottom">
+                    <h3>联系信息</h3>
+                    <table width="952" border="0" cellspacing="0" cellpadding="0">
+                        <tr>
+                            <td class="style1">联系人</td>
+                            <td class="style2">手机号码</td>
+                            <td class="style3">常用邮箱</td>
+                            <td class="style4">QQ号码</td>
+                            <td class="style5">电话号码</td>
+                            <td class="style6">身份证</td>
+                            <td class="style7 style8">预定留言</td>
+                        </tr>
+                        <tr class="style9">
+                            <td align="center" valign="middle">{$order_info['reserve_info']['truename']}</td>
+                            <td align="center" valign="middle">{$order_info['reserve_info']['mobile']}</td>
+                            <td align="center" valign="middle">{$order_info['reserve_info']['user_email']}</td>
+                            <td align="center" valign="middle">{$order_info['reserve_info']['qq']}</td>
+                            <td align="center" valign="middle">{$order_info['reserve_info']['tel']}</td>
+                            <td align="center" valign="middle">{$order_info['reserve_info']['shenfen_value']}</td>
+                            <td align="center" valign="middle" class="style8">{$order_info['reserve_info']['user_intro']}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
