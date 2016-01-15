@@ -78,11 +78,11 @@ class ArticleController extends HomeController {
 						$this->assign('category', $category);
 						$this->assign('info', $info);
 						$this->assign('page', $p); //页码
-						
+
 						$Catelist = D('category');
 						$cateList = $Catelist->getTree(2,false);
 						$this->assign('cateList',$cateList);// 分类树
-						$this->display($tmpl);
+						$this->display();
 	}
 
 	/* 文档分类检测 */

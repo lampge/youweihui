@@ -622,41 +622,32 @@
             </div>
             <div class="main4_left_bottom fix">
                 <div class="main4_left_bottom_left">
-                  <a href="#" title=""><img src="__IMG__/pic12.jpg" width="400" height="238"></a>
+                  <volist name=":get_article_position(1,4,1)" id="val">
+                          <a href="{$val['url']}" title=""><img src="{$val['thumb']}" width="400" height="238"></a>
+                   </volist>
                   <span><img src="__IMG__/bg31.png" width="10" height="21"></span>
                 </div>
                 <div class="main4_left_bottom_right">
-                  <dl class="fix">
-                      <dt>
-                          <p>21</p>
-                            <span>2015-10</span>
-                        </dt>
-                        <dd>
-                          <a href="#" title="">台湾一定不能错过的美味小吃！</a>
-                            台湾是一个美食天堂，中餐、西餐、料理各种美食都在这里云集。现在带你来看看八个地道的台湾美味小吃...
-                        </dd>
-                    </dl>
+               <volist name=":get_article_position(1,4,1)" id="val">
+                      <dl class="fix">
+                          <dt>
+                              <p>{:date('d',$val['create_time'])}</p>
+                                <span>{:date('Y-m',$val['create_time'])}</span>
+                            </dt>
+                            <dd>
+                              <a href="{$val['url']}" title="">{$val[title]}</a>
+                                {$val['description']}
+                            </dd>
+                        </dl>
+                 </volist>
                     <ul>
-                      <li class="fix">
-                          <a href="#" title="">智慧旅游之"如何在国外付小费"</a>
-                            [2015-10-21]
-                        </li>
-                      <li class="fix">
-                          <a href="#" title="">智慧旅游之"如何在国外付小费"</a>
-                            [2015-10-21]
-                        </li>
-                      <li class="fix">
-                          <a href="#" title="">智慧旅游之"如何在国外付小费"</a>
-                            [2015-10-21]
-                        </li>
-                      <li class="fix">
-                          <a href="#" title="">智慧旅游之"如何在国外付小费"</a>
-                            [2015-10-21]
-                        </li>
-                      <li class="fix">
-                          <a href="#" title="">智慧旅游之"如何在国外付小费"</a>
-                            [2015-10-21]
-                        </li>
+                      <volist name=":get_article_position(1,2,5)" id="val">
+                            <li class="fix">
+                                <a href="{$val['url']}" title="">{$val[title]}</a>
+                                  [{:date('Y-m-d',$val['create_time'])}]
+                              </li>
+                      </volist>
+
                     </ul>
                 </div>
             </div>

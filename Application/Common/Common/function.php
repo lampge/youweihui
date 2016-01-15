@@ -187,8 +187,18 @@ function pages($sql,$num=5){
 }
 
 
-function get_article_position(){
-  
+function get_article_position($catid=1,$posid=1,$num=5){
+      $Document = M('Document');
+      $map = array();
+      $map['category_id'] = $catid;
+      $map['status'] = 1;
+      $map['position'] = $posid;
+      $article_list = $Document->where($map)->order('id desc,create_time desc')->limit(0,$num)->select();
+      foreach($article_list as $key=>$val){
+         $article_list[$key]['thumb']=  get_cover($val['cover_id'],'path');
+         $article_list[$key]['url'] = U('Article/detail',array('id'=>$val['id']));
+      }
+      return $article_list;
 }
 
 
