@@ -40,7 +40,7 @@
 						</dl>
 						<dl class="fn-clear">
 							<dt>客人备注：</dt>
-							<dd>{$order_info['reserve_info']['userintro']|default='无'}</dd>
+							<dd>{$order_info['reserve_info']['user_intro']|default='无'}</dd>
 						</dl>
 					</div>
 				</div>
@@ -89,6 +89,7 @@
 								<span id="price_tal" class="pay_price">￥
 									<em>{$order_info['order_price']}</em>
 								</span>
+							<eq name="order_info['order_status']" value="4">
 								<span id="price_tal2" style="display:none">
 									<input type="text" class="text" name="total_price" value="{$order_info['order_price']}" autocomplete="off">
 								</span>&nbsp;
@@ -96,6 +97,7 @@
 								<a href="javascript:void(0)" onclick="chg_price_show()">
 									<span id="price_tal3">修改价格</span>
 								</a>
+							</eq>
 							</dd>
 						</dl>
 						<dl class="fn-clear">
@@ -130,12 +132,6 @@
 									</label>
 								</dd>
 							</case>
-							<case value="2|3">
-								<dt>确认订单：
-									<em>&nbsp;</em>
-								</dt>
-								<dd>无效订单</dd>
-							</case>
 							<case value="4">
 								<dt>确认订单：
 									<em>&nbsp;</em>
@@ -148,12 +144,6 @@
 										<input name="order_status" type="radio" value="3"><b>无效</b>
 									</label>
 								</dd>
-							</case>
-							<case value="5|6">
-								<dt>确认订单：
-									<em>&nbsp;</em>
-								</dt>
-								<dd>已完成交易</dd>
 							</case>
 							<case value="7">
 								<dt>处理退款：
@@ -168,18 +158,17 @@
 									</label>
 								</dd>
 							</case>
-							<case value="8">
+							<case value="8|9">
 								<dt>处理退款：
 									<em>&nbsp;</em>
 								</dt>
-								<dd>退款成功</dd>
+								<dd>{$order_info['order_status_text']}</dd>
 							</case>
-							<case value="9">
-								<dt>处理退款：
+							<default />
+								<dt>订单状态：
 									<em>&nbsp;</em>
 								</dt>
-								<dd>退款拒绝</dd>
-							</case>
+								<dd>{$order_info['order_status_text']}</dd>
 						</switch>
 					</dl>
 					<eq name="order_info['order_status']" value="4">

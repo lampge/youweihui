@@ -1,0 +1,20 @@
+<form id="rechargeForm" class="charge_form" method="post" action="{:addons_url("AliPlay://".$pay_type."/alipayPost")}">
+	<input type="hidden" name="out_trade_no" value="{$data['out_trade_no']}" />
+	<input type="hidden" name="price" value="{$data['price']}" />
+	<input type="hidden" name="subject" value="{$data['subject']}" />
+	<input type="hidden" name="logistics_fee" value="{$data['logistics_fee']}" />
+	<input type="hidden" name="logistics_type" value="{$data['logistics_type']}" />
+	<input type="hidden" name="logistics_payment" value="{$data['logistics_payment']}" />
+	<input type="hidden" name="body" value="{$data['body']}" />
+	<input type="hidden" name="show_url" value="{$data['show_url']}" />
+	<input type="hidden" name="receive_name" value="{$data['receive_name']}" />
+	<input type="hidden" name="receive_address" value="{$data['receive_address']}" />
+	<input type="hidden" name="receive_zip" value="{$data['receive_zip']}" />
+	<input type="hidden" name="receive_mobile" value="{$data['receive_mobile']}" />
+	<input type="hidden" name="receive_phone" value="{$data['receive_phone']}" />
+</form>
+<script type="text/javascript">
+	$(function(){
+		$("#rechargeForm").submit();
+	})
+</script>

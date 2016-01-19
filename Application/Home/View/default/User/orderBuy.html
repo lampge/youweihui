@@ -1,0 +1,29 @@
+<extend name="Base/common" />
+
+{:hook('orderAliPlay', $order_id)}
+
+<block name="body">
+    <style media="screen">
+        .pay_type{width: 500px; margin: 0 auto;}
+        .pay_type ul li{float: left; margin:50px 20px;}
+    </style>
+    <section class="hyzx_main auto fix">
+        <include file="User/left"/>
+        <div class="hyzx_main_right">
+            <h2 class="fix"> <span>订单支付</span> <a href="{:U('order')}" title="">更多订单 >></a> </h2>
+            <div class="ddxq_main">
+                <div class="pay_type">
+                    <ul>
+                        <li><a href="{:addons_url("AliPlay://AliPlayDirect/alipayGet", array('order_id'=>$order_id))}"><img src="__IMG__/bg68.png" width="118" height="34"></a></li>
+                        <li><a href="{:addons_url("Wxpay://Index/native", array('order_id'=>$order_id))}"><img src="__IMG__/bg69.png" width="118" height="34"></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</block>
+<block name="script">
+<script type="text/javascript">
+
+</script>
+</block>

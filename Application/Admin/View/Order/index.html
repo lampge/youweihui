@@ -6,9 +6,9 @@
 	</div>
 	<!-- 按钮工具栏 -->
 	<div class="cf">
-		<div class="fl">
+		<!-- <div class="fl">
 			<a href="{:U('edit', array('site_id'=>$site_id))}" class="btn">快速创建</a>
-		</div>
+		</div> -->
 
 		<volist name="nodes" id="val">
 			<a href="{$val['url']}" class="btn <eq name="val['current']" value="1">disabled</eq>">{$val['title']}</a>
@@ -37,7 +37,6 @@
                     <th>数量</th>
                     <th>下单时间</th>
                     <th>订单状态</th>
-                    <th>订单分配</th>
                     <th>操作</th>
                 </tr>
             </thead>
@@ -48,8 +47,8 @@
                     <tr>
 						<td><input class="ids" type="checkbox" name="line_id[]" value="{$val['order_id']}" /></td>
 						<td><a href="{:U('show', array('order_id'=>$val['order_id']))}" target="_blank">{$val['order_id']}</a></td>
-						<td>{$val['reserve_info']['truename']}</td>
-						<td>{$val['reserve_info']['mobile']}</td>
+						<td>{$val['truename']}</td>
+						<td>{$val['mobile']}</td>
 						<td><a href="{:U('Home/Line/show', array('id'=>$val['product_id']))}" target="_blank">{:msubstr($val['title'],0,20)}</a></td>
 						<td>{$val['product_num']}</td>
 						<td>{:date('Y-m-d H:i:s', $val['create_time'])}</td>
@@ -57,9 +56,6 @@
 							{$val['order_status_text']} <a href="javascript:void(0);">/</a>
 							{$val['pay_status_text']}
 			            </td>
-						<td>
-							未分配
-						</td>
 						<td>
 							<a href="{:U('show', array('site_id'=>$site_id,'order_id'=>$val['order_id']))}" class="authorize">查看</a>
 						</td>

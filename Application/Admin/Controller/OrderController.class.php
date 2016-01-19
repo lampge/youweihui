@@ -189,8 +189,19 @@ class OrderController extends AdminController {
                 $data['kefu_intro'] = I('kefu_intro');
                 $result = $Order->save($data);
                 break;
+            case '8':
+                $data['order_status'] = 8;
+                $data['kefu_intro'] = I('kefu_intro');
+                $result = $Order->save($data);
+                break;
+            case '9':
+                $data['order_status'] = 9;
+                $data['kefu_intro'] = I('kefu_intro');
+                $result = $Order->save($data);
+                break;
             default:
-                # code...
+                $data['kefu_intro'] = I('kefu_intro');
+                $result = $Order->save($data);
                 break;
         }
         if ($result) {
@@ -200,137 +211,20 @@ class OrderController extends AdminController {
         }
     }
 
-    public function edit2(){
-        $line_id     =   I('line_id');
-        if(empty($line_id)){
-            $this->error('参数不能为空！');
+    // 交易记录
+    public function trand() {
+        $truename = I('truename');
+        if(!empty($truename)){
+            $map['order_id|tran_type|pay_type'] = array(array('like','%'.$truename.'%'), array('like','%'.$truename.'%'), array('like','%'.$truename.'%'),'_multi'=>true);
         }
-        if (IS_POST) {
+        $price_sum = M('Transaction')->where($map)->sum('price');
+        $tran_lists = $this->lists('Transaction', $map, 'id desc');
 
-        } else  {
-            $this->getMenu();
-            // 操作步骤
-            $setp = array(
-                1 => array('title'=>'线路描述', 'url'=>U('edit', array('site_id'=>$this->site_id,'line_id'=>$line_id)), 'current'=>0),
-                2 => array('title'=>'线路价格', 'url'=>U('edit2', array('site_id'=>$this->site_id,'line_id'=>$line_id)), 'current'=>1),
-                3 => array('title'=>'行程内容', 'url'=>U('edit3', array('site_id'=>$this->site_id,'line_id'=>$line_id)), 'current'=>0)
-            );
-            $this->assign('setp', $setp);
-            $line_info = M('Line')->find($line_id);
-            // 线路套餐
-            $line_tc = M('LineTc')->where(array('line_id'=>$line_id))->select();
-            foreach ($line_tc as $key => $value) {
-                if ($value['end_time'] < strtotime('+'.$line_info['earlier_date'].'day')) {
-                    $line_tc[$key]['status'] = 0;
-                }
-            }
-            $this->assign('line_tc', $line_tc);
-            $this->assign('line_id', $line_id);
-            $this->meta_title   =   '编辑线路2';
-            $this->display();
-        }
-    }
-
-    public function edit3(){
-        $line_id     =   I('line_id');
-        if(empty($line_id)){
-            $this->error('参数不能为空！');
-        }
-        $Line = M('Line');
-        if (IS_POST) {
-            $data = $Line->create();
-            $data['xingcheng'] = serialize($data['xingcheng']);
-            $data['remark'] = serialize($data['remark']);
-            $data['update_time'] = NOW_TIME;
-            $result = $Line->save($data);
-            if ($result) {
-                $this->success('成功');
-            } else {
-                $this->error('失败');
-            }
-        } else  {
-            $this->getMenu();
-            // 操作步骤
-            $setp = array(
-                1 => array('title'=>'线路描述', 'url'=>U('edit', array('site_id'=>$this->site_id,'line_id'=>$line_id)), 'current'=>0),
-                2 => array('title'=>'线路价格', 'url'=>U('edit2', array('site_id'=>$this->site_id,'line_id'=>$line_id)), 'current'=>0),
-                3 => array('title'=>'行程内容', 'url'=>U('edit3', array('site_id'=>$this->site_id,'line_id'=>$line_id)), 'current'=>1)
-            );
-            $this->assign('setp', $setp);
-
-            $data = $Line->where(array('line_id'=>$line_id))->find();
-            $data['xingcheng'] = unserialize($data['xingcheng']);
-            $data['remark'] = unserialize($data['remark']);
-            $this->assign('data', $data);
-            $this->meta_title   =   '编辑线路3';
-            $this->display();
-        }
-    }
-
-    /**
-     *  套餐修改
-     */
-    public function tcEdit(){
-        $line_id     =   I('line_id');
-        $tc_id     =   I('tc_id');
-        if(empty($line_id)){
-            $this->error('参数不能为空！');
-        }
-        $Line = D('Line');
-        $LineTc = D('LineTc');
-        if (IS_POST) {
-            $result = $LineTc->update();
-            if ($result) {
-                $Line->where(array('line_id'=>$line_id))->setField('status', NOW_TIME);
-                $this->success('成功', U('Line/edit2', array('line_id'=>$line_id)));
-            } else {
-                $this->error($Line->getError());
-            }
-        } else {
-            // 线路套餐
-            $data = $LineTc->where(array('tc_id'=>$tc_id))->find();
-            if (empty($data)) {
-                $data['line_id'] = $line_id;
-            }
-            $data['earlier_date'] = $Line->where(array('line_id'=>$line_id))->getField('earlier_date');
-            $this->assign('data', $data);
-            $this->meta_title   =   '价格方案';
-            $this->display();
-        }
-    }
-    // 删除套餐操作
-    public function tcDel($tc_id = 0){
-        if (empty($tc_id)) {
-            $this->error('参数错误');
-        }
-        $LineTc = D('LineTc');
-        $map = array('tc_id' => $tc_id);
-        $line_tc = $LineTc->where($map)->field('is_default,line_id')->find();
-        $result = $LineTc->where($map)->delete();
-        if ($result) {
-            if ($line_tc['is_default']) {
-                $LineTc->where(array('line_id'=>$line_tc['line_id']))->limit(1)->save(array('is_default'=>1));
-            }
-            $this->success('成功');
-        } else {
-            $this->error('失败');
-        }
-
-    }
-    // 设置默认套餐
-    public function tcChangeIsDefault($line_id, $tc_id){
-        if (empty($line_id) || empty($tc_id)) {
-            $this->error('参数错误');
-        }
-        $LineTc = D('LineTc');
-        $map = array('line_id'=>$line_id);
-        $LineTc->where(array('line_id'=>$line_id))->save(array('update_time'=>NOW_TIME,'is_default'=>0));
-        $result = $LineTc->where(array('tc_id'=>$tc_id))->save(array('update_time'=>NOW_TIME,'is_default'=>1));
-        if ($result) {
-            $this->success('成功');
-        } else {
-            $this->error('失败');
-        }
+        // echo '<pre>'; print_r($tran_lists); echo '</pre>';
+        $this->assign('price_sum', $price_sum);
+        $this->assign('_list', $tran_lists);
+        $this->meta_title = '交易列表';
+        $this->display();
     }
 
 }

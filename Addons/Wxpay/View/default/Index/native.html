@@ -1,0 +1,66 @@
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>微信支付</title>
+    <style media="screen">
+    body {
+        background-color: rgb(51, 51, 51);
+        padding: 50px;
+    }
+    .impowerBox{
+        line-height: 1.6;
+        position: relative;
+        width: 100%;
+        z-index: 1;
+        text-align: center;
+        font-family: "Microsoft Yahei";
+    }
+    .ewm {
+        color: #fff;
+    }
+    .ewm span {
+        font-size: 20px;
+        line-height: 20px;
+        margin-bottom: 15px;
+        display: block;
+    }
+    .info{
+        width: 280px;
+        margin: 0 auto;
+    }
+    .normal {
+        margin-top: 15px;
+        padding: 7px 14px;
+        background-color: #232323;
+        border-radius: 100px;
+        -moz-border-radius: 100px;
+        -webkit-border-radius: 100px;
+        box-shadow: inset 0 5px 10px -5px #191919,0 1px 0 0 #444;
+        -moz-box-shadow: inset 0 5px 10px -5px #191919,0 1px 0 0 #444;
+        -webkit-box-shadow: inset 0 5px 10px -5px #191919,0 1px 0 0 #444
+    }
+    .normal p {
+        margin: 0;
+        color: #fff;
+        font-size: 13px;
+        line-height: 20px;
+    }
+    </style>
+</head>
+<body>
+    <div class="impowerBox">
+        <div class="ewm">
+            <span>扫描支付</span>
+            <img alt="模式二扫码支付" src="{:addons_url("Wxpay://Index/qrcode", array('data'=>base64_encode($url2)))}"/>
+            <div class="info">
+                <div class="normal">
+                    <p>请使用微信扫描二维码支付</p>
+                    <p>游尾会</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

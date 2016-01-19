@@ -1,0 +1,42 @@
+<style>
+.zhifubao{
+	background-image: url(__ADDONROOT__/Play/images/alipay.gif);
+	height: 45px;
+	width: 135px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+</style>
+<form id="rechargeForm" class="charge_form" method="post" action="{:addons_url("AliPlay://".$pay_type."/alipayPost")}">
+<ul>
+<li>
+	<span>充值金额：</span>
+	<input type="text" name="price" id="recSum0" value="{$data['price']}" class="digital_num input_three pay_money info_input notEmpty" /><span class="font_yuan">元</span>
+	<input type="hidden" name="out_trade_no" value="{$data['out_trade_no']}" />
+	<input type="hidden" name="subject" value="{$data['subject']}" />
+	<input type="hidden" name="logistics_fee" value="{$data['logistics_fee']}" />
+	<input type="hidden" name="logistics_type" value="{$data['logistics_type']}" />
+	<input type="hidden" name="logistics_payment" value="{$data['logistics_payment']}" />
+	<input type="hidden" name="body" value="{$data['body']}" />
+	<input type="hidden" name="show_url" value="{$data['show_url']}" />
+	<input type="hidden" name="receive_name" value="{$data['receive_name']}" />
+	<input type="hidden" name="receive_address" value="{$data['receive_address']}" />
+	<input type="hidden" name="receive_zip" value="{$data['receive_zip']}" />
+	<input type="hidden" name="receive_mobile" value="{$data['receive_mobile']}" />
+	<input type="hidden" name="receive_phone" value="{$data['receive_phone']}" />
+</li>
+<li class="fee-sum clearfix">
+    <span class="floatl" style="vertical-align:top;margin-top: 8px;display: inline-block;">充值渠道：</span>
+    <div class="fee-out floatl">
+    	<div class="fee-in">
+        	<input name="channel" type="radio" value="7" id="channel0" checked />
+        	<label for="channel0"><img src="/Addons/AliPlay/Play/images/alipay.gif" /></label>
+    	</div>
+    </div>
+</li>
+<li><span  class="_nextBtn"><input style="margin-left:68px;" class="_buttonAll addrNowSure" id="f_submit" type="submit" value="下一步" /></span></li>
+</ul>
+
+</form>

@@ -14,32 +14,40 @@
                             <td width="150">订单编号</td>
                             <td width="334" class="ytling">产品信息</td>
                             <td width="223">金额</td>
-                            <td width="120">下单时间</td>
+                            <td width="120">评价时间</td>
                             <td width="122">操作</td>
                         </tr>
+                    <volist name="comment" id="val">
                         <tr>
-                            <td>JIXIUWEI1314</td>
-                            <td class="ytling">【长滩岛4晚6日】安排长滩岛经典景点遨游</td>
-                            <td class="ytd1">￥<span>3299</span></td>
-                            <td><a href="#">2015-11-04</a></td>
-                            <td><a href="#">删除</a></td>
+                            <td>{$val['order_id']}</td>
+                            <td class="ytling"><a href="{$val['product_url']}">{$val['title']}</a></td>
+                            <td class="ytd1">￥<span>{$val['order_price']}</span></td>
+                            <td>{:date('Y-m-d H:i:s', $val['create_time'])}</td>
+                            <td>
+                                <a href="javascript:show_content('{:date('Y-m-d H:i:s', $val['create_time'])}', '{$val['content']}');">查看</a> |
+                                <a href="javascript:alert('目前不允许进行删除操作');">删除</a>
+                            </td>
                         </tr>
-                        <tr>
-                            <td>JIXIUWEI1314</td>
-                            <td class="ytling">【长滩岛4晚6日】安排长滩岛经典景点遨游</td>
-                            <td class="ytd1">￥<span>3299</span></td>
-                            <td><a href="#">2015-11-04</a></td>
-                            <td><a href="#">删除</a></td>
-                        </tr>
+                    </volist>
                     </table>
-                    <span class="yspp">点评内容：</span>
-                    <div class="ydian">
-                        昵称：1220****456<br>                                                                                        时间：2015-11-04<br>
-    内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到
-    总比错过强呀！！
+                    <div id="content" style="display:none;">
+                        <span class="yspp">点评内容：</span>
+                        <div class="ydian">
+                            时间：2015-11-04<br>
+                            内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到
+                            总比错过强呀！！
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+</block>
+<block name="script">
+<script type="text/javascript">
+function show_content(time, content) {
+    $("#content .ydian").html('时间：'+ time +'<br>内容：' + content);
+    $("#content").show();
+}
+</script>
 </block>

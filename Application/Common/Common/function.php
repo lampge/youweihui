@@ -15,8 +15,25 @@ const ONETHINK_ADDON_PATH = './Addons/';
 
 // 吴文豹 start
 function send_sms($mobile, $content) {
-
+    
     return true;
+}
+
+/**
+ * 交易流水
+ */
+function transaction($order_id, $order_price, $from_user, $tran_type = '旅游订单', $pay_type = '微信扫码'){
+    $data = array(
+        'tran_type' => $tran_type,
+        'pay_type' => $pay_type,
+        'order_id' => $order_id,
+        'price' => $order_price,
+        'from_user' => $from_user,
+        'create_time' => NOW_TIME,
+        'update_time' => NOW_TIME,
+        'status' => 1,
+    );
+    M('Transaction')->add($data);
 }
 
 /**
@@ -25,14 +42,15 @@ function send_sms($mobile, $content) {
 function order_status_text($status){
     $data = array(
         1 => '<font color="red">待审核</font>',
-		2 => '<font color="#eee">用户取消</font>',
-		3 => '<font color="#eee">无效订单</font>',
+		2 => '<font color="cadetblue">用户取消</font>',
+		3 => '<font color="cadetblue">无效订单</font>',
 		4 => '已确认',
 		5 => '<font color="green">已付款</font>',
 		6 => '<font color="green">交易完成</font>',
 		7 => '退款中',
 		8 => '已退款',
-        9 => '退款拒绝'
+        9 => '退款拒绝',
+        10 => '<font color="green">订单完成</font>'
     );
     return $data[$status];
 }
