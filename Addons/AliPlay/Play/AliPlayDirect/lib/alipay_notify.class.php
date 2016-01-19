@@ -48,7 +48,7 @@ class AlipayNotify {
 			$isSign = $this->getSignVeryfy($_POST, $_POST["sign"]);
 			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
 			$responseTxt = 'true';
-			if (! empty($_POST["notify_id"])) {$responseTxt = $this->getResponse($_POST["notify_id"]);}
+			// if (! empty($_POST["notify_id"])) {$responseTxt = $this->getResponse($_POST["notify_id"]);}
 
 			//写日志记录
 			//if ($isSign) {
@@ -82,10 +82,13 @@ class AlipayNotify {
 		}
 		else {
 			//生成签名结果
+			unset($_GET['_addons']);
+			unset($_GET['_controller']);
+			unset($_GET['_action']);
 			$isSign = $this->getSignVeryfy($_GET, $_GET["sign"]);
 			//获取支付宝远程服务器ATN结果（验证是否是支付宝发来的消息）
 			$responseTxt = 'true';
-			if (! empty($_GET["notify_id"])) {$responseTxt = $this->getResponse($_GET["notify_id"]);}
+			// if (! empty($_GET["notify_id"])) {$responseTxt = $this->getResponse($_GET["notify_id"]);}
 
 			//写日志记录
 			//if ($isSign) {

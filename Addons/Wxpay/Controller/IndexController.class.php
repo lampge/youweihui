@@ -11,9 +11,7 @@ class IndexController extends AddonsController{
     public $options;    //使用微信支付的Controller最好有一个统一的微信支付配置参数
     public $wxpaycfg;
     public function index($mp_id = 0){
-        $params['mp_id'] = get_mpid();   //系统中公众号ID
-        $this->assign ( 'mp_id', $params['mp_id'] );
-        $this->display ();
+        
     }
 
     public function qrcode() {
@@ -198,40 +196,30 @@ class IndexController extends AddonsController{
     public function notify(){
         $rsv_data = $GLOBALS ['HTTP_RAW_POST_DATA'];
         $result = json_decode(json_encode($rsv_data), true);
-
-        file_put_contents('wx.log', var_export($result, true), FILE_APPEND);
-
-        // exit; 
         import('Com.Wxpay.lib.WxPayDataBase');
-       //获取公众号信息，jsApiPay初始化参数
-        $config = get_addon_config('Wxpay');
-        $this->options['appid'] = $config['APPID'];
-        $this->options['mchid'] = $config['MCHID'];
-        $this->options['mchkey'] = $config['KEY'];
-        $this->options['secret'] = $config['APPSECRET'];
-        $this->options['notify_url'] = $config['NOTIFY_URL'];
-        $this->wxpaycfg = new \Com\Wxpay\lib\WxPayConfig($this->options);
-
-        //发送模板消息
-        $TMArray = array(
-            "touser" => $result['openid'],
-            "template_id" => 'bkBZQbP6HCy_OWMIqYhD_fh-zCK2Zk7aeTlSoPelXMY',
-            "url" => "",
-            "topcolor" => "#FF0000",
-            "data" => array(
-                "first" => array("value" => "我们已收到您的货款，开始为您打包商品，请耐心等待: )","color" => "#173177"),
-                "orderMoneySum" => array("value" => "30.00元"),
-                "orderProductName" => array("value" => "我是商品名字"),
-                "remark" => array("value" => "如有问题请致电400-000-0000或直接在微信留言，我们将第一时间为您服务！","color" => "#173177")
-            )
-        );
-        $options['appid'] = $config['appid'];    //初始化options信息
-        $options['appsecret'] = $config['secret'];
-        $weObj = new TPWechat($options);
-        $res = $weObj->sendTemplateMessage($TMArray);
+        //获取公众号信息，jsApiPay初始化参数
+        // $config = get_addon_config('Wxpay');
+        // //发送模板消息
+        // $TMArray = array(
+        //     "touser" => 'oiPJjuAWphisWwn9aLyjJzDI_9v4',
+        //     "template_id" => 'bkBZQbP6HCy_OWMIqYhD_fh-zCK2Zk7aeTlSoPelXMY',
+        //     "url" => "",
+        //     "topcolor" => "#FF0000",
+        //     "data" => array(
+        //         "first" => array("value" => "我们已收到您的货款，开始为您打包商品，请耐心等待: )","color" => "#173177"),
+        //         "orderMoneySum" => array("value" => "30.00元"),
+        //         "orderProductName" => array("value" => "我是商品名字"),
+        //         "remark" => array("value" => "如有问题请致电400-000-0000或直接在微信留言，我们将第一时间为您服务！","color" => "#173177")
+        //     )
+        // );
+        // $options['token'] = '123456';    //初始化options信息
+        // $options['appid'] = $config['appid'];    //初始化options信息
+        // $options['appsecret'] = $config['secret'];
+        // $weObj = new TPWechat($options);
+        // $res = $weObj->sendTemplateMessage($TMArray);
 
         //回复公众平台支付结果
-        $notify = new PayNotifyCallBackController($this->wxpaycfg);
+        $notify = new PayNotifyCallBackController();
         $notify->Handle(false);
 
         //处理业务逻辑
@@ -241,7 +229,7 @@ class IndexController extends AddonsController{
     //支付成功JS回调显示支付成功页
     public function orderpaid(){
         $map['order_id'] = I('order_id');
-        $order = M('Order')-> where($map)->find();
+        $order = M('Order')->where($map)->find();
         $this->assign ( 'order', $order );
         //显示支付成功结果页
         $this->display ();

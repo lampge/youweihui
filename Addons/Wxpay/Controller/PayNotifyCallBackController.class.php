@@ -13,10 +13,9 @@ class PayNotifyCallBackController extends WxPayNotify
 	//查询订单
 	public function Queryorder($transaction_id)
 	{
-		$input = new WxPayOrderQuery($this->wxpaycfg);
+		$input = new WxPayOrderQuery();
 		$input->SetTransaction_id($transaction_id);
-		$result = $this->wxpayapi->orderQuery($input);
-
+		$result = WxPayApi::orderQuery($input);
 		if(array_key_exists("return_code", $result)
 			&& array_key_exists("result_code", $result)
 			&& $result["return_code"] == "SUCCESS"
@@ -26,11 +25,9 @@ class PayNotifyCallBackController extends WxPayNotify
 		}
 		return false;
 	}
-
 	//重写回调处理方法，成功的时候返回true，失败返回false，处理商城订单
 	public function NotifyProcess($data, &$msg)
 	{
-
 		$notfiyOutput = array();
 
 		if(!array_key_exists("transaction_id", $data)){
@@ -42,7 +39,6 @@ class PayNotifyCallBackController extends WxPayNotify
 			$msg = "订单查询失败";
 			return false;
 		}
-
         //以上的代码都是相同的，以下代码写定制业务逻辑，这里应该写通用订单处理逻辑
 		$map = array(
 			'order_id' => $data["out_trade_no"],
@@ -55,7 +51,7 @@ class PayNotifyCallBackController extends WxPayNotify
 			'update_time' =>NOW_TIME
 		);
         M('Order')->where($map)->save($save);
-		transaction($data["out_trade_no"], $data["total_fee"], $data["openid"], '旅游订单', '微信扫码');
+		transaction($data["out_trade_no"], $data["total_fee"]/100, $data["openid"], '旅游订单', '微信扫码');
 		return true;
 	}
 }
