@@ -16,8 +16,8 @@ use Think\Model;
 class LineModel extends Model{
 
     protected $_validate = array(
-        array('site_id', 'require', '所属站点不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
-        array('title', 'require', '主标题不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
+      array('site_id', 'require', '所属站点不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
+      array('title', 'require', '主标题不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
     	array('sub_title', 'require', '副标题不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
     	array('l_type', 'require', '线路类型不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),
     	array('ct_type', 'require', '参团类型不能为空', self::MUST_VALIDATE , 'regex', self::MODEL_BOTH),

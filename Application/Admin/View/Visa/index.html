@@ -1,0 +1,101 @@
+<extend name="Public/base"/>
+<block name="body">
+	<!-- 标题 -->
+	<div class="main-title">
+		<h2>{$meta_title}({$_total})</h2>
+	</div>
+	<!-- 按钮工具栏 -->
+	<div class="cf">
+		<div class="fl">
+			<a href="{:U('edit', array('site_id'=>$site_id))}" class="btn">快速创建</a>
+		</div>
+
+		<volist name="nodes" id="val">
+			<a href="{$val['url']}" class="btn <eq name="val['current']" value="1">disabled</eq>">{$val['title']}</a>
+		</volist>
+
+		<!-- 高级搜索 -->
+		<div class="search-form fr cf">
+			<div class="sleft">
+				<input type="text" name="title" class="search-input" value="{:I('title')}" placeholder="请输入线路标题">
+				<a class="sch-btn" href="javascript:void(0);" id="search" url="{:U('index', array('site_id'=>$site_id), false)}"><i class="btn-search"></i></a>
+			</div>
+		</div>
+	</div>
+
+	<!-- 数据表格 -->
+    <div class="data-table">
+		<table>
+            <!-- 表头 -->
+            <thead>
+                <tr>
+                    <th class="row-selected row-selected"><input class="check-all" type="checkbox"></th>
+                    <th>产品名称</th>
+                    <th>人气</th>
+                    <th>产品类型</th>
+                    <th>排序</th>
+                    <th>最后更新</th>
+					          <th>有效期至</th>
+                    <th>订单</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+
+            <!-- 列表 -->
+            <tbody>
+                <volist name="_list" id="val">
+                    <tr>
+						<td><input class="ids" type="checkbox" name="line_id[]" value="{$val['line_id']}" /></td>
+						<td> </td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td></td>
+						<td>
+							<eq name="val['status']" value="1">
+							<a href="{:U('changeStatus', array('status'=>0, 'line_id'=>$val['visa_id']))}" class="confirm ajax-get">隐藏</a>
+							<else/>
+							<a href="{:U('changeStatus', array('status'=>1, 'line_id'=>$val['visa_id']))}" class="confirm ajax-get">显示</a>
+							</eq>
+							<a href="{:U('edit2', array('site_id'=>$site_id,'line_id'=>$val['visa_id']))}" class="authorize">价格</a>
+							<a href="{:U('edit', array('site_id'=>$site_id,'visa_id'=>$val['visa_id']))}" class="authorize">修改</a>
+			            </td>
+                    </tr>
+                </volist>
+            </tbody>
+        </table>
+	</div>
+	<!-- 分页 -->
+    <div class="page">
+        {$_page}
+    </div>
+</div>
+
+</block>
+<block name="script">
+	<script type="text/javascript">
+	//搜索功能
+	$("#search").click(function(){
+		var url = $(this).attr('url');
+        var query  = $('.search-form').find('input').serialize();
+        query = query.replace(/(&|^)(\w*?\d*?\-*?_*?)*?=?((?=&)|(?=$))/g,'');
+        query = query.replace(/^&/g,'');
+        if( url.indexOf('?')>0 ){
+            url += '&' + query;
+        }else{
+            url += '?' + query;
+        }
+		window.location.href = url;
+	});
+	//回车搜索
+	$(".search-input").keyup(function(e){
+		if(e.keyCode === 13){
+			$("#search").click();
+			return false;
+		}
+	});
+	//导航高亮
+	highlight_subnav('{:U('index')}');
+	</script>
+</block>
