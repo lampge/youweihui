@@ -20,6 +20,23 @@ function send_sms($mobile, $content) {
 }
 
 /**
+ * 交易流水
+ */
+function transaction($order_id, $order_price, $from_user, $tran_type = '旅游订单', $pay_type = '微信扫码'){
+    $data = array(
+        'tran_type' => $tran_type,
+        'pay_type' => $pay_type,
+        'order_id' => $order_id,
+        'price' => $order_price,
+        'from_user' => $from_user,
+        'create_time' => NOW_TIME,
+        'update_time' => NOW_TIME,
+        'status' => 1,
+    );
+    M('Transaction')->add($data);
+}
+
+/**
  * 订单状态
  */
 function order_status_text($status){

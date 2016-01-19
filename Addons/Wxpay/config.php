@@ -27,5 +27,10 @@ return array(
         'title'=>'公众帐号secert（仅JSAPI支付的时候需要配置）:',
         'type'=>'text',
         'value'=>'',
+    ),
+    'NOTIFY_URL'=>array(
+        'title'=>'支付回调NOTIFY_URL:',
+        'type'=>'text',
+        'value'=>'',
     )
 );

@@ -44,14 +44,18 @@ class PayNotifyCallBackController extends WxPayNotify
 		}
 
         //以上的代码都是相同的，以下代码写定制业务逻辑，这里应该写通用订单处理逻辑
-        $transaction = M('transaction'); // 保存微信支付订单流水
-        $transaction->data($data)->add();
-
-        $omap["order_id"] = $map["out_trade_no"] = $data["out_trade_no"];
-        $data["paySta"] = 1;
-        M('shop_order')-> where($map)->setField($data); //商城订单支付状态置为1
-        M('order')-> where($omap)->setField("trans_id",$data["transaction_id"]); //支付流水号写入订单
-
+		$map = array(
+			'order_id' => $data["out_trade_no"],
+			'pay_status' => 1,
+			'order_status' => 4
+		);
+        $save = array(
+			'pay_status' => 2,
+			'order_status' => 5,
+			'update_time' =>NOW_TIME
+		);
+        M('Order')->where($map)->save($save);
+		transaction($data["out_trade_no"], $data["total_fee"], $data["openid"], '旅游订单', '微信扫码');
 		return true;
 	}
 }

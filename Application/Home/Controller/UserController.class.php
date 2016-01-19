@@ -81,6 +81,11 @@ class UserController extends HomeController {
 		// );
 		// $reply_count = M('Message')->where($map)->count();
 
+		$get_notify_url=addons_url("Wxpay://Index/native", array('order_id'=>'NS201601061346482784'));
+		// $get_notify_url=preg_replace('/.html/i','',$get_notify_url);
+		// $get_notify_url="http://".$_SERVER['HTTP_HOST'].$get_notify_url;
+		echo $get_notify_url;
+
 		$this->assign('chuli_count', $chuli_count);
 		$this->assign('pingjia_count', $pingjia_count);
 		$this->assign('collect_count', $collect_count);

@@ -22,10 +22,44 @@ class AliPlayDirectController extends AddonsController{
 	 * [alipayPost 提交到支付宝方法]
 	 * @return [type] [description]
 	 */
-	public function alipayPost()
-	{
+	public function alipayGet() {
+		$order_id = I('order_id');
+		if (empty($order_id)) {
+			$this->error('非法订单参数...');
+		}
+		$map = array(
+			'order_status' => 4,
+			'order_id' => $order_id
+		);
+		$order_info = M('Order')->field('order_id,order_price,product_id,order_type')->where($map)->find();
+		if (empty($order_info)) {
+			$this->error('订单不存在...');
+		}
+		switch ($order_info['order_type']) {
+			case 'line':
+				$info = M('Line')->field('title,sub_title')->find($order_info['product_id']);
+				if ($info) {
+					$order_info['title'] = $info['title'];
+					$order_info['sub_title'] = $info['sub_title'];
+				} else {
+					$order_info['title'] = '旅游线路';
+					$order_info['sub_title'] = '旅游线路资费';
+				}
+				break;
+			case 'visa':
+				$info = M('Visa')->field('title,sub_title')->find($order_info['product_id']);
+				if ($info) {
+					$order_info['title'] = $info['title'];
+					$order_info['sub_title'] = $info['sub_title'];
+				} else {
+					$order_info['title'] = '旅游线路';
+					$order_info['sub_title'] = '旅游线路资费';
+				}
+				break;
+			default:
+				break;
+		}
 				/**************************请求参数**************************/
-
 		        //支付类型
 		        $payment_type = "1";
 		        //必填，不能修改
@@ -49,22 +83,22 @@ class AliPlayDirectController extends AddonsController{
 		        //必填
 
 		        //商户订单号
-		        $out_trade_no = $_POST['out_trade_no'];
+		        $out_trade_no = $order_info['order_id'];
 		        //商户网站订单系统中唯一订单号，必填
 
 		        //订单名称
-		        $subject = $_POST['subject'];
+		        $subject = $order_info['title'];
 		        //必填
 
 		        //付款金额
-		        $total_fee = $_POST['price'];
+		        $total_fee = $order_info['order_price'];
 		        //必填
 
 		        //订单描述
 
-		        $body = $_POST['body'];
+		        $body = $order_info['title'];
 		        //商品展示地址
-		        $show_url = $_POST['show_url'];
+		        $show_url = '';
 		        //需以http://开头的完整路径，例如：http://www.xxx.com/myorder.html
 
 		        //防钓鱼时间戳
@@ -116,6 +150,7 @@ class AliPlayDirectController extends AddonsController{
 	{
 		$alipayNotify = new AlipayNotify($this->alipay_config);
 		$verify_result = $alipayNotify->verifyReturn();
+		$this->success('支付成功', U('User/orderShow', array('order_id'=>$_GET['out_trade_no']))); exit;
 		if($verify_result) {//验证成功
 			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 			//请在这里加上商户的业务逻辑程序代码
@@ -130,7 +165,8 @@ class AliPlayDirectController extends AddonsController{
 			//支付宝交易号
 
 			$trade_no = $_GET['trade_no'];
-
+			$total_fee = $_GET['total_fee'];
+			$buyer_email = $_GET['buyer_email'];
 			//交易状态
 			$trade_status = $_GET['trade_status'];
 
@@ -139,9 +175,21 @@ class AliPlayDirectController extends AddonsController{
 				//判断该笔订单是否在商户网站中已经做过处理
 				//如果没有做过处理，根据订单号（out_trade_no）在商户网站的订单系统中查到该笔订单的详细，并执行商户的业务程序
 				//如果有做过处理，不执行商户的业务程序
+				// $map = array(
+				// 	'order_id' => $out_trade_no,
+				// 	'pay_status' => 1,
+				// 	'order_status' => 4
+				// );
+				// $save = array(
+				// 	'pay_status' => 2,
+				// 	'order_status' => 5,
+				// 	'update_time' =>NOW_TIME
+				// );
+				// M('Order')->where($map)->save($save);
+				// transaction($out_trade_no, $total_fee, $buyer_email, '旅游订单', '支付宝');
 
-		    }
-		    else {
+				echo '支付成功';
+		    } else {
 		      echo "trade_status=".$_GET['trade_status'];
 		    }
 
@@ -150,8 +198,7 @@ class AliPlayDirectController extends AddonsController{
 			//——请根据您的业务逻辑来编写程序（以上代码仅作参考）——
 
 			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		}
-		else {
+		} else {
 		    //验证失败
 		    //如要调试，请看alipay_notify.php页面的verifyReturn函数
 		    echo "验证失败";
@@ -169,6 +216,8 @@ class AliPlayDirectController extends AddonsController{
 		$alipayNotify = new AlipayNotify($this->alipay_config);
 		$verify_result = $alipayNotify->verifyNotify();
 
+		file_put_contents('alipay.log', var_export($verify_result, true), FILE_APPEND);
+		file_put_contents('alipay-post.log', var_export($_POST, true), FILE_APPEND);
 
 		if($verify_result) {//验证成功
 			/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,6 +235,8 @@ class AliPlayDirectController extends AddonsController{
 			//支付宝交易号
 
 			$trade_no = $_POST['trade_no'];
+			$total_fee = $_POST['total_fee'];
+			$buyer_email = $_POST['buyer_email'];
 
 			//交易状态
 			$trade_status = $_POST['trade_status'];
@@ -203,7 +254,18 @@ class AliPlayDirectController extends AddonsController{
 
 		        //调试用，写文本函数记录程序运行情况是否正常
 		        //logResult("这里写入想要调试的代码变量值，或其他运行的结果记录");
-
+				$map = array(
+					'order_id' => $out_trade_no,
+					'pay_status' => 1,
+					'order_status' => 4
+				);
+				$save = array(
+					'pay_status' => 2,
+					'order_status' => 5,
+					'update_time' =>NOW_TIME
+				);
+				M('Order')->where($map)->save($save);
+				transaction($out_trade_no, $total_fee, $buyer_email, '旅游订单', '支付宝');
 
 		    }
 		    else if ($_POST['trade_status'] == 'TRADE_SUCCESS') {

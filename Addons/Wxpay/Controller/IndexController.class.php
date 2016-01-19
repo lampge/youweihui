@@ -3,19 +3,7 @@
 namespace Addons\Wxpay\Controller;
 use Home\Controller\AddonsController;
 use Common\Model\UcuserModel;
-use Com\Wxpay\example\JsApiPay;
-use Com\Wxpay\lib\WxPayApi;
-use Com\Wxpay\lib\WxPayConfig;
-use Com\Wxpay\lib\WxPayUnifiedOrder;
-
-require_once "../lib/WxPay.Api.php";
-require_once "WxPay.NativePay.php";
-require_once 'log.php';
-
 use Addons\Wxpay\Controller\PayNotifyCallBackController;
-
-
-
 use Com\TPWechat;
 
 class IndexController extends AddonsController{
@@ -25,12 +13,19 @@ class IndexController extends AddonsController{
     public function index($mp_id = 0){
         $params['mp_id'] = get_mpid();   //系统中公众号ID
         $this->assign ( 'mp_id', $params['mp_id'] );
-        $this->display ( );
+        $this->display ();
+    }
+
+    public function qrcode() {
+        import('Com.Wxpay.example.phpqrcode.phpqrcode', LIB_PATH, '.php');
+        $url = base64_decode($_GET["data"]);
+        \QRcode::png($url, false, QR_ECLEVEL_L, 9, 2);
+        exit();
     }
 
     //http://wwb.sypole.com/addon/Wxpay/Index/native/order_id/NS201601061346482784
-    public function native($order_id = '') {
-        exit('@@@@@@');
+    public function native() {
+        $order_id = I('order_id');
         if (empty($order_id)) {
             $this->error('非法订单参数...');
         }
@@ -64,48 +59,44 @@ class IndexController extends AddonsController{
                 }
                 break;
             default:
-                # code...
                 break;
         }
         //模式二
-        /**
-         * 流程：
-         * 1、调用统一下单，取得code_url，生成二维码
-         * 2、用户扫描二维码，进行支付
-         * 3、支付完成之后，微信服务器会通知支付成功
-         * 4、在支付成功通知中需要查单确认是否真正支付成功（见：notify.php）
-         */
+        import('Com.Wxpay.lib.NativePay');
+        import('Com.Wxpay.lib.WxPayApi');
+        import('Com.Wxpay.lib.WxPayDataBase');
+        $notify = new \Com\WxPay\lib\NativePay();
         $get_notify_url=addons_url("Wxpay://Index/notify");
         $get_notify_url=preg_replace('/.html/i','',$get_notify_url);
         $get_notify_url="http://".$_SERVER['HTTP_HOST'].$get_notify_url;
         $notify_url = $get_notify_url;
         //获取公众号信息，jsApiPay初始化参数
         $config = get_addon_config('Wxpay');
-        $this->options['appid'] = $config['appid'];
-        $this->options['mchid'] = $config['mchid'];
-        $this->options['mchkey'] = $config['mchkey'];
-        $this->options['secret'] = $config['secret'];
-        $this->options['notify_url'] = $config['notify_url'];
-        $this->wxpaycfg = new WxPayConfig($this->options);
-        $input = new WxPayUnifiedOrder($this->wxpaycfg);
+        $input = new \Com\WxPay\lib\WxPayUnifiedOrder();
         $input->SetBody($order_info['title']);
         $input->SetAttach($order_info['sub_title']);
         $input->SetOut_trade_no($order_info['order_id']);
-        $input->SetTotal_fee(intval($order_info['price']));
+        $input->SetTotal_fee(intval($order_info['order_price'] * 100));
         $input->SetTime_start(date("YmdHis"));
         $input->SetTime_expire(date("YmdHis", time() + 600));
         $input->SetGoods_tag($order_info['title']);
         $input->SetNotify_url($notify_url);
         $input->SetTrade_type("NATIVE");
         $input->SetProduct_id("123456789");
-		if($input->GetTrade_type() == "NATIVE") {
-			$result = WxPayApi::unifiedOrder($input);
-            $url2 = $result["code_url"]
-		}
-
-        // echo $url2;
+        $result = $notify->GetPayUrl($input);
+        if ($result['result_code'] == 'FAIL') {
+            $this->error($result['err_code_des'], U('User/orderShow', array('order_id'=>$order_info['order_id'])));
+        }
+        $url2 = $result["code_url"];
         $this->assign('url2', $url2);
-        $this->display();
+        $this->display(T('Addons://Wxpay@Index/native'));
+        // echo '<pre>'; print_r($result); echo '</pre>';
+        // $url = 'http://paysdk.weixin.qq.com/example/qrcode.php?data=' . urlencode($url2);
+        // $url = "http://".$_SERVER['HTTP_HOST'] . addons_url("Wxpay://Index/qrcode", array('data'=>base64_encode($url2)));
+        // exit($url);
+        // $url = 'http://wwb.sypole.com/Addons/execute/_addons/Wxpay/_controller/Index/_action/qrcode?data=' . urlencode($url2);
+        // header('Content-type: image/png');
+        // echo file_get_contents($url);
     }
 
     /**
@@ -156,7 +147,6 @@ class IndexController extends AddonsController{
             // 如果主键是自动增长型 成功后返回值就是最新插入的值
 
         }
-
         //获取公众号信息，jsApiPay初始化参数
         $info = get_mpid_appinfo ( $odata['mp_id'] );
         $this->options['appid'] = $info['appid'];
@@ -206,48 +196,42 @@ class IndexController extends AddonsController{
 
     //支付完成接收支付服务器返回通知，PayNotifyCallBackController继承WxPayNotify处理定制业务逻辑
     public function notify(){
-
         $rsv_data = $GLOBALS ['HTTP_RAW_POST_DATA'];
-        $result = xmlToArray($rsv_data);
+        $result = json_decode(json_encode($rsv_data), true);
 
-        $map["appid"] = $result["appid"];
-        $map["mchid"] = $result["mch_id"];
+        file_put_contents('wx.log', var_export($result, true), FILE_APPEND);
 
-        $info = M ( 'member_public' )->where ( $map )->find ();
+        // exit; 
+        import('Com.Wxpay.lib.WxPayDataBase');
        //获取公众号信息，jsApiPay初始化参数
-        $this->options['appid'] = $info['appid'];
-        $this->options['mchid'] = $info['mchid'];
-        $this->options['mchkey'] = $info['mchkey'];
-        $this->options['secret'] = $info['secret'];
-        $this->options['notify_url'] = $info['notify_url'];
-        $this->wxpaycfg = new WxPayConfig($this->options);
+        $config = get_addon_config('Wxpay');
+        $this->options['appid'] = $config['APPID'];
+        $this->options['mchid'] = $config['MCHID'];
+        $this->options['mchkey'] = $config['KEY'];
+        $this->options['secret'] = $config['APPSECRET'];
+        $this->options['notify_url'] = $config['NOTIFY_URL'];
+        $this->wxpaycfg = new \Com\Wxpay\lib\WxPayConfig($this->options);
 
         //发送模板消息
         $TMArray = array(
-            "touser" => $result["openid"],
-            "template_id" => "diW6jm5hBwemeoDF0FZdU2agSZ9kydje22YJIC0gVMo",
-            "url" => "http://test.uctoo.com/index.php?s=/home/addons/execute/Ucuser/Ucuser/index/mp_id/107.html",
+            "touser" => $result['openid'],
+            "template_id" => 'bkBZQbP6HCy_OWMIqYhD_fh-zCK2Zk7aeTlSoPelXMY',
+            "url" => "",
             "topcolor" => "#FF0000",
             "data" => array(
-                "name" => array(
-                    "value" => "优创智投",
-                    "color" => "#173177",
-                ),
-                "remark" => array(
-                    "value" => "今天",
-                    "color" => "#173177",
-                )
+                "first" => array("value" => "我们已收到您的货款，开始为您打包商品，请耐心等待: )","color" => "#173177"),
+                "orderMoneySum" => array("value" => "30.00元"),
+                "orderProductName" => array("value" => "我是商品名字"),
+                "remark" => array("value" => "如有问题请致电400-000-0000或直接在微信留言，我们将第一时间为您服务！","color" => "#173177")
             )
         );
-
-        $options['appid'] = $info['appid'];    //初始化options信息
-        $options['appsecret'] = $info['secret'];
-        $options['encodingaeskey'] = $info['encodingaeskey'];
+        $options['appid'] = $config['appid'];    //初始化options信息
+        $options['appsecret'] = $config['secret'];
         $weObj = new TPWechat($options);
         $res = $weObj->sendTemplateMessage($TMArray);
 
         //回复公众平台支付结果
-        $notify = new PayNotifyCallBackController($this->wxpaycfg);    //
+        $notify = new PayNotifyCallBackController($this->wxpaycfg);
         $notify->Handle(false);
 
         //处理业务逻辑
