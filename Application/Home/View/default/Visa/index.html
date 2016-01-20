@@ -8,24 +8,20 @@
           <span>签证国家</span>
           <div class="y_div1">
               <div class="y_div1tou">
-                  <a href="#">亚洲</a><a href="#">欧洲</a><a href="#">美洲</a><a href="#">澳洲</a><a href="#">非洲</a>
+                    <volist name=":get_visa_catlist(0,'Visa/index/catid/')" id="val">
+                        <a href="{$val['url']}">{$val['title']}</a>
+                    </volist>
               </div>
               <div class="y_gjn">
+              <volist name=":get_visa_catlist(0)" id="val">
                   <div class="y_gj fix">
-                      <a href="#">韩国</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
+                  <volist name=":get_visa_catlist($val['id'],'Visa/index/zone/')" id="v">
+                      <a href="{$v['url']}">{$v['title']}</a>
+                  </volist>
                   </div>
-                  <div class="y_gj fix">
-                      <a href="#">韩国2</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
-                  </div>
-                  <div class="y_gj fix">
-                      <a href="#">韩国3</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
-                  </div>
-                  <div class="y_gj fix">
-                      <a href="#">韩国4</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
-                  </div>
-                  <div class="y_gj fix">
-                      <a href="#">韩国5</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
-                  </div>
+              </volist>
+
+
               </div>
           </div>
           <div class="y_div2">
@@ -60,9 +56,9 @@
       <section class="ymain_right2 fr">
           <span>签证类型</span>
           <ul class="yul3">
-              <li class="xz"><a href="#">旅游签证</a></li>
-              <li><a href="#">探亲签证</a></li>
-              <li><a href="#">商务签证</a></li>
+              <volist name="sub_ids" id="val">
+                 <li><a href="{:U('Visa/index',array('sub_id'=>$key))}">{$val}</a></li>
+               </volist>
           </ul>
           <div class="yseou">
               <input type="text" value="国家名称或地区名称"onfocus="if(this.value=='国家名称或地区名称'){this.value='';}"  onblur="if(this.value==''){this.value='国家名称或地区名称';}" class="y_put6 fl putnone">

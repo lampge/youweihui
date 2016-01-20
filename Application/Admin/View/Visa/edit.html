@@ -40,9 +40,19 @@
                     </div>
 
 				    <label class="item-label">签证国家：<span class="check-tips">(必填)</span></label>
-                    <div class="controls">
-                     <input type="text" class="text input-min" name="zone" value="{$data['zone']}">
-                    </div>
+                <div class="controls">
+                  <select name="zhou" id="zhou" onchange="changeZone()">
+                     <option value="0">请选择</option>
+										 <volist name="catelist" id="val">
+										    <option <eq name="data['visa_catid']" value="$val['id']">selected = "selected"</eq> value="{$val['id']}">{$val['title']}</option>
+											</volist>
+									</select>
+
+									<select name="zone" id="zone">
+										 <option value="0">请选择</option>
+										 <option></option>
+									</select>
+                </div>
 
 				    <label class="item-label">产品分类：<span class="check-tips">(必填)</span></label>
                     <div class="controls">
@@ -218,29 +228,39 @@
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
 
 <script type="text/javascript">
+		Think.setValue("type", {$data.type|default='""'});
+		Think.setValue("display", {$data.display|default=0});
+		$('#submit').click(function(){
+			$('#form').submit();
+		});
+		$(function(){
+		    $('.date').datetimepicker({
+		        format: 'yyyy-mm-dd',
+		        language:"zh-CN",
+		        minView:2,
+		        autoclose:true
+		    });
+		    $('.time').datetimepicker({
+		        format: 'yyyy-mm-dd hh:ii',
+		        language:"zh-CN",
+		        minView:2,
+		        autoclose:true
+		    });
+		    showTab();
+		});
 
-Think.setValue("type", {$data.type|default='""'});
-Think.setValue("display", {$data.display|default=0});
+function changeZone(){
+		var zhou = $('#zhou').val();
+		$.ajax({
+	       type:'get',
+				 url:"{:U('Visa/zone_ajax')}",
+				 data:{'pid':zhou},
+				 dataType:'html',
+				 success:function(data){
+           $('#zone').html(data);
+	        }
+		})
+}
 
-$('#submit').click(function(){
-	$('#form').submit();
-});
-
-$(function(){
-    $('.date').datetimepicker({
-        format: 'yyyy-mm-dd',
-        language:"zh-CN",
-        minView:2,
-        autoclose:true
-    });
-    $('.time').datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        language:"zh-CN",
-        minView:2,
-        autoclose:true
-    });
-    showTab();
-
-});
 </script>
 </block>

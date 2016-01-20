@@ -231,10 +231,26 @@ function get_visa_position($catid=0,$posid=1,$num=5){
       foreach($visa_list as $key=>$val){
          $visa_list[$key]['thumb']=  get_cover($val['cover_id'],'path');
          $visa_list[$key]['url'] = U('Visa/show',array('id'=>$val['visa_id']));
+         $visa_list[$key]['zone']=  get_visa_field($val['zone'],'title');
       }
       return $visa_list;
 }
 
+function get_visa_field($catid=0,$field=''){
+         $Visa_cate = M('VisaCate');
+         $catname = $Visa_cate->field($field)->where(array('id'=>$catid))->find();
+         $catname = $catname[$field];
+         return $catname;
+}
+
+function get_visa_catlist($pid=0,$url=''){
+        $Visa_cate = M('VisaCate');
+        $catlist = $Visa_cate->where(array('pid'=>$pid))->select();
+        foreach($catlist as $k=>$val){
+             $catlist[$k]['url'] = U($url.$val['id']);
+        }
+        return $catlist;
+}
 /**
  * 内容分页
  */

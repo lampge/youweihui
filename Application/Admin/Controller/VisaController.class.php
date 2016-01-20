@@ -88,10 +88,12 @@ class VisaController extends AdminController {
             $map['l_type'] = $l_type;
         }
 
-
-        $list   = $this->lists('Visa', $map, 'status desc, visa_id desc');
+        $sub_ids = C('QZ_TYPE');
+        $list = $this->lists('Visa', $map, 'status desc, visa_id desc');
+        foreach($list as $k=>$val){
+           $list[$k]['sub_id'] = $sub_ids[$val['sub_id']];
+        }
         int_to_string($list);
-        //print_r($list);
         $this->assign('_list', $list);
         $this->meta_title = '签证';
         $this->display();
@@ -123,7 +125,7 @@ class VisaController extends AdminController {
 
 
            $Visa_cate = M('Visa_cate');
-           $catelist = $Visa_cate->select();
+           $catelist = $Visa_cate->where(array('pid'=>0))->select();
            $this->assign('catelist', $catelist);//栏目
            $qz_list = C('QZ_TYPE');//签证类别
            $this->assign('qz_list', $qz_list);
@@ -134,21 +136,33 @@ class VisaController extends AdminController {
     		}
     }
 
-    function changeStatus(){
-
-      $data['status'] = I('status');
-      $data['visa_id'] = I('visa_id');
-      if(empty($data['visa_id'])){
-           $this->success('非法参数');
-      }
-      $Visa = M('Visa');
-      $res = $Visa->save($data);
-      if($res){
-         $this->success('成功');
-      }else{
-         $this->error('失败');
-      }
-
+    public function changeStatus(){
+            $data['status'] = I('get.status');
+            $data['visa_id'] = I('get.visa_id');
+            if(empty($data['visa_id'])){
+                 $this->success('非法参数');
+            }
+            $Visa = M('Visa');
+            $res = $Visa->save($data);
+            if($res){
+               $this->success('成功');
+            }else{
+               $this->error('失败');
+            }
     }
+
+  public function zone_ajax(){
+            $pid = I('get.pid');
+            $Visa_cate = M('VisaCate');
+            if(empty($pid)){
+              $catelist = array();
+            }else{
+              $catelist = $Visa_cate->where(array('pid'=>$pid))->select();
+            }
+            $this->assign('catelist', $catelist);
+            $this->display();
+    }
+
+
 
 }
