@@ -45,20 +45,20 @@
             <tbody>
                 <volist name="_list" id="val">
                     <tr>
-						<td><input class="ids" type="checkbox" name="line_id[]" value="{$val['line_id']}" /></td>
-						<td> </td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
-						<td></td>
+						<td><input class="ids" type="checkbox" name="visa_id[]" value="{$val['visa_id']}" /></td>
+						<td>{$val['title']}</td>
+						<td>{$val['base_hits']}</td>
+						<td>{$val['sub_id']}</td>
+						<td>{$val['sort']}</td>
+						<td>{:date('Y-m-d',$val['update_time'])}</td>
+						<td>{:date('Y-m-d',$val['expire_date'])}</td>
+						<td>{$val['base_order']}</td>
 						<td>
 							<eq name="val['status']" value="1">
-							<a href="{:U('changeStatus', array('status'=>0, 'line_id'=>$val['visa_id']))}" class="confirm ajax-get">隐藏</a>
+							<a href="{:U('changeStatus', array('status'=>0, 'visa_id'=>$val['visa_id']))}" class="confirm ajax-get">隐藏</a>
 							<else/>
-							<a href="{:U('changeStatus', array('status'=>1, 'line_id'=>$val['visa_id']))}" class="confirm ajax-get">显示</a>
+							<a href="{:U('changeStatus', array('status'=>1, 'visa_id'=>$val['visa_id']))}" class="confirm ajax-get">显示</a>
 							</eq>
-							<a href="{:U('edit2', array('site_id'=>$site_id,'line_id'=>$val['visa_id']))}" class="authorize">价格</a>
 							<a href="{:U('edit', array('site_id'=>$site_id,'visa_id'=>$val['visa_id']))}" class="authorize">修改</a>
 			            </td>
                     </tr>

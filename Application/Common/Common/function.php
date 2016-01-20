@@ -15,7 +15,7 @@ const ONETHINK_ADDON_PATH = './Addons/';
 
 // 吴文豹 start
 function send_sms($mobile, $content) {
-    
+
     return true;
 }
 
@@ -219,6 +219,21 @@ function get_article_position($catid=1,$posid=1,$num=5){
       return $article_list;
 }
 
+function get_visa_position($catid=0,$posid=1,$num=5){
+      $Visa = M('Visa');
+      $map = array();
+      if($catid){
+        $map['visa_catid'] = $catid;
+      }
+      $map['status'] = 1;
+      $map['position'] = $posid;
+      $visa_list = $Visa->where($map)->order('sort asc,update_time desc')->limit(0,$num)->select();
+      foreach($visa_list as $key=>$val){
+         $visa_list[$key]['thumb']=  get_cover($val['cover_id'],'path');
+         $visa_list[$key]['url'] = U('Visa/show',array('id'=>$val['visa_id']));
+      }
+      return $visa_list;
+}
 
 /**
  * 内容分页

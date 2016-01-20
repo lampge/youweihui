@@ -1,0 +1,92 @@
+<extend name="Base/common"/>
+
+<block name="body">
+
+  <section class="ybanner_01"></section>
+  <section class="main auto fix">
+      <section class="ymain_left2 fl">
+          <span>签证国家</span>
+          <div class="y_div1">
+              <div class="y_div1tou">
+                  <a href="#">亚洲</a><a href="#">欧洲</a><a href="#">美洲</a><a href="#">澳洲</a><a href="#">非洲</a>
+              </div>
+              <div class="y_gjn">
+                  <div class="y_gj fix">
+                      <a href="#">韩国</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
+                  </div>
+                  <div class="y_gj fix">
+                      <a href="#">韩国2</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
+                  </div>
+                  <div class="y_gj fix">
+                      <a href="#">韩国3</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
+                  </div>
+                  <div class="y_gj fix">
+                      <a href="#">韩国4</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
+                  </div>
+                  <div class="y_gj fix">
+                      <a href="#">韩国5</a><a href="#">尼泊尔</a><a href="#">印度</a><a href="#">马来西亚</a><a href="#">泰国</a><a href="#">新加坡</a><a href="#">日本</a><a href="#">越南M</a><a href="#">菲律宾</a><a href="#">柬埔寨</a><a href="#"></a><a href="#">阿联酋</a><a href="#">老挝</a><a href="#">印度尼西亚</a><a href="#">缅甸</a><a href="#">土耳其</a><a href="#">台湾</a><a href="#">斯里兰卡</a>
+                  </div>
+              </div>
+          </div>
+          <div class="y_div2">
+            <volist name="visa_lists" id="val">
+                    <div class="y_k01 fix">
+                      <if condition=" $val['image'] !='' ">
+                           <img src="{$val['image']}" alt="" class="fl">
+                      <else/>
+                           <img width='221' height='161' src="__IMG__/no_picture.gif" alt="" class="fl">
+                      </if>
+
+                        <div class="y_art01 fl">
+                            <a href="{$val['url']}" class="y_a1 fs">{$val['zone']}</a>
+                            <a href="{$val['url']}" class="y_a2">{$val['title']}</a>
+                            办理时间: {$val['work_time']} &nbsp;&nbsp;&nbsp;
+                            邀 请 函: {$val['is_yaoqing']} &nbsp;&nbsp;&nbsp;
+                            有 效 期: {$val['expiration']}天 &nbsp;&nbsp;&nbsp;
+                            所属领区: {$val['address']} &nbsp;&nbsp;&nbsp;
+                            最多停留: {$val['stay_days']}天   <br>
+                            面    试: {$val['is_mianshi']} &nbsp;&nbsp;&nbsp;
+                            受理范围: {$val['acceptance_range']}
+                        </div>
+                        <span><bdo>￥</bdo><font>{$val['price_cncn']}</font>元起</span>
+                        <a href="#">立即预定</a>
+                    </div>
+              </volist>
+          </div>
+          <div class="pages">
+          {$_page}
+           </div>
+      </section>
+      <section class="ymain_right2 fr">
+          <span>签证类型</span>
+          <ul class="yul3">
+              <li class="xz"><a href="#">旅游签证</a></li>
+              <li><a href="#">探亲签证</a></li>
+              <li><a href="#">商务签证</a></li>
+          </ul>
+          <div class="yseou">
+              <input type="text" value="国家名称或地区名称"onfocus="if(this.value=='国家名称或地区名称'){this.value='';}"  onblur="if(this.value==''){this.value='国家名称或地区名称';}" class="y_put6 fl putnone">
+              <input type="button" class="y_put7 fr putnone">
+          </div>
+          <div class="ydiv4">
+              <span>热门签证</span>
+              <volist name=":get_visa_position('',1,4)" id="val">
+                    <div class="y_k2 fix">
+                      <if condition=" $val['thumb'] !='' ">
+                           <img src="{$val['thumb']}" width='161' height='118' alt="" class="fl">
+                      <else/>
+                           <img src="__IMG__/no_picture.gif" alt="" class="fl">
+                      </if>
+                        <div class="y_k2r fl">
+                            <a href="{$val['url']}">{$val[zone]}</a>
+                            <span>￥<font>{$val['price_cncn']}</font></span>
+                        </div>
+                    </div>
+              </volist>
+
+
+
+          </div>
+      </section>
+  </section>
+</block>

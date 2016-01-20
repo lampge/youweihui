@@ -69,21 +69,13 @@ class VisaModel extends Model{
      */
     public function update(){
        $data = $this->create();
-       $Visa_data = M('Visa_data');
-       $content = array();
-       $content['visa_id'] = $data['visa_id'];
-       $content['cailiao'] = $data['cailiao'];
-       $content['clint'] = $data['clint'];
-       $content['shuoming'] = $data['shuoming'];
        if(!$data){ //数据对象创建错误
            return false;
        }
        /* 添加或更新数据 */
        if(empty($data['visa_id'])){
-           $Visa_data->add($content);
            $res = $this->add();
        }else{
-           $Visa_data->where(array('visa_id'=>$content['visa_id']))->save($content);
            $res = $this->save();
        }
        return $res;

@@ -1,0 +1,27 @@
+<extend name="Base/common" />
+<block name="body">
+<section class="main auto fix">
+    <div class="ddzf_main2_top"></div>
+    <div class="ddzf_main2_bottom auto">
+        <dl>
+            <dt>
+                <img src="__IMG__/bg51.png" width="84" height="84">
+                <span>订单提交成功！</span>
+            </dt>
+            <dd>
+                <span>到<a href="{:U('User/index')}" title="查看订单">会员中心</a>查看订单 &gt;&gt;</span>
+                <span>订单编号：<a href="javascript:void(0);" title="">{$order_info['order_id']}</a></span>
+            </dd>
+        </dl>
+        <ol class="auto fix">
+            <p>温馨提示：</p>
+            <span> 订单需要等待旅行社确认后才能够付款，请您等待旅行社确认
+                <br> 旅行社确认订单后你可以到会员中心付款。如需马上确认，建议您直接联系旅行社操作。 </span>
+        </ol>
+        <ul>
+            <span>游尾会客服专员会尽快处理您的订单，并与您联系确认。</span> 如有其它咨询请直接致电：
+            <em>400-876-5261</em>
+        </ul>
+    </div>
+</section>
+</block>

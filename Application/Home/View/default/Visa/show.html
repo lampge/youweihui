@@ -1,0 +1,73 @@
+<extend name="Base/common" />
+<block name="body">
+  <section class="main auto fix">
+      <div class="ytip_02 fs">
+          <a href="/">首页</a> -> <a>{$detail['title']}</a>
+      </div>
+      <div class="ydiv1 fix">
+          <div class="ydivl fl pt20 pb20">
+              <img src="{$detail['image']}" alt="">
+              <div class="yqianz fl">
+                  <a href="#" class="ya1">{$detail['title']}</a>
+                  办理时间：{$detail['work_time']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;有效期：{$detail['expiration']}天&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;最多停留：{$detail['stay_days']}天  <br>
+  邀请函：{$detail['is_yaoqing']}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;面试：{$detail['is_mianshi']}  <br>
+                  <div class="ydid">
+                      <font>￥</font><span>{$detail['price_cncn']}</span> / 人起
+                      <a href="#" class="ya2">立即预定</a>
+                  </div>
+              </div>
+          </div>
+          <div class="ydivr fr">
+              <div class="yrnr">
+                  <span><a href="#">选择签证</a>><a href="#">递交材料</a>><a href="#">成功出签</a></span>
+                  <font>受理范围：{$detail['acceptance_range']}       所属领区：{$detail['address']} </font>
+                  <div class="yduv">
+                      客服电话：<bdo>400-876-5261</bdo>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="ydiv2">
+          <div class="ytitle_02 fix">
+              <a href="#ys1" class="xz">所需材料</a>
+              <a href="#ys2">特别提示</a>
+              <a href="#ys3">服务说明</a>
+              <a href="#ys4">我要咨询</a>
+          </div>
+          <div class="yart_04">
+              <a class="ydi" name="ys1"> </a>
+              <a class="yspan1">所需材料</a>
+                  {$detail['cailiao']}
+              <a class="ydi" name="ys2"> </a>
+              <a class="yspan1">特别提示</a>
+                  {$detail['clint']}
+              <a class="ydi" name="ys3"> </a>
+              <a class="yspan1">服务说明</a>
+                {$detail['shuoming']}
+             <a class="ydi" name="ys4"> </a>
+              <a class="yspan1">我要咨询</a>
+                  <div class="ybiaodan">
+                      <div class="ydiv3 fix">
+                          <span>我要咨询：</span>
+                          <textarea class="ytex fl putnone"></textarea>
+                      </div>
+                      <div class="ydiv3 fix">
+                          <span>联系方式：</span>
+                          <select class="yselect fl">
+                              <option value=""></option>
+                          </select>
+                          <input type="text" class="y_put3 fl putnone">
+                      </div>
+                      <div class="ydiv3 fix">
+                          <span>验 证 码 ：</span>
+                          <input type="text" class="y_put4 fl putnone">
+                          <img src="__IMG__/yyzm.jpg" alt="">
+                      </div>
+                      <div class="ydiv3 fix">
+                          <input type="button" value="提交" class="y_put5 fl putnone">
+                      </div>
+                  </div>
+          </div>
+      </div>
+  </section>
+</block>

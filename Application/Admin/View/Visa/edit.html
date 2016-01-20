@@ -106,6 +106,10 @@
 					  优惠价：<input type="text" class="text input-min" name="price_cncn" value="{$data['price_cncn']}">
                     </div>
 
+															<div class="controls">
+																游客关注：<input type="text" class="text input-min" name="base_hits" value="{$data['base_hits']}">
+											          最近订单：<input type="text" class="text input-min" name="base_order" value="{$data['base_order']}">
+															</div>
 
                     <label class="item-label">签证描述图：<span class="check-tips"></span></label>
 
@@ -155,18 +159,21 @@
 								</script>
 
 						   <label class="item-label">所需材料:<span class="check-tips"></span></label>
-						    <label class="textarea input-large">
-                                <textarea name="cailiao">{$content['cailiao']}</textarea>
+						    <label style="width:100%;" class="textarea input-large">
+                                <textarea name="cailiao">{$data['cailiao']}</textarea>
+																 {:hook('adminArticleEdit', array('name'=>'cailiao','value'=>$data['cailiao']))}
                              </label>
 						   <label class="item-label">特别提示:<span class="check-tips"></span></label>
-						    <label class="textarea input-large">
-                                <textarea name="clint">{$content['clint']}</textarea>
+						    <label style="width:100%;" class="textarea input-large">
+                                <textarea name="clint">{$data['clint']}</textarea>
+
+                                 {:hook('adminArticleEdit', array('name'=>'clint','value'=>$data['clint']))}
                              </label>
 
                         <label class="item-label">签证详情:<span class="check-tips"></span></label>
 						            <label class="textarea">
-                               <textarea name="shuoming">{$content['shuoming']}</textarea>
-                                {:hook('adminArticleEdit', array('name'=>'shuoming','value'=>$content['shuoming']))}
+                               <textarea name="shuoming">{$data['shuoming']}</textarea>
+                                {:hook('adminArticleEdit', array('name'=>'shuoming','value'=>$data['shuoming']))}
                          </label>
 
                          <label class="item-label">创建时间:<span class="check-tips"></span></label>
@@ -209,6 +216,7 @@
 <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
 <script type="text/javascript">
 
 Think.setValue("type", {$data.type|default='""'});
