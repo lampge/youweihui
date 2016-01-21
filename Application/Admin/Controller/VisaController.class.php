@@ -124,9 +124,16 @@ class VisaController extends AdminController {
            $this->assign('data', $data);//签证信息
 
 
+
            $Visa_cate = M('Visa_cate');
            $catelist = $Visa_cate->where(array('pid'=>0))->select();
            $this->assign('catelist', $catelist);//栏目
+
+           if($data['zone']){
+              $catelist2 = $Visa_cate->where(array('pid'=>$data['visa_catid']))->select();
+              $this->assign('catelist2', $catelist2);//栏目
+           }
+
            $qz_list = C('QZ_TYPE');//签证类别
            $this->assign('qz_list', $qz_list);
            $qzh_list = C('QZH_TYPE');//签注类别
@@ -152,6 +159,7 @@ class VisaController extends AdminController {
     }
 
   public function zone_ajax(){
+
             $pid = I('get.pid');
             $Visa_cate = M('VisaCate');
             if(empty($pid)){
@@ -159,7 +167,9 @@ class VisaController extends AdminController {
             }else{
               $catelist = $Visa_cate->where(array('pid'=>$pid))->select();
             }
+
             $this->assign('catelist', $catelist);
+
             $this->display();
     }
 

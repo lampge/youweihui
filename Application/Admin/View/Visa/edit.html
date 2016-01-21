@@ -49,9 +49,17 @@
 									</select>
 
 									<select name="zone" id="zone">
-										 <option value="0">请选择</option>
-										 <option></option>
+										<if condition="$data['visa_id'] !='' ">
+										    <option value="">请选择</option>
+                        <volist name="catelist2" id="val">
+												<option <eq name="data['zone']" value="$val['id']">selected = "selected"</eq> value="{$val['id']}">{$val['title']}</option>
+											  </volist>
+										<else/>
+                        <option value="">请选择</option>
+									  </if>
+
 									</select>
+
                 </div>
 
 				    <label class="item-label">产品分类：<span class="check-tips">(必填)</span></label>
@@ -212,7 +220,7 @@
 
 
 		<div class="form-item cf">
-			<input type="hidden" name="visa_id" value="{$data.visa_id|default=''}"/>
+			<input type="hidden" name="visa_id" id="visa_id" value="{$data.visa_id|default=''}"/>
 			<button class="btn submit-btn ajax-post hidden" id="submit" type="submit" target-form="form-horizontal">确 定</button>
 		</div>
 	</form>
@@ -251,10 +259,11 @@
 
 function changeZone(){
 		var zhou = $('#zhou').val();
+		var visa_id = $('#visa_id').val();
 		$.ajax({
 	       type:'get',
 				 url:"{:U('Visa/zone_ajax')}",
-				 data:{'pid':zhou},
+				 data:{'pid':zhou,'visa_id':visa_id},
 				 dataType:'html',
 				 success:function(data){
            $('#zone').html(data);
