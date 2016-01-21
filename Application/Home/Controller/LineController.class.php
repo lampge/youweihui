@@ -48,8 +48,6 @@ class LineController extends HomeController {
         }
         $Line = M('Line');
         $line_info = $Line->find($id);
-
-
         // 线路信息
         $line_info['images'] = explode(',', $line_info['images']);
         foreach ($line_info['images'] as $key => $val) {
@@ -57,7 +55,6 @@ class LineController extends HomeController {
         }
         $line_info['xingcheng'] = unserialize($line_info['xingcheng']);
         $line_info['remark'] = unserialize($line_info['remark']);
-
         // 套餐信息
         $map = array(
             'line_id' => $id,
@@ -77,8 +74,13 @@ class LineController extends HomeController {
         if (empty($default_tc)) {
             $default_tc = $line_tc[0];
         }
+        $map = array(
+            'product_id' => $id,
+            'status' => 1
+        );
+        $comment_lists = M('Comment')->where($map)->select();
 
-
+        $this->assign('comment_lists', $comment_lists);
         $this->assign('line_info', $line_info);
         $this->assign('line_tc', $line_tc);
         $this->assign('default_tc', $default_tc);
@@ -276,4 +278,15 @@ class LineController extends HomeController {
         exit;
     }
 
+    // 咨询留言
+    public function message() {
+        if (IS_POST) {
+            $result = D('Message')->input();
+            if ($result) {
+                $this->success('咨询成功，等待管理员回复');
+            } else {
+                $this->error('失败');
+            }
+        }
+    }
 }
