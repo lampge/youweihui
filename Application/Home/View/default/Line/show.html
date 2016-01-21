@@ -163,7 +163,7 @@
     </div>
     <div class="ydiv2">
         <div class="ytitle_02 fix">
-            <a href="#ys1" class="xz">线路行程</a>
+            <a href="#ys1">线路行程</a>
             <a href="#ys2">费用说明</a>
             <a href="#ys3">预定指南</a>
             <a href="#ys4">游客点评</a>
@@ -197,7 +197,7 @@
             <a class="ydi" name="ys2"> </a>
             <a class="yspan4">费用说明：</a>
             <div class="yaa fix editor">
-               
+
 				{$line_tc[0]['update_price_explan']}
             </div>
 
@@ -212,55 +212,41 @@
             <a class="ydi" name="ys4"> </a>
             <a class="yspan4">游客评价：</a>
             <div class="yaa">
+            <volist name="comment_lists" id="val">
                 <div class="ydid2">
-                    昵称：1220****456
-                    <br> 内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！
+                    昵称：{:get_username($val['user_id'])}
+                    <br> 内容：{$val['content']}
                     <br>
-                    <span>2015-10-29</span>
+                    <span>{:date('Y-m-d', $val['create_time'])}</span>
                 </div>
-                <div class="ydid2">
-                    昵称：1220****456
-                    <br> 内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！
-                    <br>
-                    <span>2015-10-29</span>
-                </div>
-                <div class="ydid2">
-                    昵称：1220****456
-                    <br> 内容：由于旅游尾单的特性，价格可能还会随着时间的临近而下降，您购买到心仪的度假产品后，还请冷静面对随后的降价，该出手时就出手，买到总比错过强呀！！
-                    <br>
-                    <span>2015-10-29</span>
-                </div>
+            </volist>
             </div>
 
             <a class="ydi" name="ys5"> </a>
             <a class="yspan4">我要咨询：</a>
-            <div class="ybiaodan">
-                <div class="ydiv3 fix">
-                    <span>我要咨询：</span>
-                    <textarea class="ytex fl putnone"></textarea>
-                </div>
-                <div class="ydiv3 fix">
-                    <span>联系方式：</span>
-                    <select class="yselect fl">
-                        <option value=""></option>
-                    </select>
-                    <input type="text" class="y_put3 fl putnone">
-                </div>
-                <div class="ydiv3 fix">
-                    <span>验 证 码 ：</span>
-                    <input type="text" class="y_put4 fl putnone">
-                    <img src="__IMG__/yyzm.jpg" alt="">
-                </div>
-                <div class="ydiv3 fix">
-                    <input type="button" value="提交" class="y_put5 fl putnone">
-                </div>
-            </div>
+            {:hook('message')}
         </div>
     </div>
 </section>
 </block>
 <block name="script">
     <script type="text/javascript">
+        show_code()
+        function show_code() {
+            var rand = Math.random();
+            $("#verify_img").attr('src', '/Line/verify?' + rand)
+        }
+        $(function(){
+            var thisId = window.location.hash;
+            if(thisId != "" && thisId != undefined){
+                $("a[href="+ thisId +"]").addClass("xz");
+            }
+            var ytitle_02 = $(".ytitle_02 a");
+            ytitle_02.click(function(xx){
+                ytitle_02.removeClass("xz");
+                $(this).addClass("xz");
+            })
+        })
         var _url_show_price_type = '{:U('showTypeDate')}';
     </script>
     <script src="__JS__/line.js" type="text/javascript"></script>

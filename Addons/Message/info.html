@@ -1,0 +1,31 @@
+<div class="span{$addons_config.width}">
+	<div class="columns-mod">
+		<div class="hd cf">
+			<h5>{$addons_config.title}</h5>
+			<div class="title-opt">
+			</div>
+		</div>
+		<div class="bd">
+			<div class="sys-info">
+				<table>
+                    <thead>
+                        <tr>
+                            <th>联系方式</th>
+                            <th>时间</th>
+                            <th>咨询内容</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="_list" id="val">
+    					<tr>
+    						<th>{$val['tel']}</th>
+    						<th>{:date('Y-m-d H:i:s', $val['create_time'])}</th>
+    						<th>{$val['content']}</th>
+    					</tr>
+                    </volist>
+                    </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

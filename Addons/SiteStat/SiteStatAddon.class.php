@@ -38,10 +38,10 @@ class SiteStatAddon extends Addon{
         $this->assign('addons_config', $config);
         if($config['display']){
             $info['user']		=	M('Member')->count();
-            $info['action']		=	M('ActionLog')->count();
+            $info['order']		=	M('Order')->count();
             $info['document']	=	M('Document')->count();
-            $info['category']	=	M('Category')->count();
-            $info['model']		=	M('Model')->count();
+            $info['message']	=	M('Message')->count();
+            $info['transaction']		=	M('Transaction')->count();
             $this->assign('info',$info);
             $this->display('info');
         }
