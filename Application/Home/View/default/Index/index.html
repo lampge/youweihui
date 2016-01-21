@@ -570,48 +570,24 @@
             <a href="#" title="">更多 ></a>
         </div>
       <div class="main3_bottom fix">
-          <dl>
-              <dt><a href="#" title=""><img src="__IMG__/pic11.jpg" width="176" height="129"></a><span>活动价</span></dt>
-                <dd class="fix">
-                  <p><a href="#" title="">泰国</a></p>
-                    <span><em>￥240</em>元起</span>
-                </dd>
-            </dl>
-          <dl>
-              <dt><a href="#" title=""><img src="__IMG__/pic11.jpg" width="176" height="129"></a><span>活动价</span></dt>
-                <dd class="fix">
-                  <p><a href="#" title="">泰国</a></p>
-                    <span><em>￥240</em>元起</span>
-                </dd>
-            </dl>
-          <dl>
-              <dt><a href="#" title=""><img src="__IMG__/pic11.jpg" width="176" height="129"></a><span>活动价</span></dt>
-                <dd class="fix">
-                  <p><a href="#" title="">泰国</a></p>
-                    <span><em>￥240</em>元起</span>
-                </dd>
-            </dl>
-          <dl>
-              <dt><a href="#" title=""><img src="__IMG__/pic11.jpg" width="176" height="129"></a><span>活动价</span></dt>
-                <dd class="fix">
-                  <p><a href="#" title="">泰国</a></p>
-                    <span><em>￥240</em>元起</span>
-                </dd>
-            </dl>
-          <dl>
-              <dt><a href="#" title=""><img src="__IMG__/pic11.jpg" width="176" height="129"></a><span>活动价</span></dt>
-                <dd class="fix">
-                  <p><a href="#" title="">泰国</a></p>
-                    <span><em>￥240</em>元起</span>
-                </dd>
-            </dl>
-          <dl>
-              <dt><a href="#" title=""><img src="__IMG__/pic11.jpg" width="176" height="129"></a><span>活动价</span></dt>
-                <dd class="fix">
-                  <p><a href="#" title="">泰国</a></p>
-                    <span><em>￥240</em>元起</span>
-                </dd>
-            </dl>
+        <volist name=":get_visa_position('',1,6)" id="val">
+            <dl>
+                <dt><a href="{$val['url']}" title="">
+                  <if condition=" $val['thumb'] !='' ">
+                       <img src="{$val['thumb']}" width="176" height="129">
+                  <else/>
+                       <img src="__IMG__/no_picture.gif" width="176" height="129">
+                  </if>
+
+
+                </a><span>活动价</span></dt>
+                  <dd class="fix">
+                    <p><a href="{$val['url']}" title="">{$val['zone']}</a></p>
+                      <span><em>￥{$val['price_cncn']}</em>元起</span>
+                  </dd>
+              </dl>
+          </volist>
+
         </div>
     </div>
   <div class="main4 fix">

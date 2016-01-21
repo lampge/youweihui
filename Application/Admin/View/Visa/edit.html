@@ -40,9 +40,19 @@
                     </div>
 
 				    <label class="item-label">签证国家：<span class="check-tips">(必填)</span></label>
-                    <div class="controls">
-                     <input type="text" class="text input-min" name="zone" value="{$data['zone']}">
-                    </div>
+                <div class="controls">
+                  <select name="zhou" id="zhou" onchange="changeZone()">
+                     <option value="0">请选择</option>
+										 <volist name="catelist" id="val">
+										    <option <eq name="data['visa_catid']" value="$val['id']">selected = "selected"</eq> value="{$val['id']}">{$val['title']}</option>
+											</volist>
+									</select>
+
+									<select name="zone" id="zone">
+										 <option value="0">请选择</option>
+										 <option></option>
+									</select>
+                </div>
 
 				    <label class="item-label">产品分类：<span class="check-tips">(必填)</span></label>
                     <div class="controls">
@@ -106,6 +116,10 @@
 					  优惠价：<input type="text" class="text input-min" name="price_cncn" value="{$data['price_cncn']}">
                     </div>
 
+															<div class="controls">
+																游客关注：<input type="text" class="text input-min" name="base_hits" value="{$data['base_hits']}">
+											          最近订单：<input type="text" class="text input-min" name="base_order" value="{$data['base_order']}">
+															</div>
 
                     <label class="item-label">签证描述图：<span class="check-tips"></span></label>
 
@@ -155,18 +169,21 @@
 								</script>
 
 						   <label class="item-label">所需材料:<span class="check-tips"></span></label>
-						    <label class="textarea input-large">
-                                <textarea name="cailiao">{$content['cailiao']}</textarea>
+						    <label style="width:100%;" class="textarea input-large">
+                                <textarea name="cailiao">{$data['cailiao']}</textarea>
+																 {:hook('adminArticleEdit', array('name'=>'cailiao','value'=>$data['cailiao']))}
                              </label>
 						   <label class="item-label">特别提示:<span class="check-tips"></span></label>
-						    <label class="textarea input-large">
-                                <textarea name="clint">{$content['clint']}</textarea>
+						    <label style="width:100%;" class="textarea input-large">
+                                <textarea name="clint">{$data['clint']}</textarea>
+
+                                 {:hook('adminArticleEdit', array('name'=>'clint','value'=>$data['clint']))}
                              </label>
 
                         <label class="item-label">签证详情:<span class="check-tips"></span></label>
 						            <label class="textarea">
-                               <textarea name="shuoming">{$content['shuoming']}</textarea>
-                                {:hook('adminArticleEdit', array('name'=>'shuoming','value'=>$content['shuoming']))}
+                               <textarea name="shuoming">{$data['shuoming']}</textarea>
+                                {:hook('adminArticleEdit', array('name'=>'shuoming','value'=>$data['shuoming']))}
                          </label>
 
                          <label class="item-label">创建时间:<span class="check-tips"></span></label>
@@ -209,30 +226,41 @@
 <link href="__STATIC__/datetimepicker/css/dropdown.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="__STATIC__/datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+
 <script type="text/javascript">
+		Think.setValue("type", {$data.type|default='""'});
+		Think.setValue("display", {$data.display|default=0});
+		$('#submit').click(function(){
+			$('#form').submit();
+		});
+		$(function(){
+		    $('.date').datetimepicker({
+		        format: 'yyyy-mm-dd',
+		        language:"zh-CN",
+		        minView:2,
+		        autoclose:true
+		    });
+		    $('.time').datetimepicker({
+		        format: 'yyyy-mm-dd hh:ii',
+		        language:"zh-CN",
+		        minView:2,
+		        autoclose:true
+		    });
+		    showTab();
+		});
 
-Think.setValue("type", {$data.type|default='""'});
-Think.setValue("display", {$data.display|default=0});
+function changeZone(){
+		var zhou = $('#zhou').val();
+		$.ajax({
+	       type:'get',
+				 url:"{:U('Visa/zone_ajax')}",
+				 data:{'pid':zhou},
+				 dataType:'html',
+				 success:function(data){
+           $('#zone').html(data);
+	        }
+		})
+}
 
-$('#submit').click(function(){
-	$('#form').submit();
-});
-
-$(function(){
-    $('.date').datetimepicker({
-        format: 'yyyy-mm-dd',
-        language:"zh-CN",
-        minView:2,
-        autoclose:true
-    });
-    $('.time').datetimepicker({
-        format: 'yyyy-mm-dd hh:ii',
-        language:"zh-CN",
-        minView:2,
-        autoclose:true
-    });
-    showTab();
-
-});
 </script>
 </block>

@@ -15,7 +15,7 @@ const ONETHINK_ADDON_PATH = './Addons/';
 
 // 吴文豹 start
 function send_sms($mobile, $content) {
-    
+
     return true;
 }
 
@@ -219,7 +219,38 @@ function get_article_position($catid=1,$posid=1,$num=5){
       return $article_list;
 }
 
+function get_visa_position($catid=0,$posid=1,$num=5){
+      $Visa = M('Visa');
+      $map = array();
+      if($catid){
+        $map['visa_catid'] = $catid;
+      }
+      $map['status'] = 1;
+      $map['position'] = $posid;
+      $visa_list = $Visa->where($map)->order('sort asc,update_time desc')->limit(0,$num)->select();
+      foreach($visa_list as $key=>$val){
+         $visa_list[$key]['thumb']=  get_cover($val['cover_id'],'path');
+         $visa_list[$key]['url'] = U('Visa/show',array('id'=>$val['visa_id']));
+         $visa_list[$key]['zone']=  get_visa_field($val['zone'],'title');
+      }
+      return $visa_list;
+}
 
+function get_visa_field($catid=0,$field=''){
+         $Visa_cate = M('VisaCate');
+         $catname = $Visa_cate->field($field)->where(array('id'=>$catid))->find();
+         $catname = $catname[$field];
+         return $catname;
+}
+
+function get_visa_catlist($pid=0,$url=''){
+        $Visa_cate = M('VisaCate');
+        $catlist = $Visa_cate->where(array('pid'=>$pid))->select();
+        foreach($catlist as $k=>$val){
+             $catlist[$k]['url'] = U($url.$val['id']);
+        }
+        return $catlist;
+}
 /**
  * 内容分页
  */
